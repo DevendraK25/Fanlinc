@@ -1,4 +1,4 @@
-| Points	  | User Story (As a <user>, I want <a goal> so that <reason>) 										| Time 		   	|
+| Points	  | User Story (As a 'user', I want 'a goal' so that 'reason') 										| Time 		   	|
 |:---------:|:------------------------------------------------------------------------------|:-----------:|
 |7.5				|As a user I want to be able to access and edit my own custom profile.					|2 wk			   	|
 |8					|As a user I want to be able to create my own forum board (of similar interests)|4 wk					|
