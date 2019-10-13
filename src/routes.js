@@ -1,8 +1,7 @@
 const path = require('path')
-const home = require('./controllers/homepage.js')
 
 // const apiRoute = require('./controllers/apis')
-const homeRoute = require('./controllers/homepage.js')
+const homeRoute = require('./controllers/homepage')
 // const errorRoute = require('./controllers/error');
 
 function init(server) {
