@@ -1,6 +1,5 @@
 var express = require('express');
 var app = express();
-var bodyParser = require('body-parser');
 const routes = require('./src/routes.js');
 
 // currently running on localhost:8080

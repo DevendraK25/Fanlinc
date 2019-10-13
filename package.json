@@ -7,7 +7,7 @@
     "doc": "doc"
   },
   "scripts": {
-	"server": "nodemon server.js",
+    "server": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +22,8 @@
   "homepage": "https://github.com/UTSCCSCC01/project-cosmic-kittens#readme",
   "dependencies": {
     "dotenv": "^8.1.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.7.4"
   },
   "devDependencies": {
     "nodemon": "^1.19.3"

@@ -1,10 +1,10 @@
 const path = require('path')
 
-// const apiRoute = require('./controllers/apis')
 const homeRoute = require('./controllers/homepage')
-// const errorRoute = require('./controllers/error');
+const registerRoute = require('./controllers/register')
 
 function init(server) {
+
 	server.get('*', function(req, res, next) {
 		console.log('Request was made to: ' + req.originalUrl);
 		return next();
@@ -14,9 +14,9 @@ function init(server) {
 		res.redirect('/home');
 	});
 
-	// server.use('/api', apiRoute);
 	server.use('/home', homeRoute);
-	// server.use('/error', errorRoute);
+	server.use('/register', registerRoute);
+	
 }
 
 module.exports = {

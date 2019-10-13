@@ -7,7 +7,5 @@ router.get('/', (req, res) => {
 	res.sendFile(path.join(__dirname + '/../frontend/homepage.html'));
 });
 
-router.post('/register', (req, res) => {
-});
 
 module.exports = router;
