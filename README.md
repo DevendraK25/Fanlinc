@@ -7,6 +7,6 @@ to do stuff
 
 npm install
 
-node server.js
+nodemon server.js
 
 enjoy
