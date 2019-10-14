@@ -11,16 +11,17 @@ mongoose
 					useUnifiedTopology : true,
 					useCreateIndex : true
 				});
-function verifyUser(user, password) {
-	var found = mongoose.Collection.findOne({
-		username : user,
-		password : password
-	});
-	if (found) {
-		return found;
-	} else {
-		return false;
-	}
+function verifyUser(jsonCred, callback) {
+	User.findOne({
+		username : jsonCred.user,
+		password : jsonCred.password
+	}).exec(function(err) {
+		console.log(err.message)
+		callback(err)
+	}, function(res) {
+		console.log("res returned: ", res)
+		callback(res)
+	})
 }
 
 function addUser(jsonUser, method) {
@@ -33,15 +34,6 @@ function addUser(jsonUser, method) {
 	})
 	
 	
-//	newUser.save(function(err) {
-//		if (err) {
-//			console.log(err.message)
-//			method(400);
-//		} else {
-//			method(200);
-//		}
-//	})
-	
 	newUser.save().then(function() {
 		console.log("saved")
 	}).then(function() {
@@ -52,18 +44,6 @@ function addUser(jsonUser, method) {
 			method(400)
 		}
 	})
-
-
-	
-
-//	try {
-//	newUser.save().then( () => {
-//		return 200
-//	})
-//	} catch(err){
-//		return 400
-//	}
-	
 }
 
 module.exports = {
