@@ -45,8 +45,8 @@ app.post('/users/add', function(req, res){
 });
 
 // GET user
-app.get('/users/:username', function(req, res){
-    userSchema.find({username: req.params.username}, function(err, user) {
+app.get('/users/:username/:password', function(req, res){
+    userSchema.find({username: req.params.username, password: req.params.password}, function(err, user) {
         if (user == '')
             res.status(400).send("Failed to retrieve user '"+req.params.username+"'");
         else

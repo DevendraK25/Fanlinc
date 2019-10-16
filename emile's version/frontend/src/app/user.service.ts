@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { Config } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -7,34 +10,34 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   uri = 'http://localhost:8080';
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
   getUsers() {
     return this.http.get(`${this.uri}/users`);
   }
 
-  getUserByUsername(username) {
-    return this.http.get(`${this.uri}/users/${username}`);
+  getUser(username, password) {
+    return this.http.get(`${this.uri}/users/${username}/${password}`, {observe: 'response'});
   }
 
-  addUser(username, firstname, lastname, password, email) {
+  addUser(username, firstname, lastname, email, password) {
     const user = {
       username: username,
       firstname: firstname,
       lastname: lastname,
-      password: password,
-      email: email
+      email: email,
+      password: password 
     };
     return this.http.post(`${this.uri}/users/add`, user);
   }
 
-  updateUser(username, firstname, lastname, password, email) {
+  updateUser(username, firstname, lastname, email, password) {
     const user = {
       username: username,
       firstname: firstname,
       lastname: lastname,
-      password: password,
-      email: email
+      email: email,
+      password: password      
     };
     return this.http.post(`${this.uri}/users/update/${username}`, user);
   }
