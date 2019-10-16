@@ -13,7 +13,7 @@ Testing in postman:
 
 base URL: "http://localhost:8080/"
 
-JSON body e.g:
+JSON request body e.g for the POST requests:
 
 {
 
