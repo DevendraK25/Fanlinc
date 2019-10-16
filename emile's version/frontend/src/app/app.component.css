@@ -12,6 +12,7 @@ html {
 
 mat-toolbar {
     background-color: orange;
+    height:55px;
 }
 
 #title {
@@ -30,6 +31,10 @@ mat-toolbar a:hover{
     color:grey;
 }
 
-#about,#menu,#login{
+#about,#login{
     margin-right:30px;
+}
+
+#menu{
+    margin-right:15px;
 }

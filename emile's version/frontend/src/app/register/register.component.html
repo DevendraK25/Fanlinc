@@ -1,0 +1,39 @@
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<html>
+<!-- Default form register -->
+<form class="text-center p-5">
+
+  <p class="h4 mb-4">Sign up</p>
+
+  <div class="form-row mb-4">
+    <div class="col">
+      <!-- username -->
+      <input type="text" class="form-control" placeholder="username" ng-value='username'>
+    </div>
+    <div class="col">
+      <!-- First name -->
+      <input type="text" class="form-control" placeholder="First name" ng-model="firstname">
+    </div>
+    <div class="col">
+      <!-- Last name -->
+      <input type="text" class="form-control" placeholder="Last name" ng-model="lastname">
+    </div>
+  </div>
+
+  <!-- E-mail -->
+  <input type="email" class="form-control mb-4" placeholder="E-mail" ng-model="email">
+
+  <!-- Password -->
+  <input type="password" class="form-control" placeholder="Password" aria-describedby="defaultRegisterFormPasswordHelpBlock" ng-model="password">
+  <small id="defaultRegisterFormPasswordHelpBlock" class="form-text text-muted mb-4">
+    At least 8 characters and 1 digit
+  </small>
+
+  <!-- Sign up button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="addUser('eltc','emile','li','emile@gmail.com','123')">Sign in</button>
+
+  <hr>
+
+</form>
+<!-- Default form register -->
+</html>

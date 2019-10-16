@@ -20,7 +20,9 @@
     ]
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+		"files": true,
+    "fullTemplateTypeCheck": false,
+    "strictInjectionParameters": true,
+		"transpileOnly": true
   }
 }
