@@ -5,7 +5,6 @@ instructions:
 testing in postman:
 - POST /users/add
 - GET /users (this is to get all users present in db)
-- GET /users/add
 - GET /users/username (username is to be replaced by real username)
 - POST /users/update/username
 - DEL /users/delete/username
