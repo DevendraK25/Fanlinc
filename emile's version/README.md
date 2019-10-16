@@ -9,6 +9,8 @@ testing in postman:
 - POST /users/update/username
 - DEL /users/delete/username
 
+base URL: "http://localhost:8080/"
+
 JSON body e.g:
 {
 	"username": string
