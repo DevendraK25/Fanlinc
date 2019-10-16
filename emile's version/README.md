@@ -18,13 +18,9 @@ JSON body e.g:
 {
 
 	"username": string,
-
 	"firstname": string,
-
 	"lastname": string,
-
 	"email": string,
-
-	"password": string,
+	"password": string
 
 }
