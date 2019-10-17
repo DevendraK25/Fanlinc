@@ -20,15 +20,14 @@ export class UserService {
     return this.http.get(`${this.uri}/users/${username}/${password}`, {observe: 'response'});
   }
 
-  addUser(username, firstname, lastname, email, password) {
+  addUser(username, email, password) {
+      console.log("hello")
     const user = {
       username: username,
-      firstname: firstname,
-      lastname: lastname,
-      email: email,
-      password: password 
+      password: password,
+      email: email
     };
-    return this.http.post(`${this.uri}/users/add`, user);
+    return this.http.post('http://localhost:8080/register', user);
   }
 
   updateUser(username, firstname, lastname, email, password) {
@@ -39,10 +38,10 @@ export class UserService {
       email: email,
       password: password      
     };
-    return this.http.post(`${this.uri}/users/update/${username}`, user);
+    return this.http.post('${this.uri}/users/update/${username}', user);
   }
 
   deleteUser(username) {
-    return this.http.get(`${this.uri}/users/delete/${username}`);
+    return this.http.get('${this.uri}/users/delete/${username}');
   }
 }

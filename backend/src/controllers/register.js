@@ -14,13 +14,16 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	
 	var userCred = req.body
+	console.log(userCred)
 	db.addUser(userCred, function (a) {
 		if(a == 200) {
 			console.log("success")
 			res.status(200).send("all good").end()
-		} else if(a == 400){
+		} else if(a == 409){
 			console.log("failed")
-			res.status(400).send("Username exists").end()
+			res.status(409).send("Username exists").end()
+		} else if(a == 400) {
+			res.status(400).end()
 		}
 	})
 

@@ -41,7 +41,7 @@ function addUser(jsonUser, method) {
 	}, function(err) {
 		if(err) {
 			console.log(err.message)
-			method(400)
+			method(409)
 		}
 	})
 }
