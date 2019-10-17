@@ -1,0 +1,68 @@
+<html>
+<head>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js">
+	
+</script>
+<title>Register</title>
+</head>
+<div>
+	<a href="/register">Register</a> <a href="/login">Login</a> <a
+		href="/home">Home</a>
+</div>
+<body>
+
+	<div ng-app="registerApp" ng-controller="registerCtrl">
+
+		<div class="form-container">
+			<form>
+				<div>
+					<label for="email"> Email: </label> <input type="email"
+							ng-model="email" placeholder="Enter Email ">
+				</div>
+				<div>
+					<label for="name"> Username: </label> <input type="text"
+						ng-model="username" placeholder="Enter Name ">
+				</div>
+
+				<div>
+					<label for="password"> Password: </label> <input type="password"
+						ng-model="password" placeholder="Enter Password ">
+				</div>
+				<button ng-click="register(email,username,password)" value="Submit">Submit</button>
+			</form>
+
+		</div>
+		<div>
+			<br>
+			<label> {{msg}} </label>
+		</div>
+		<script type="text/javascript">
+			var regApp = angular.module("registerApp", []);
+			regApp.controller('registerCtrl', function($scope, $http) {
+				$scope.register = function(email, username,password) {
+//					$scope.msg = 'wewewew'
+					var data = {
+						email : email,
+						username : username,
+						password : password
+					}
+
+
+					$http.post('/register/',JSON.stringify(data)).then(function successCallback(response) {
+						$scope.msg = "Post Data Submitted Successfully!";
+						window.location.replace('/home');
+					  }, function errorCallback(response) {
+							$scope.msg = "bad response";
+
+					  });
+
+				};
+			});
+		</script>
+
+
+	</div>
+
+</body>
+</html>
