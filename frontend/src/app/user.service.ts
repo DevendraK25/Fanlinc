@@ -27,7 +27,7 @@ export class UserService {
       password: password,
       email: email
     };
-    return this.http.post('http://localhost:8080/register', user);
+    return this.http.post('http://localhost:8080/register', user, {observe: "response"});
   }
 
   updateUser(username, firstname, lastname, email, password) {

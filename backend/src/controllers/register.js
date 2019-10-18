@@ -18,10 +18,10 @@ router.post('/', (req, res) => {
 	db.addUser(userCred, function (a) {
 		if(a == 200) {
 			console.log("success")
-			res.status(200).send("all good").end()
+			res.status(200).end()
 		} else if(a == 409){
 			console.log("failed")
-			res.status(409).send("Username exists").end()
+			res.status(409).end()
 		} else if(a == 400) {
 			res.status(400).end()
 		}
