@@ -8,11 +8,13 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

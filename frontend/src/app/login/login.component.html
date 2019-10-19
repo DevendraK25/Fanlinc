@@ -1,15 +1,15 @@
 <!doctype html>
 <html>
   <!-- Default form login -->
-<form class="text-center p-5">
+<form [formGroup]='form' class="text-center p-5">
 
   <p class="h4 mb-4">Sign in</p>
 
   <!-- Email -->
-  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="username" #username>
+  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="username" formControlName='username' #username>
 
   <!-- Password -->
-  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" #password>
+  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" formControlName='password' #password>
 
   <div class="d-flex justify-content-around">
     <div>
@@ -23,14 +23,15 @@
   </div>
 
   <!-- Sign in button -->
-  <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="getUser(username.value, password.value)">Sign in</button>
+  <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!form.valid" (click)="getUser(username.value, password.value)">Sign in</button>
 
+  <hr>
   <!-- Register -->
   <p>Not a member?
     <a routerLink='/register' routerLinkActive='active'>Register</a>
   </p>
-
+  
 </form>
-<!-- Default form login -->
+<!-- Default form login -->	
   
 </html>

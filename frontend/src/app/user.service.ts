@@ -12,7 +12,7 @@ export class UserService {
   uri = 'http://localhost:8080';
   constructor(private http: HttpClient, private router: Router) { }
 
-  getUsers() {
+  getAllUsers() {
     return this.http.get(`${this.uri}/users`);
   }
 
@@ -21,27 +21,24 @@ export class UserService {
   }
 
   addUser(username, email, password) {
-      console.log("hello")
     const user = {
       username: username,
-      password: password,
-      email: email
+      email: email,
+      password: password 
     };
-    return this.http.post('http://localhost:8080/register', user, {observe: "response"});
+    return this.http.post(`${this.uri}/users/add`, user, {observe: 'response'});
   }
 
-  updateUser(username, firstname, lastname, email, password) {
+  updateUser(username, email, password) {
     const user = {
       username: username,
-      firstname: firstname,
-      lastname: lastname,
       email: email,
       password: password      
     };
-    return this.http.post('${this.uri}/users/update/${username}', user);
+    return this.http.post(`${this.uri}/users/update/${username}`, user);
   }
 
   deleteUser(username) {
-    return this.http.get('${this.uri}/users/delete/${username}');
+    return this.http.get(`${this.uri}/users/delete/${username}`);
   }
 }
