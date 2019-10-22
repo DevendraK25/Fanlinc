@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
       this.userService.getUser(username, password).subscribe(res => {
         if (res.status == 200) {
           console.log("User '"+username+"' retrieved");
-          console.log(res)
-          this.router.navigate(['/']);
+          console.log(res);
+          this.router.navigate(['/profile'], {'queryParams': {'user': username}});
         }
       });
     }

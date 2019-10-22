@@ -9,12 +9,14 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
 import { AboutComponent } from './about/about.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
     AboutComponent,
+    UserProfileComponent,
   ],
   imports: [
     BrowserModule,
