@@ -21,7 +21,7 @@
   </small>
 
   <!-- Sign up button -->
-  <button mdbBtn color="info" block="true" class="my-4" type="submit" (click)="addUser(username.value, email.value, password.value)">Sign up</button>
+  <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!form.valid" (click)="addUser(username.value, email.value, password.value)">Sign up</button>
   <div #check></div>
 
   <hr>
