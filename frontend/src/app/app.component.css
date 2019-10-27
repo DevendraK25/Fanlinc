@@ -37,4 +37,19 @@ mat-toolbar a:hover{
 
 #menu{
     margin-right:15px;
+    background: orange;
+    width:80px;
+}
+
+#dropDownItemBack{
+    background: #FAD7A0;
+}
+
+#dropDownItem{
+    height:40px;
+}
+
+#dropDownItem:hover{
+    color:white;
+    background: orange;
 }

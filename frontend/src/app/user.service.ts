@@ -1,8 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
+import { of } from 'rxjs'; 
 import { Observable } from 'rxjs';
 import { Config } from 'protractor';
+
+class SearchItem {
+  constructor(
+    public track: string,
+    public artist: string,
+    public link: string,
+    public thumbnail: string,
+    public artistId: string
+  ) {}
+}
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +30,10 @@ export class UserService {
 
   getUser(username, password) {
     return this.http.get(`${this.uri}/users/${username}/${password}`, {observe: 'response'});
+  }
+
+  getUserByUsername(username){
+    return this.http.get(`${this.uri}/users/${username}`, {observe: 'response'});
   }
 
   addUser(username, email, password) {

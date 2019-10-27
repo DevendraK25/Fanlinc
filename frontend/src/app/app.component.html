@@ -1,5 +1,5 @@
-
 <!doctype html>
+<html>
   <mat-toolbar>
     <a routerLink='' routerLinkActive='active' id='title'>{{title}}</a>
   
@@ -8,9 +8,19 @@
   
     <a id='about' routerLink='/about' routerLinkActive='active'>About</a>
     <a id='login' routerLink='/login' routerLinkActive='active'>Login</a>
-    <a id='menu'>Menu</a>
+    <div ngbDropdown class="d-inline-block">
+      <button class="form-control btn-outline-primary" id='menu' ngbDropdownToggle>Menu</button>
+      <div id='dropDownItemBack' ngbDropdownMenu>
+        <button id='dropDownItem' ngbDropdownItem>Fandoms</button>
+        <button id='dropDownItem' ngbDropdownItem>Events</button>
+        <button id='dropDownItem' ngbDropdownItem>Forums</button>
+        <button id='dropDownItem' ngbDropdownItem>Messaging</button>
+        <button id='dropDownItem' ngbDropdownItem>Profile</button>
+      </div>
+    </div>
   </mat-toolbar>
 
 <body>
   <router-outlet></router-outlet>
 </body>
+</html>

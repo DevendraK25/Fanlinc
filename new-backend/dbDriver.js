@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-import express from 'express';
 import userSchema from './models/user';
 
 function connection() { 
@@ -41,8 +40,19 @@ function getUser(req, res){
     userSchema.find({username: req.params.username, password: req.params.password}, function(err, user) {
         if (err) 
             res.status(400).send(err.errmsg);
-        if (user == '')
-            res.status(404).send("User '"+req.params.username+"' not found");
+        else if (user == '')
+            res.send("User '"+req.params.username+"' not found");
+        else
+            res.status(200).send(user);
+    });
+}
+
+function getUserByUsername(req, res){
+    userSchema.find({username: req.params.username}, function(err, user) {
+        if (err) 
+            res.status(400).send(err.errmsg);
+        else if (user == '')
+        res.status(404).send("User '"+req.params.username+"' not found");
         else
             res.status(200).send(user);
     });
@@ -80,5 +90,6 @@ module.exports = {
   getUser : getUser,
   addUser : addUser,
   updateUser : updateUser,
-  deleteUser : deleteUser
+  deleteUser : deleteUser,
+  getUserByUsername : getUserByUsername
 }

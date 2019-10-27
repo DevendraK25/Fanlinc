@@ -1,5 +1,5 @@
 import express from 'express';
-import cors from 'cors';
+const cors = require('cors');
 import bodyParser from 'body-parser';
 
 const routes = require('./routes.js');

@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   // @ViewChild('check', {static:false}) check: ElementRef;
 
   form: FormGroup;
+  message = "";
 
   constructor(private userService: UserService, private fb: FormBuilder, private router: Router) { }
 
@@ -25,13 +26,17 @@ export class LoginComponent implements OnInit {
 
   getUser(username, password){
     if (this.form.valid){
-      this.userService.getUser(username, password).subscribe(res => {
-        if (res.status == 200) {
-          console.log("User '"+username+"' retrieved");
-          console.log(res);
-          this.router.navigate(['/profile'], {'queryParams': {'user': username}});
+      this.userService.getUser(username, password).subscribe(
+        res => {
+          if (res.status == 200) {
+            console.log("User '"+username+"' retrieved");
+            this.router.navigate(['/profile'], {'queryParams': {'user': username}});
+          }
+        },
+        err => {
+          this.message = "user doesn't exist";
         }
-      });
+      );
     }
   }
 

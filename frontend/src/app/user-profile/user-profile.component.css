@@ -1,9 +1,39 @@
-#nameAndPicture{
-	display:inline-block;
+#wrap {
+	padding:3em 0 2em 0;
+	/* text-align:center; */
+	margin:0 auto 0 auto;
+	width:80%;
 }
-#col1{
-	text-align:center;
+
+p{
+	font-size:15px;
 }
-#aboutMe{
-	padding:1vw;
+
+textarea {
+	border-radius:3px;
+	border-color: #E5E7E9 ;
+	outline: none;
+	width: 300px;
+	resize:none;
+	margin: 0 0 15px 0;
+}
+
+.column{
+	margin-left:20px;
+}
+
+.list-group{
+	width:300px;
+}
+
+.list-group-item{
+	border-color:#E5E7E9;
+}
+
+button {
+	font-size:11px;
+}
+
+#color1{
+	color:#F5B041;
 }
