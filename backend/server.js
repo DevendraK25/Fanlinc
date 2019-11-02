@@ -1,13 +1,17 @@
-var express = require('express');
-var app = express();
-const routes = require('./src/routes.js');
+import express from 'express';
+const cors = require('cors');
+import bodyParser from 'body-parser';
 
-// currently running on localhost:8080
-var port = process.env.PORT || 8080;
+const routes = require('./routes.js');
+const app = express();
 
-// lets routesApi handle routes starting with "/"
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 routes.init(app);
 
-app.listen(port, () => {
-	console.log("server has been started");
-});
+app.use('/', express.Router());
+
+app.listen(8080, () => console.log('Express server running on port 8080'));
+

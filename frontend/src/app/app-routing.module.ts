@@ -6,6 +6,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ForumComponent } from './forum/forum.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: 'forums', component: ForumComponent },
   { path: '', component: HomepageComponent },
 ];
 
@@ -22,6 +24,11 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents = [
-  AboutComponent, LoginComponent, RegisterComponent,
-  UserProfileComponent, PageNotFoundComponent, HomepageComponent
+  AboutComponent,
+  LoginComponent, 
+  RegisterComponent,
+  UserProfileComponent, 
+  PageNotFoundComponent, 
+  ForumComponent, 
+  HomepageComponent
 ]

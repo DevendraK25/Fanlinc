@@ -39,6 +39,8 @@ mat-toolbar a:hover{
     margin-right:15px;
     background: orange;
     width:80px;
+    color:white;
+    border-color: white;
 }
 
 #dropDownItemBack{

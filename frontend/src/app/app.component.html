@@ -9,11 +9,11 @@
     <a id='about' routerLink='/about' routerLinkActive='active'>About</a>
     <a id='login' routerLink='/login' routerLinkActive='active'>Login</a>
     <div ngbDropdown class="d-inline-block">
-      <button class="form-control btn-outline-primary" id='menu' ngbDropdownToggle>Menu</button>
+      <button class="form-control btn-outline" id='menu' ngbDropdownToggle>Menu</button>
       <div id='dropDownItemBack' ngbDropdownMenu>
         <button id='dropDownItem' ngbDropdownItem>Fandoms</button>
         <button id='dropDownItem' ngbDropdownItem>Events</button>
-        <button id='dropDownItem' ngbDropdownItem>Forums</button>
+        <button routerLink='/forums' routerLinkActive='active' id='dropDownItem' ngbDropdownItem>Forums</button>
         <button id='dropDownItem' ngbDropdownItem>Messaging</button>
         <button id='dropDownItem' ngbDropdownItem>Profile</button>
       </div>

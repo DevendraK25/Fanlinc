@@ -1,0 +1,38 @@
+body{
+    width:90%;
+    margin:0 auto 0 auto;
+    padding:1em 0 0 10%;
+}
+
+#post-box{
+    width:80%;
+    height:120px;
+    background:#FAE5D3;
+    border-radius:5px;
+    margin-bottom:1em;
+    padding:0;
+}
+
+#box-header{
+    width:100%;
+    background:#EDBB99;
+    padding:.5em;
+    border-radius:5px;
+}
+
+#box-content{
+    padding-left:.5em;
+}
+
+#dropDownItemBack{
+    padding-left:5px;
+}
+
+#apply{
+    width:70px;
+    background: #D5DBDB ;
+}
+
+#pop-filter,#category-filter,#recent-filter{
+    margin: 10px 0 0 0;
+}
