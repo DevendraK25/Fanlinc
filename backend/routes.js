@@ -5,7 +5,7 @@ const userHandler = require('./handlers/userH')
 function init(server){
 	db.connection()
 	
-	server.get('*', function(req, res, next) {
+	server.use('*', function(req, res, next) {
 		console.log('Request was made to: ' + req.originalUrl);
 		return next();
 	});
