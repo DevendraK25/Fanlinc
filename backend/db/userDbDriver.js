@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-userSchema = require('./../models/user');
-db = require('./db')
+var userSchema = require('./../models/user');
+var db = require('./db')
 
 //GET all users
 function getAllUsers(req, res) {

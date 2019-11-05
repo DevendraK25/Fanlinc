@@ -10,14 +10,22 @@ export class PostService {
   uri = 'http://localhost:8080';
   constructor(private http: HttpClient, private router: Router) { }
 
-  createPost(title, fandom, tags, content) {
+  createPost(tags, title, content, image, author, timestamp, comments, numVotes) {
     const post = {
-      title:title,
-      fandom:fandom,
-      tags:tags,
-      content:content 
+      "tags":tags,
+      "title":title,
+      "content":content,
+      "image":image,
+      "author":author,
+      "timestamp":timestamp,
+      "comments":comments,
+      "numVotes":numVotes
     };
-    return this.http.post(`${this.uri}/posts/add`, post, {observe: 'response'});
+    return this.http.post(`${this.uri}/posts/create`, post, {observe: 'response'});
+  }
+
+  getAllPosts() {
+    return this.http.get(`${this.uri}/posts`, {observe: 'response'});
   }
 
 }
