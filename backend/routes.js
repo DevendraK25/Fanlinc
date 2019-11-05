@@ -1,6 +1,8 @@
 const db = require('./db/db');
 const path = require('path');
 const userHandler = require('./handlers/userH')
+const postHandler = require('./handlers/postH')
+
 
 function init(server){
 	db.connection()
@@ -11,6 +13,8 @@ function init(server){
 	});
 	
 	server.use('/users', userHandler);
+	
+	server.use('/posts', postHandler);
 	
   // ---database section---
 //  udb.connection(); //connect to mongodb
