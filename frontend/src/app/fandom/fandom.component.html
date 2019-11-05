@@ -1,0 +1,58 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<div id='header' style='text-align: left;'>
+    <span style='font-size:30px;'>Fandoms</span>
+    <form style='float:right;padding-top:10px'>
+        <button id='create-post' (click)="this.router.navigate(['/create-new-post'])">Create New Post</button>
+        <input id='search-bar' type='text' placeholder='search fandoms'>
+        <button id='search-button' type="submit"><i class="fa fa-search"></i></button>
+    </form>
+</div>
+<body>
+    <div style='width:700px;text-align: left; margin:0 auto 0 auto;'>
+        <b>Most Popular Fandoms</b>
+        <a style='color:#5DADE2 ;float: right;'><em>view full list</em></a>
+    </div>
+    <div class="scrollmenu">
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+        <a><img src='https://via.placeholder.com/100.jpg'></a>
+    </div>  
+    
+    <p></p>
+    <p style='margin-left:-2%'><b>Popular posts</b></p>
+    <div class='row'>
+        <div style='width:70%' class='column' id='post'>   
+        </div>
+
+        <div style='float:right;padding:10px 20px 20px 20px;width:30%;height:100%;background: white;' class='column'>
+            Sort by:
+            <div style='margin-left:-10px;'>
+            <div style='margin-left:10px' ngbDropdown class="d-inline-block">
+            <button class="form-control btn-outline" id='recent-filter'>Most Recent</button>
+            </div>
+
+            <div style='margin-left:10px' ngbDropdown class="d-inline-block">
+            <button class="form-control btn-outline" id='pop-filter'>Popularity</button>
+            </div>
+
+            <div style='margin-left:10px' class="dropdown">
+            <button class="btn-outline dropdown-toggle" data-toggle='dropdown' id='category-filter'>Category</button>
+            <div class='dropdown-menu' id='categories'>
+            </div>
+            </div>
+            </div>
+
+            <!-- <br>
+            <button class="btn-outline" type='submit' id='apply'>Apply</button> -->
+        </div>
+
+    </div>
+
+</body>

@@ -6,7 +6,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ForumComponent } from './forum/forum.component';
+import { FandomComponent } from './fandom/fandom.component';
+import { NewPostComponent } from './new-post/new-post.component';
 
 const routes: Routes = [
   { path: 'about', component: AboutComponent },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: 'page-not-found', component: PageNotFoundComponent },
-  { path: 'forums', component: ForumComponent },
+  { path: 'fandoms', component: FandomComponent },
+  { path: 'create-new-post', component: NewPostComponent },
   { path: '', component: HomepageComponent },
 ];
 
@@ -29,6 +31,7 @@ export const routingComponents = [
   RegisterComponent,
   UserProfileComponent, 
   PageNotFoundComponent, 
-  ForumComponent, 
+  FandomComponent,
+  NewPostComponent, 
   HomepageComponent
 ]

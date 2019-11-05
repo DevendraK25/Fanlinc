@@ -18,7 +18,13 @@ let userSchema = new Schema({
 		required : true,
 		min : 6,
 		max : 40
-	}
+	},
+	// subscribed : {
+	// 	type : any
+	// },
+	// friends : {
+	// 	type : any
+	// }
 });
 
 export default mongoose.model('userSchema', userSchema);

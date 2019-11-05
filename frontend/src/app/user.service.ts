@@ -6,16 +6,6 @@ import { of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Config } from 'protractor';
 
-class SearchItem {
-  constructor(
-    public track: string,
-    public artist: string,
-    public link: string,
-    public thumbnail: string,
-    public artistId: string
-  ) {}
-}
-
 @Injectable({
   providedIn: 'root'
 })

@@ -11,9 +11,8 @@
     <div ngbDropdown class="d-inline-block">
       <button class="form-control btn-outline" id='menu' ngbDropdownToggle>Menu</button>
       <div id='dropDownItemBack' ngbDropdownMenu>
-        <button id='dropDownItem' ngbDropdownItem>Fandoms</button>
+        <button routerLink='/fandoms' routerLinkActive='active' id='dropDownItem' ngbDropdownItem>Fandoms</button>
         <button id='dropDownItem' ngbDropdownItem>Events</button>
-        <button routerLink='/forums' routerLinkActive='active' id='dropDownItem' ngbDropdownItem>Forums</button>
         <button id='dropDownItem' ngbDropdownItem>Messaging</button>
         <button id='dropDownItem' ngbDropdownItem>Profile</button>
       </div>
