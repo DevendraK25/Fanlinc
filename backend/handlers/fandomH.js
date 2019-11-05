@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const path = require('path');
-pdb = require('./../db/fandomDbDriver');
+var pdb = require('./../db/fandomDbDriver');
 
 //TODO
 router.get('/:name', function(req, res) {res.sendStatus(400)

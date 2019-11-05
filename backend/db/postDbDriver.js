@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-postSchema = require('./../models/post');
+const postSchema = require('./../models/post');
 var ObjectId = require('mongodb').ObjectId; 
      
 
@@ -18,11 +18,13 @@ function getPost(id, cb) {
 function addPost(post, cb) {
 	console.log(post)
 	var newPost = new postSchema(post)
-	newPost.save(function(err, post) {
+	newPost.save(function(err, post2) {
 		if(err){
+			console.log(err)
 			cb(err,null)
 		}
-		cb(null, post)
+		cb(null, post2)
+		console.log(post2)
 	})
 }
 

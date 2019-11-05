@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const path = require('path');
-pdb = require('./../db/postDbDriver');
+var pdb = require('./../db/postDbDriver');
 
 
 router.get('/:id', function(req, res) {
@@ -16,7 +16,7 @@ router.get('/:id', function(req, res) {
 
 router.post('/create', function(req, res){
 	pdb.addPost(req.body, function(err,success) {
-		if(err) {
+		if(err) { 
 			res.status(400).send(err.message);
 		} else 
 		res.sendStatus(200) ;
