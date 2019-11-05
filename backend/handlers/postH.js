@@ -19,7 +19,7 @@ router.post('/create', function(req, res){
 		if(err) { 
 			res.status(400).send(err.message);
 		} else 
-		res.sendStatus(200) ;
+		res.status(200).send() ;
 		
 	})
 });
