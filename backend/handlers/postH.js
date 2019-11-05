@@ -24,8 +24,8 @@ router.post('/create', function(req, res){
 	})
 });
 
-router.post('/update/', function(req, res){ udb.getUserByUsername(req, res) });
-router.get('/:username/:password', function(req, res){ udb.getUser(req, res) });
+// TODO
+router.post('/update/', function(req, res){res.sendStatus(400) });
 router.delete('/delete/:id', function(req, res){res.sendStatus(400) });
 
 module.exports = router;
