@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
 					this.username = res.body[0].username;
 				this.email = res.body[0].email;
 				this.age = res.body[0].profile.age;
-				document.getElementById("bio").value= res.body[0].profile.bio;
+				(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
 			},
 			err => {
 				this.router.navigate(['/page-not-found']);

@@ -21,10 +21,11 @@ export class EditprofileComponent implements OnInit {
 			res => {
 				if (res.status == 200)
 					this.username = res.body[0].username;
-					document.getElementById("password").value = res.body[0].password;
-					document.getElementById("email").value = res.body[0].email;
-					document.getElementById("bio").value = res.body[0].profile.bio;
-					document.getElementById("age").value = res.body[0].profile.age;
+				
+					(<HTMLInputElement>document.getElementById("password")).value = res.body[0].password; 
+					(<HTMLInputElement>document.getElementById("email")).value = res.body[0].email;
+					(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
+					(<HTMLInputElement>document.getElementById("age")).value = res.body[0].profile.age;
 					
 			},
 			err => {
