@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
-userSchema = require('./../models/user');
-db = require('./db')
+const userSchema = require('./../models/user');
+const db = require('./db')
 
 //GET all users
 function getAllUsers(req, res) {
@@ -53,8 +53,6 @@ function updateUser(req, res){
             res.status(400).send(err.errmsg);
         else if (user.n == 0)
             res.status(404).send("User '"+req.params.username+"' not found");
-        else if (user.nModified == 0)
-            res.status(200).send("Nothing to modify for user '"+req.params.username+"'");
         else 
             res.status(200).send(user);
     });

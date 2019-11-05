@@ -11,11 +11,11 @@
 			<div>
 				<a id='edit-bio' class="glyphicon glyphicon-edit" (click)="editBio(biotext, save)"></a>
 			</div>
-			<textarea id='bio' #biotext type="text" value="{{bio}}" readonly></textarea>
+			<textarea id='bio' #biotext type="text" readonly></textarea>
 
 			<div><span id='color1'>Age:</span> {{age}}</div>
 			<p></p>
-			<div><span id='color1'>Interests:</span> {{age}}</div>
+			<div><span id='color1'>Interests:</span> </div>
 			<p></p>
 		</div>
 
@@ -62,7 +62,7 @@
 		<button mdbBtn color="info" #edit (click)="settings()">profile settings</button>
 	</div>
 	<div style='float:right'>
-		<button mdbBtn color="info" #edit (click)="edit()">edit profile</button>
+		<button mdbBtn color="info" #edit (click)="redirectToEditProfile()">edit profile</button>
 		<button mdbBtn color="info" #save (click)="save()">save changes</button>
 	</div>		
 	<br><br>
