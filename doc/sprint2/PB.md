@@ -1,6 +1,6 @@
 | Points	  | User Story (As a 'user', I want 'a goal' so that 'reason') 										| Time 		   	|
 |:---------:|:------------------------------------------------------------------------------|:-----------:|
-|7.5				|As a user I want to be able to access and edit my own custom profile so that other can see the profile content as i want to show					|2 wk			   	|
+|7.5				|As a user I want to edit my profile so that I can change the profile content as i wish					|2 wk			   	|
 |8					|As a user I want to be able to create my own forum board (of similar interests) so that i can view all of my interested things|4 wk					|
 |5.2				|As a user I want to be able to friend other fans so that I can make friends with other																|1 wk					|
 |3					|As a user I want to be able to create fandoms so that I can meet people with same interests																|1 wk					|
