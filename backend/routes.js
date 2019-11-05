@@ -2,7 +2,7 @@ const db = require('./db/db');
 const path = require('path');
 const userHandler = require('./handlers/userH')
 const postHandler = require('./handlers/postH')
-
+const fandomHandler = require('./handlers/fandomH')
 
 function init(server){
 	db.connection()
@@ -13,7 +13,7 @@ function init(server){
 	});
 	
 	server.use('/users', userHandler);
-	
+	server.use('/fandom', fandomHandler);
 	server.use('/posts', postHandler);
 	
   // ---database section---
