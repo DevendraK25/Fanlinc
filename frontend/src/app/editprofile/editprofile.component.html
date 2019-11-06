@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<div class="row">
+		<div class="col">
+			<p style="text-align: center;">Edit profile</p>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Password</p>
+		</div>
+		<div class="col">
+			<input id="password" #password>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Email</p>
+		</div>
+		<div class="col">
+			<input id="email" #email>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Bio</p>
+		</div>
+		<div class="col">
+			<input id="bio" #bio>
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Age</p>
+		</div>
+		<div class="col">
+			<input id="age" type="number" min="0"
+				oninput="validity.valid||(value='');" #age>
+
+		</div>
+	</div>
+	<div>
+		<button mdbBtn color="info" #edit
+			(click)="saveChanges(password.value, email.value, bio.value, age.value)" style="margin:0 auto; display:block;">save
+			changes</button>
+	</div>
+</body>
+</html>

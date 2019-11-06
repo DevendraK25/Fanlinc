@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const path = require('path');
-var udb = require('./../db/userDbDriver');
 
+var udb = require('./../db/userDbDriver');
 
 router.get('/', function(req, res) {
 	udb.getAllUsers(req, res)

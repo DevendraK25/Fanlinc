@@ -10,13 +10,17 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
+
 import { NewPostComponent } from './new-post/new-post.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     routingComponents,
-    NewPostComponent
+    NewPostComponent,
+    EditprofileComponent
   ],
   imports: [
     NgbDropdownModule,
