@@ -13,4 +13,7 @@ router.get('/:username/:password', function(req, res){ udb.getUser(req, res) });
 router.post('/update/:username', function(req, res){ udb.updateUser(req, res) });
 router.delete('/delete/:username', function(req, res){ udb.deleteUser(req, res) });
 
+router.post('/addfriend/:username', function(req, res){ udb.addfriend(req, res) });
+
+
 module.exports = router;
