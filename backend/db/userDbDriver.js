@@ -119,6 +119,42 @@ function removeFriend(req, res) {
 	});
 }
 
+function subscribe(req, res) {
+	userSchema.update({
+		username : req.body.user
+	}, {
+		profile : {
+			$push : {
+				fandoms : req.body.fandom
+			}
+		}
+	}, function(err, user) {
+		if (err)
+			res.status(404).send(err.errmsg);
+		else
+			res.status(200).send();
+	});
+}
+
+
+function unsubscribe(req, res) {
+	userSchema.update({
+		_id : req.body.user
+	}, {
+		profile : {
+			$pull : {
+				fandom : req.body.fandom
+			}
+		}
+	}, function(err, user) {
+		if (err)
+			res.status(404).send(err.errmsg);
+		else
+			res.status(200).send();
+	});
+}
+
+
 
 module.exports = {
 	getAllUsers : getAllUsers,
