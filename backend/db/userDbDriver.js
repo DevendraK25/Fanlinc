@@ -84,13 +84,13 @@ function deleteUser(req, res) {
 	});
 }
 
-function addfriend(req, res) {
+function addFriend(req, res) {
 	userSchema.update({
-		username : req.params.username
+		username : req.body.user
 	}, {
 		profile : {
 			$push : {
-				pending_friends : req.body.id
+				friends : req.body.friend
 			}
 		}
 	}, function(err, user) {
@@ -101,6 +101,25 @@ function addfriend(req, res) {
 	});
 }
 
+
+function removeFriend(req, res) {
+	userSchema.update({
+		_id : req.body.user
+	}, {
+		profile : {
+			$pull : {
+				friends : req.body.friend
+			}
+		}
+	}, function(err, user) {
+		if (err)
+			res.status(404).send(err.errmsg);
+		else
+			res.status(200).send();
+	});
+}
+
+
 module.exports = {
 	getAllUsers : getAllUsers,
 	getUser : getUser,
@@ -108,5 +127,6 @@ module.exports = {
 	updateUser : updateUser,
 	deleteUser : deleteUser,
 	getUserByUsername : getUserByUsername,
-	addfriend : addfriend
+	addfriend : addfriend,
+	removefriend : removefriend
 }
