@@ -6,7 +6,6 @@ import { of } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Config } from 'protractor';
 
-
 @Injectable({
 	providedIn: 'root'
 })

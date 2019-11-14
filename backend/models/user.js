@@ -43,6 +43,9 @@ let userSchema = new Schema({
 		},
 		friends : {
 			type : Array
+		},
+		pending_friends : {
+			type : Array
 		}
 	}
 });
