@@ -21,7 +21,7 @@ export class PostService {
       "comments":comments,
       "numVotes":numVotes
     };
-    return this.http.post(`${this.uri}/posts/create`, post, {observe: 'response'});
+    return this.http.post(`${this.uri}/posts/add`, post, {observe: 'response'});
   }
 
   getAllPosts() {

@@ -21,16 +21,9 @@ function getPost(id, cb) {
 	})
 }
 
-
 function addPost(post, res) {
 	console.log(post)
 	var newPost = new postSchema(post.body)
-	// newPost.save(function(err, post) {
-	// 	if(err){
-	// 		cb(err,null)
-	// 	}
-	// 	cb(null, post)
-	// })
 	newPost.save(function(err, user){
         if (err)
             res.status(400).send(err.message);

@@ -54,7 +54,7 @@ function updateUser(req, res){
         else if (user.n == 0)
             res.status(404).send("User '"+req.params.username+"' not found");
         else if (user.nModified == 0)
-            res.status(200).send("Nothing to modify for user '"+req.params.username+"'");
+            res.status(200).send(user);
         else 
             res.status(200).send(user);
     });
