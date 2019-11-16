@@ -10,33 +10,36 @@ import { FandomComponent } from './fandom/fandom.component';
 import { NewPostComponent } from './new-post/new-post.component';
 //import { ForumComponent } from './forum/forum.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { FandomPageComponent } from './fandom-page/fandom-page.component';
 
 
 const routes: Routes = [
-  { path: 'editprofile', component: EditprofileComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: 'profile', component: UserProfileComponent },
-  { path: 'page-not-found', component: PageNotFoundComponent },
-  { path: 'fandoms', component: FandomComponent },
-  { path: 'create-new-post', component: NewPostComponent },
-  { path: '', component: HomepageComponent },
+	{ path: 'fandoms/:name', component: FandomPageComponent},
+	{ path: 'editprofile', component: EditprofileComponent },
+	{ path: 'about', component: AboutComponent },
+	{ path: 'login', component: LoginComponent },
+	{ path: 'register', component: RegisterComponent },
+	{ path: 'profile', component: UserProfileComponent },
+	{ path: 'page-not-found', component: PageNotFoundComponent },
+	{ path: 'fandoms', component: FandomComponent },
+	{ path: 'create-new-post', component: NewPostComponent },
+	{ path: '', component: HomepageComponent },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forRoot(routes)],
+	exports: [RouterModule]
 })
 export class AppRoutingModule { }
 export const routingComponents = [
-  EditprofileComponent,
-  AboutComponent,
-  LoginComponent, 
-  RegisterComponent,
-  UserProfileComponent, 
-  PageNotFoundComponent, 
-  FandomComponent,
-  NewPostComponent, 
-  HomepageComponent
+	FandomPageComponent,
+	EditprofileComponent,
+	AboutComponent,
+	LoginComponent,
+	RegisterComponent,
+	UserProfileComponent,
+	PageNotFoundComponent,
+	FandomComponent,
+	NewPostComponent,
+	HomepageComponent
 ]

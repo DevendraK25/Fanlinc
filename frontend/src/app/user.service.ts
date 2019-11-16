@@ -30,12 +30,13 @@ export class UserService {
 		const user = {
 			username: username,
 			email: email,
-			password: password
+			password: password,
+			image: "https://via.placeholder.com/100.jpg"
 		};
 		return this.http.post(`${this.uri}/users/add`, user, { observe: 'response' });
 	}
 
-	updateUser(username, email, password, bio, age) {
+	updateUser(username, email, password, bio, age, image) {
 		const user = {
 			username: username,
 			email: email,
@@ -43,7 +44,8 @@ export class UserService {
 			profile: {
 				bio: bio,
 				age: age
-			}
+			},
+			image: image
 		};
 		return this.http.post(`${this.uri}/users/update/${username}`, user, {observe: 'response'});
 	}

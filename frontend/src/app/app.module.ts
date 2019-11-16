@@ -13,6 +13,8 @@ import { UserService } from './user.service';
 
 import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { FandomPageComponent } from './fandom-page/fandom-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     AppComponent,
     routingComponents,
     NewPostComponent,
-    EditprofileComponent
+    EditprofileComponent,
+    FandomPageComponent,
+	UserProfileComponent
   ],
   imports: [
     NgbDropdownModule,
@@ -31,7 +35,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+	
   ],
   providers: [UserService],
   bootstrap: [AppComponent, routingComponents]
