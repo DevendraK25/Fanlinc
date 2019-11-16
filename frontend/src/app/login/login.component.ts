@@ -1,21 +1,22 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ModuleWithComponentFactories } from '@angular/core';
 import { UserService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { SessionStorageService } from 'ngx-webstorage';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
   
   // @ViewChild('check', {static:false}) check: ElementRef;
-
   form: FormGroup;
   message = "";
-
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private session: SessionStorageService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -30,11 +31,14 @@ export class LoginComponent implements OnInit {
         res => {
           if (res.status == 200) {
             console.log("User '"+username+"' retrieved");
-            this.router.navigate(['/profile'], {'queryParams': {'user': username}});
+            this.session.store("logged-in", username);
+            // this.router.navigate(['/profile'], {'queryParams': {'user': username}});
+            this.router.navigate(['/fandoms']);
           }
         },
         err => {
-          this.message = "user doesn't exist";
+          console.log(err);
+          this.message = "username or password is invalid";
         }
       );
     }

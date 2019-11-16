@@ -10,7 +10,7 @@ import { Config } from 'protractor';
 	providedIn: 'root'
 })
 export class UserService {
-
+	
 	uri = 'http://localhost:8080';
 	constructor(private http: HttpClient, private router: Router) { }
 
@@ -47,7 +47,7 @@ export class UserService {
 		};
 		return this.http.post(`${this.uri}/users/update/${username}`, user, {observe: 'response'});
 	}
-
+	
 	deleteUser(username) {
 		return this.http.get(`${this.uri}/users/delete/${username}`);
 	}

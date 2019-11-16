@@ -35,9 +35,11 @@
     "jquery": "^3.4.1",
     "ng-bootstrap-dropdown": "^1.0.0",
     "ng2-dropdown": "0.0.21",
+    "ngx-webstorage": "^4.0.1",
     "popper.js": "^1.16.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
+    "webstorage": "0.0.7",
     "zone.js": "~0.9.1"
   },
   "devDependencies": {

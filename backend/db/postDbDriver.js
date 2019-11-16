@@ -32,8 +32,16 @@ function addPost(post, res) {
     });
 }
 
+function deleteAll(req, res){
+	postSchema.deleteMany({}, function(err){
+		if (err) res.send(err);
+		else res.send('ok');
+	});
+}
+
 module.exports = {
-		getPost : getPost,
-		addPost : addPost,
-		getAllPosts:getAllPosts
+	getPost : getPost,
+	addPost : addPost,
+	getAllPosts:getAllPosts,
+	deleteAll : deleteAll
 }
