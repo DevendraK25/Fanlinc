@@ -170,8 +170,8 @@ module.exports = {
 	getUser : getUser,
 	addUser : addUser,
 	updateUser : updateUser,
-	deleteUser : deleteUser,
+	//deleteUser : deleteUser,
 	getUserByUsername : getUserByUsername,
-	addfriend : addfriend,
-	removefriend : removefriend
+	//addfriend : addfriend,
+	//removefriend : removefriend
 }
