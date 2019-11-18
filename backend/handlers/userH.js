@@ -17,5 +17,7 @@ router.post('/unfriend', function(req, res){ udb.removeFriend(req, res) });
 router.post('/subscribe', function(req, res){ udb.subscribe(req, res) });
 router.post('/unsubscribe', function(req, res){ udb.unsubscribe(req, res) });
 
+router.get('/getsubscribed', function(req, res){ udb.getsubscribed(req, res) });
+
 
 module.exports = router;
