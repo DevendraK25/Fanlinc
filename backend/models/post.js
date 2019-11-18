@@ -24,9 +24,11 @@ let postSchema = new Schema({
 	numVotes : {
 		type : Number
 		
+	},
+	fandom : {
+		type : String,
+		required : true
 	}
-	
-
 });
 
 module.exports = mongoose.model('postSchema', postSchema);

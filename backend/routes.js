@@ -13,7 +13,7 @@ function init(server){
 	});
 	
 	server.use('/users', userHandler);
-	server.use('/fandom', fandomHandler);
+	server.use('/fandoms', fandomHandler);
 	server.use('/posts', postHandler);
 	
   // ---database section---
