@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+  <!-- Default form login -->
+<form [formGroup]='form' class="text-center p-5">
+
+  <p class="h4 mb-4">Sign in</p>
+
+  <!-- Email -->
+  <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Username" formControlName='username' #username>
+
+  <!-- Password -->
+  <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" formControlName='password' #password>
+
+  <div style="margin-top:-8px;color:red">{{message}}</div>
+  <div class="d-flex justify-content-around">
+    <div>
+      <!-- Remember me -->
+      <mdb-checkbox [default]="true">Remember me</mdb-checkbox>
+    </div>
+    <div>
+      <!-- Forgot password -->
+      <a href="#">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- Sign in button -->
+  <button mdbBtn color="info" block="true" class="my-4" type="submit" [disabled]="!form.valid" (click)="getUser(username.value, password.value)">Sign in</button>
+
+  <hr>
+  <!-- Register -->
+  <p>Not a member?
+    <a routerLink='/register' routerLinkActive='active'>Register</a>
+  </p>
+  
+</form>
+<!-- Default form login -->	
+  
+</html>

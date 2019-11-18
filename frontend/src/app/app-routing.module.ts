@@ -9,6 +9,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FandomComponent } from './fandom/fandom.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
+import { FandomProfileComponent } from './fandom-profile/fandom-profile.component';
+import { FandomListComponent } from './fandom-list/fandom-list.component';
 
 
 const routes: Routes = [
@@ -21,6 +23,8 @@ const routes: Routes = [
   { path: 'fandoms', component: FandomComponent },
   { path: 'create-new-post', component: NewPostComponent },
   { path: '', component: HomepageComponent },
+  { path: 'fandom-profile', component: FandomProfileComponent},
+  { path: 'fandom-list', component: FandomListComponent}
 ];
 
 @NgModule({
@@ -37,5 +41,7 @@ export const routingComponents = [
   PageNotFoundComponent, 
   FandomComponent,
   NewPostComponent, 
-  HomepageComponent
+  HomepageComponent,
+  FandomProfileComponent,
+  FandomListComponent
 ]

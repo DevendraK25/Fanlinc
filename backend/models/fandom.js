@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 
-fandomSchema = new Schema({
+let fandomSchema = new Schema({
 	name : {
 		type : String
 	},

@@ -64,6 +64,7 @@ export class FandomComponent implements OnInit {
                 `
                 <div id='post-box' class='row'>
                     <div class='column' style='width:10%;text-align: center;'>
+                    
                         <img src=`+this.posts[i].image+` alt="user" style="width:60px;border-radius: 50%;">
                         <hr style='width:50px;margin:10px auto 5px auto;'>
                         <div style='font-size:13px;'>`+this.posts[i].author+`</div>
@@ -84,6 +85,8 @@ export class FandomComponent implements OnInit {
                                 </div>-->
                                 `+commentDiv+`
                             </div>
+                         <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Fandom: </b>   
+                        `+this.posts[i].fandom+`
                         </div>
                     </div>
                     <div class='column' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
@@ -91,6 +94,7 @@ export class FandomComponent implements OnInit {
                         <div class='arrow-up'></div>
                         <p style='text-align: center;'>`+this.posts[i].numVotes+`</p>
                         <div class="arrow-down"></div>
+                        
                     </div>
                 </div>
                 <p></p>
@@ -165,6 +169,10 @@ export class FandomComponent implements OnInit {
       alert('sign in first!');
       this.router.navigate(['/login']);
     }
+  }
+
+  getList() {
+    this.router.navigate(['/fandom-list']);
   }
 
 }
