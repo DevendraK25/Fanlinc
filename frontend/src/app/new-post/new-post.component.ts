@@ -18,7 +18,7 @@ export class NewPostComponent implements OnInit {
   ngOnInit() {
   }
   // createPost(tags, title, content, image, author, date, comments, numVotes){
-  createPost(title, tags, content){
+  createPost(title, tags, content, fandom, image){
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
@@ -29,11 +29,13 @@ export class NewPostComponent implements OnInit {
       if (title!=''&&tags!=''&&content!=''){
       var tags1 = [];
       tags1.push(tags);
-      var image='https://via.placeholder.com/100.jpg';
+      if (image == null) {
+        image = 'https://via.placeholder.com/100.jpg';
+      }
       var author='user1'
       var comments = ['comment1', 'comment2']
       var numVotes = 0;
-      this.postService.createPost(tags1, title, content, image, author, date, comments, numVotes).subscribe(
+      this.postService.createPost(tags1, title, content, image, author, date, comments, numVotes, fandom).subscribe(
         // this.postService.createPost(title, fandom, tags, content).subscribe(
         res => {
           if (res.status == 200) {
