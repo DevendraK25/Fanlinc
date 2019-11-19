@@ -53,6 +53,16 @@ div.scrollmenu a:hover {
 #apply:hover{
     background: #2E86C1;
 }
+#create-fandom {
+
+    color:white;
+    border-radius:4px;
+    background:orange;
+    border-color:orange;
+    border-style:solid;
+    margin-left: 25px;
+    
+}
 
 #create-post, #search-button {
     color:white;

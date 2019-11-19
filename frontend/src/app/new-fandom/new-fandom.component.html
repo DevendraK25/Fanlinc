@@ -1,0 +1,17 @@
+<body>
+
+    <div id='box'>
+        <h4><b>Create a new Fandom</b></h4>
+
+        <div [formGroup]='form'>
+        <div><input id='title' #title placeholder='Enter Fandom name'></div>
+        <!-- <div><input id='fandom' #fandom placeholder='Enter fandom name'>
+        <input id='category' #category placeholder='Enter category'></div> -->
+        <div><input id='admin' #admin placeholder='Admin Name'></div>
+        
+        <button id='submit' (click)='createFandom(title.value,admin.value)'>submit</button>
+        <div style='margin-top:10px;color:red'>{{message}}</div>
+        </div>
+    </div>
+
+</body>
