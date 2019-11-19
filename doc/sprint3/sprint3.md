@@ -16,18 +16,19 @@ We decided to continue to consummate the forum board part in comment, tags and d
 
 user story: 1. As a user I want to be able to create fandoms so that I can meet people with same interests
 
-			2. As a user I can subscribe to personal fandoms so that I can find people with same hobbies
+	    2. As a user I can subscribe to personal fandoms so that I can find people with same hobbies
 
-			3. As a user I can have my personal feed so that I can view my previous liked content
+	    3. As a user I can have my personal feed so that I can view my previous liked content
 
-			4. As a user I can post my OG content, with personal tags/categories so that I can share information with others	
+	    4. As a user I can post my OG content, with personal tags/categories so that I can share information with others	
 
-			5. As a user I want to be able to friend other fans so that I can make friends with other
+	    5. As a user I want to be able to friend other fans so that I can make friends with other
 
-			6. As a user, I can comment on other posts and comments so that I can share my ideas and feelings with other fans
+	    6. As a user, I can comment on other posts and comments so that I can share my ideas and feelings with other fans
 
 
-subtasks: 1. Create fandom schema
+subtasks: 
+1. Create fandom schema
           2. Add routes for CRUD operations on fandoms
           3. implement fandom creation option in frontend 
           4. Add user subscription route in backend
