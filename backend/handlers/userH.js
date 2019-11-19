@@ -11,7 +11,7 @@ router.get('/:username/:password', function(req, res){ udb.getUser(req, res) });
 router.post('/update/:username', function(req, res){ udb.updateUser(req, res) });
 router.delete('/deleteAll', function(req, res){ udb.deleteAll(req, res) });
 
-router.post('/addfriend', function(req, res){ udb.addFriend(req, res) });
+router.post('/addfriend/:username', function(req, res){ udb.addFriend(req, res) });
 router.post('/unfriend', function(req, res){ udb.removeFriend(req, res) });
 
 router.post('/subscribe', function(req, res){ udb.subscribe(req, res) });

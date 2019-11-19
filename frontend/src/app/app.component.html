@@ -14,7 +14,7 @@
         <button routerLink='/fandoms' routerLinkActive='active' id='dropDownItem' ngbDropdownItem>Fandoms</button>
         <button id='dropDownItem' ngbDropdownItem>Events</button>
         <button id='dropDownItem' ngbDropdownItem>Messaging</button>
-        <button routerLink='/profile' routerLinkActive='active' id='dropDownItem' ngbDropdownItem>Profile</button>
+        <button (click)="navig()" id='dropDownItem' ngbDropdownItem>Profile</button>
       </div>
     </div>
   </mat-toolbar>

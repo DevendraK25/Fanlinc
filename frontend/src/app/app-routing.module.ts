@@ -9,7 +9,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { FandomComponent } from './fandom/fandom.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
-
+import { CommentPgComponent } from './fandom/commentPg.component'
 
 const routes: Routes = [
   { path: 'editprofile', component: EditprofileComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'page-not-found', component: PageNotFoundComponent },
   { path: 'fandoms', component: FandomComponent },
   { path: 'create-new-post', component: NewPostComponent },
+  { path: 'post-comments', component: CommentPgComponent },
   { path: '', component: HomepageComponent },
 ];
 
@@ -37,5 +38,6 @@ export const routingComponents = [
   PageNotFoundComponent, 
   FandomComponent,
   NewPostComponent, 
+  CommentPgComponent,
   HomepageComponent
 ]

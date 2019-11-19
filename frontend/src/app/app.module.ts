@@ -10,7 +10,7 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
-import { NgxWebstorageModule } from 'ngx-webstorage';
+import { NgxWebstorageModule } from 'ngx-webstorage'
 
 
 @NgModule({

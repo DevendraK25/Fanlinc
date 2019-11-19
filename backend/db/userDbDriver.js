@@ -84,19 +84,12 @@ function deleteAll(req, res) {
 }
 
 function addFriend(req, res) {
-	userSchema.update({
-		username : req.body.user
-	}, {
-		profile : {
-			$push : {
-				friends : req.body.friend
-			}
-		}
-	}, function(err, user) {
+	userSchema.updateOne({username : req.params.username},
+		 { "profile": {$push : {"friends" : req.body.friend}} }, function(err, user) {
 		if (err)
 			res.status(404).send(err.errmsg);
 		else
-			res.status(200).send();
+			res.status(200).send(user);
 	});
 }
 

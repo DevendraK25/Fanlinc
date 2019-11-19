@@ -47,6 +47,10 @@ export class UserService {
 		};
 		return this.http.post(`${this.uri}/users/update/${username}`, user, {observe: 'response'});
 	}
+
+	addFriend(username, friend) {
+		return this.http.post(`${this.uri}/users/addfriend/${username}`, {friend: friend}, {observe: 'response'});
+	}
 	
 	deleteUser(username) {
 		return this.http.get(`${this.uri}/users/delete/${username}`);

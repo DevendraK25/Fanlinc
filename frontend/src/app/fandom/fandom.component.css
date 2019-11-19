@@ -80,3 +80,96 @@ div.scrollmenu a:hover {
     padding-left:10px;
     height:32px;
 }
+
+.div1{
+    width:95%;
+    background:white;
+    padding:15px 0px 15px 15px;
+}
+#div2{
+    width:10%;text-align: center;
+}
+#imgCont{
+    width:60px;border-radius: 50%;
+}
+#hr{
+    width:50px;margin:10px auto 5px auto;
+}
+#div3{
+    font-size:13px;
+}
+#div4{
+    width:80%; margin-left:20px;padding:0 10px 0 10px
+}
+#div5{
+    font-size:13px;margin-top:-10px;color:#A6ACAF;text-align: left;
+}
+/* #div6Before{
+    text-align:left;
+    float:right
+} */
+#div6{
+    float:right
+}
+#optB{
+    float:right;
+}
+#optBCont:after {
+    margin:0 0 0 100px;
+    content: '\2807';
+    color:grey;
+    font-size: 18px;
+}
+#div7{
+    margin-bottom: 10px;
+}
+#button{
+    margin-top:5px;
+    font-size:14px;
+    border-radius:2px;
+    border:none;
+    background: #EAEDED;
+}
+#div9{
+    width:500px
+}
+#div10{
+    margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;
+}
+#div11{
+    margin:auto auto auto auto
+}
+#div12{
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #D7DBDD;
+}
+.p{
+    text-align: center;
+}
+#div13{
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #D7DBDD;
+    margin-top:-65%;
+}
+#div12:hover {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #909497;
+}
+
+#div13:hover {
+    width: 0; 
+    height: 0; 
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #909497;
+    margin-top:-65%;
+}
