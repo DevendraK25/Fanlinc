@@ -14,7 +14,9 @@ Participants:
 
 We decided to continue to consummate the forum board part in comment, tags and do a new feature of creating friending features in Sprint 3.
 
-user story: 1. As a user I want to be able to create fandoms so that I can meet people with same interests
+user story: 
+           
+	    1. As a user I want to be able to create fandoms so that I can meet people with same interests
 
 	    2. As a user I can subscribe to personal fandoms so that I can find people with same hobbies
 
@@ -28,7 +30,8 @@ user story: 1. As a user I want to be able to create fandoms so that I can meet 
 
 
 subtasks: 
-1. Create fandom schema
+
+          1. Create fandom schema
           2. Add routes for CRUD operations on fandoms
           3. implement fandom creation option in frontend 
           4. Add user subscription route in backend
