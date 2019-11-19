@@ -10,7 +10,9 @@ export class PostService {
   uri = 'http://localhost:8080';
   constructor(private http: HttpClient, private router: Router) { }
 
-  addPost(tags, title, content, image, author, timestamp, comments, numVotes) {
+  // addPost(tags, title, content, image, author, timestamp, comments, numVotes) {
+  //   const body = {
+  addPost(tags, title, content, image, author, timestamp, comments, numVotes, fandom) {
     const body = {
       "tags":tags,
       "title":title,
@@ -19,7 +21,8 @@ export class PostService {
       "author":author,
       "timestamp":timestamp,
       "comments":comments,
-      "numVotes":numVotes
+      "numVotes":numVotes,
+      "fandom":fandom
     };
     return this.http.post(`${this.uri}/posts/add`, body, {observe: 'response'});
   }

@@ -3,12 +3,13 @@ import * as $ from 'jquery';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
-import { DOCUMENT } from '@angular/common';
+import { LoginComponent } from '../login/login.component';
+import { FandomService } from '../fandom.service';
 
 @Component({
-  selector: 'app-fandom',
-  templateUrl: './fandom.component.html',
-  styleUrls: ['./fandom.component.css']
+	selector: 'app-fandom',
+	templateUrl: './fandom.component.html',
+	styleUrls: ['./fandom.component.css']
 })
 export class FandomComponent implements OnInit, AfterViewInit{
   
@@ -17,14 +18,36 @@ export class FandomComponent implements OnInit, AfterViewInit{
   @ViewChild('postDiv', {static: false}) postDiv: ElementRef<HTMLElement>;
   
   posts:any;
-  
+  fandoms: any;
+	fandomNames = [];
+	fandomImages = [];
   categories = ['movies', 'anime', 'tv shows', 'sports']
-  constructor(private el: ElementRef, private router: Router, private postService:PostService, private session: SessionStorageService, private renderer: Renderer2) {}
+  constructor(private fandomService: FandomService, private el: ElementRef, private router: Router, private postService:PostService, private session: SessionStorageService, private renderer: Renderer2) {}
 
   postIds = {}
   postNumV = {}
 
   ngAfterViewInit() {
+    // var user = this.session.retrieve("logged-in");
+    // console.log(user)
+    // if (user != null){
+	  this.fandomService.getAllFandoms().subscribe(
+        res => {
+          if (res.status == 200) {
+			this.fandoms = res.body;
+			for (var i = 0; i < this.fandoms.length; i++){
+				this.fandomNames.push(this.fandoms[i].name);
+				this.fandomImages.push(this.fandoms[i].image);
+			}
+          }
+        },
+        err => {
+        
+        }
+      );
+
+	 console.log(this.fandomImages);
+	 console.log(this.fandomNames);
     // var user = this.session.retrieve("logged-in");
     // if (user != null){
       this.postService.getAllPosts().subscribe(
@@ -327,6 +350,9 @@ export class FandomComponent implements OnInit, AfterViewInit{
       )
     }
   }
+	redirectToFandom(nameIndex){
+		this.router.navigate(['/fandoms/' + this.fandomNames[nameIndex]]);
+	}
 
   toCommentPage(postId){
     this.router.navigate(['/post-comments'], {queryParams: {postId:postId}})

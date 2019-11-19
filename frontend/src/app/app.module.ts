@@ -10,13 +10,25 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
-import { NgxWebstorageModule } from 'ngx-webstorage'
+import { NgxWebstorageModule } from 'ngx-webstorage';
+import { NewPostComponent } from './new-post/new-post.component';
+import { EditprofileComponent } from './editprofile/editprofile.component';
+import { FandomPageComponent } from './fandom-page/fandom-page.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FandomComponent } from './fandom/fandom.component';
+import { NewFandomComponent } from './new-fandom/new-fandom.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents
+    routingComponents,
+    NewPostComponent,
+    EditprofileComponent,
+    FandomPageComponent,
+	UserProfileComponent,
+  FandomComponent,
+  NewFandomComponent
   ],
   imports: [
     NgbDropdownModule,

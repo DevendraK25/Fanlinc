@@ -5,24 +5,26 @@
     <form style='float:right;padding-top:10px'>
         <button id='create-post' (click)="this.router.navigate(['/create-new-post'])">Create New Post</button>
         <input id='search-bar' type='text' placeholder='search fandoms'>
-        <button id='search-button' type="submit"><i class="fa fa-search"></i></button>
+
+      <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
+
+        <button id='create-fandom' (click)="this.router.navigate(['/create-new-fandom'])">Create New Fandom</button>
     </form>
 </div>
 <body>
     <div style='width:700px;text-align: left; margin:0 auto 0 auto;'>
         <b>Most Popular Fandoms</b>
-        <a style='color:#5DADE2 ;float: right;'><em>view full list</em></a>
+        <button style='color:#5DADE2 ;float: right;' (click)='getList()'><em>view full list</em></button>
     </div>
-    <div class="scrollmenu">
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
-        <a><img src='https://via.placeholder.com/100.jpg'></a>
+    <div class="scrollmenu" >
+    <table>
+		<tr>
+		<th *ngFor="let image of fandomImages; let i = index">
+			<a (click)="redirectToFandom([i])"><img src="{{image}}" style="max-width:100px;max-height:100px"></a>
+			<p style="text-align:center">{{fandomNames[i]}}</p>
+		</th>
+		</tr>
+	</table>
     </div>  
     
     <p></p>
