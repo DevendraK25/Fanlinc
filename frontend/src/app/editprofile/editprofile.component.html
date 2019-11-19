@@ -47,9 +47,18 @@
 
 		</div>
 	</div>
+		<div class="row">
+		<div class="col">
+			<p style="float: right">Image</p>
+		</div>
+		<div class="col">
+			<input id="image" #image>
+
+		</div>
+	</div>
 	<div>
 		<button mdbBtn color="info" #edit
-			(click)="saveChanges(password.value, email.value, bio.value, age.value)" style="margin:0 auto; display:block;">save
+			(click)="saveChanges(password.value, email.value, bio.value, age.value, image.value)" style="margin:0 auto; display:block;">save
 			changes</button>
 	</div>
 </body>

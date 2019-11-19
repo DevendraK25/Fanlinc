@@ -5,6 +5,7 @@ import { UserService } from '../user.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionStorageService } from 'ngx-webstorage';
 
+
 @Component({
 	selector: 'app-user-profile',
 	templateUrl: './user-profile.component.html',
@@ -16,6 +17,8 @@ export class UserProfileComponent implements OnInit {
 	username = "";
 	email = "";
 	age = "";
+	imagelink = "";
+
 	constructor(private fb: FormBuilder, private userService: UserService, private route: ActivatedRoute, private router: Router, private session: SessionStorageService) { }
 
 	ngOnInit() {
@@ -27,6 +30,7 @@ export class UserProfileComponent implements OnInit {
 						this.username = res.body[0].username;
 						this.email = res.body[0].email;
 						this.age = res.body[0].profile.age;
+						this.imagelink = res.body[0].image;
 						(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
 					}
 					

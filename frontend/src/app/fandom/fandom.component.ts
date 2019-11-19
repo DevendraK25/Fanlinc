@@ -4,47 +4,43 @@ import { PostService } from '../post.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 import { LoginComponent } from '../login/login.component';
+import { FandomService } from '../fandom.service';
 
 @Component({
-  selector: 'app-fandom',
-  templateUrl: './fandom.component.html',
-  styleUrls: ['./fandom.component.css']
+	selector: 'app-fandom',
+	templateUrl: './fandom.component.html',
+	styleUrls: ['./fandom.component.css']
 })
 export class FandomComponent implements OnInit {
-  
-  // posts = [
-  //   {
-  //     tags:['fandom1','fandom2'],
-  //     title:'title1',
-  //     fandom:'Avengers1',
-  //     image:'https://via.placeholder.com/100.jpg',
-  //     author:'user1',
-  //     timestamp:'01/02/2019',
-  //     comments:['11','12','13'],
-  //     numVotes:10
-  //   },
-  //   {
-  //     tags:['fandom3','fandom4'],
-  //     title:'title2',
-  //     fandom:'Avengers2',
-  //     content:"content2",
-  //     image:'https://via.placeholder.com/100.jpg',
-  //     author:'user2',
-  //     timestamp:'03/04/2019',
-  //     comments:['14','15','16', '17'],
-  //     numVotes:14
-  //   },
-  // ]
-  posts:any;
 
+	fandoms: any;
+	fandomNames = [];
+	fandomImages = [];
   categories = ['movies', 'anime', 'tv shows', 'sports']
-  constructor(private router: Router, private postService:PostService, private session: SessionStorageService) {
+  constructor(private router: Router, private postService:PostService, private session: SessionStorageService, private fandomService: FandomService) {
   }
 
   ngOnInit() {
     var user = this.session.retrieve("logged-in");
     console.log(user)
     if (user != null){
+	  this.fandomService.getAllFandoms().subscribe(
+        res => {
+          if (res.status == 200) {
+			this.fandoms = res.body;
+			for (var i = 0; i < this.fandoms.length; i++){
+				this.fandomNames.push(this.fandoms[i].name);
+				this.fandomImages.push(this.fandoms[i].image);
+			}
+          }
+        },
+        err => {
+        
+        }
+      );
+
+	 console.log(this.fandomImages);
+	 console.log(this.fandomNames);
       this.postService.getAllPosts().subscribe(
         res => {
           if (res.status == 200) 
@@ -170,9 +166,8 @@ export class FandomComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-
-  getList() {
-    this.router.navigate(['/fandom-list']);
-  }
+	redirectToFandom(nameIndex){
+		this.router.navigate(['/fandoms/' + this.fandomNames[nameIndex]]);
+	}
 
 }

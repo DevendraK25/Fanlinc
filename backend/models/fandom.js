@@ -3,8 +3,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 let fandomSchema = new Schema({
+
+	image : {
+		type: String,
+		default: "https://via.placeholder.com/100.jpg"
+	},
 	name : {
-		type : String
+		type : String,
+		required : true
 	},
 	posts : [],
 	subcount : {

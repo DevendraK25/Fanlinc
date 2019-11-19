@@ -1,9 +1,10 @@
 <!doctype html>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 <div id='wrap'>
 	<div class='row'>
 		<div class='column'>
-			<p><img src="https://via.placeholder.com/100.jpg" alt="John" style="width:50%;border-radius:50%"></p>
+			<p><img [src]="imagelink" alt="John" style="width:50%;border-radius:50%;max-width:100px;max-height:100px;"></p>
 			<div><span id='color1'>Username:</span> {{username}}</div>
 			<div><span id='color1'>Email:</span> {{email}}</div>
 			<p></p>
