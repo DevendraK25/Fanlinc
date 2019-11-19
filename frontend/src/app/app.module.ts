@@ -10,17 +10,13 @@ import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { UserService } from './user.service';
-
-import { NewPostComponent } from './new-post/new-post.component';
-import { EditprofileComponent } from './editprofile/editprofile.component';
+import { NgxWebstorageModule } from 'ngx-webstorage';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    routingComponents,
-    NewPostComponent,
-    EditprofileComponent
+    routingComponents
   ],
   imports: [
     NgbDropdownModule,
@@ -31,7 +27,8 @@ import { EditprofileComponent } from './editprofile/editprofile.component';
     ReactiveFormsModule,
     AppRoutingModule,
     HttpClientModule,
-    MDBBootstrapModule.forRoot()
+    MDBBootstrapModule.forRoot(),
+    NgxWebstorageModule.forRoot()
   ],
   providers: [UserService],
   bootstrap: [AppComponent, routingComponents]

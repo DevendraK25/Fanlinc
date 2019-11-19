@@ -1,0 +1,114 @@
+Team Name: Cosmic Kittens
+
+
+
+[Below, x=previous sprint, y=current sprint]
+
+
+Planning Meetings (SRx.md, sprinty.md) (Max 5 marks)
+-SRx.md (Sprint Retrospective) 
+ [2 marks=Meeting is documented, participants are recorded, everyone has participated, analysis of good practices/bad practices wad made.]
+  =======
+  Your mark: 2
+  =======
+-Sprint Planning meeting (sprinty.md) 
+ [3 marks=Meeting is documented, participants are recorded, everyone has participated, Sprint goals are specified and
+  there is sufficient references to user stories to be completed during the sprint]
+  =======
+  Your mark: 3 
+  =======
+	
+User Stories (PB.md, sprinty.md) (Max 10 marks) 
+-Correctly formulated user stories 
+ [2 marks=all stories in PB.md follow the User Story template]
+ =========
+ Your mark: 2
+ =========
+-Recorded on Jira
+ [2 marks=all new stories added at sprinty planning meeting in PB.md recorded on the Tracker]
+  =======
+  Your mark: 2
+  =======
+-Broken down into tasks 
+ [2 marks=all Sprinty.md stories broken down into tasks]
+  =======
+  Your mark: 1
+  Notes: Should be clearly stated which tasks are for which user story(-1)
+  =======
+-Estimated
+ [0 marks=the majority of the stories in PB.md are not point estimated or the point value is not recorded in the Tracker]
+  =======
+  Your mark: 0
+  Notes: The story points from PB.md don't match the story points on Jira
+  =======
+-Prioritized	
+ [2 marks=all stories in PB.md are prioritized and the order of priority in PB.md matches the order of priority on the Tracker]
+  =======
+  Your mark: 2
+  =======
+ 
+Tracking on Jira and daily scrum:  (max 20 marks) 
+- Are all your stories present on sprinty.md recorded  on the tracker? 
+  [2=all stories recorded]
+  =======
+  Your mark: 2
+  =======
+- Did you start all stories for sprint two? 
+  [2=all stories started or some stories not started, but logical explanation provided in the sprinty.md document]
+  =======
+  Your mark: 2
+  =======
+- Do the commits on github match the tasks listed in sprinty.md? 
+  [2=no tasks are missing]
+  =======
+  Your mark: 2
+  =======
+- Is the commit done by the person to whom the task has been assigned to? 
+  [2=all assigned tasks are completed]
+  =======
+  Your mark: 2
+  =======
+- Tasks Distribution
+  [2=every team member had at least one task assigned and completed]
+  =======
+  Your mark: 2
+  =======
+- Continuous work
+  [0=80% of commits or more are done last two days of sprint (that is Sunday and Monday)]
+  =======
+  Your mark: 0
+  Notes: Majority of the commits are from the last 2 days
+  =======
+- Daily standup [record all standup notes on files named standup1.txt, ..., standup10.txt
+  for 10 business days for each sprint, in the sprinty folder]
+  [0=80% of sprint days have no recorded standups]
+  =======
+  Your mark: 0
+  Notes: Missing standup notes
+  =======
+
+System Design - (PDF or MD file or other suitable format) (Max 5 marks) 
+- Cover Page and Table of Contents 
+  [0 marks: None present]
+  =======
+  Your mark: 0
+  Notes: Missing system design pdf
+  =======
+- Design Updates
+  [0 marks: No evidence that the system design has been reviewed]
+  =======
+  Your mark: 0
+  Notes: Missing system design pdf
+  =======
+  
+-Class Demo: [10 marks, see other rubric]
+ =======
+ Your mark:  10
+ ======= 
+ 
+ 
+ Total mark: 32/50
+
+Note: Keep in mind you individual mark will be scaled based on peer evaluation mark that other team members give you, using same formula as in sprint 1.
+
+  

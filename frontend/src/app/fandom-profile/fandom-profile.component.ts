@@ -6,11 +6,11 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
-	selector: 'app-user-profile',
-	templateUrl: './user-profile.component.html',
-	styleUrls: ['./user-profile.component.css']
+	selector: 'app-fandom-profile',
+	templateUrl: './fandom-profile.component.html',
+	styleUrls: ['./fandom-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class FandomProfileComponent implements OnInit {
 
 	form: FormGroup;
 	username = "";
@@ -42,7 +42,7 @@ export class UserProfileComponent implements OnInit {
 		}
 	}
 
-	redirectToEditProfile() {
+	redirectToSubscribe() {
 		this.router.navigate(['/editprofile'], { 'queryParams': { 'user': this.username } });
 	}
 	editBio(biotext, save) {
