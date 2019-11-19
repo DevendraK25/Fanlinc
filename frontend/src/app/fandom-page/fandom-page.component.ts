@@ -21,7 +21,7 @@ export class FandomPageComponent implements OnInit {
 		this.route.params.forEach((urlParams) => {
 			this.name = urlParams['name'];
 		});
-		this.fandomService.getFandom(name).subscribe(
+		this.fandomService.getFandom(this.name).subscribe(
 			res => {
 				if (res.status == 200){
 					this.posts = res.body[0].posts;

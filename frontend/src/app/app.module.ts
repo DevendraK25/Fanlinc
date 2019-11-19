@@ -15,6 +15,7 @@ import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
 import { FandomPageComponent } from './fandom-page/fandom-page.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { FandomComponent } from './fandom/fandom.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     NewPostComponent,
     EditprofileComponent,
     FandomPageComponent,
-	UserProfileComponent
+	UserProfileComponent,
+	FandomComponent
   ],
   imports: [
     NgbDropdownModule,

@@ -10,11 +10,13 @@ export class FandomService {
 	//getAllFandoms() {
 		//return this.http.get(`${this.uri}/fandoms`);
 	//}
-
+	
 	getFandom(name) {
 		return this.http.get(`${this.uri}/fandom/${name}`, { observe: 'response' });
 	}
-
+	getAllFandoms(){
+		return this.http.get(`${this.uri}/fandom/getAllFandoms`, { observe: 'response' });
+	}
 	addFandom(name) {
 		const fandom = {
 			image: "https://via.placeholder.com/100.jpg",
@@ -28,8 +30,9 @@ export class FandomService {
 		return this.http.post(`${this.uri}/fandom/add`, fandom, { observe: 'response' });
 	}
 
-	updateFandom(name, posts, subcount, admin, mods,events) {
+	updateFandom(name, posts, subcount, admin, mods,events,image) {
 		const fandom = {
+			image: image,
 			name: name,
 			posts: posts,
 			subcount: subcount,

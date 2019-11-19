@@ -11,14 +11,18 @@ function getAllFandoms(req, res) {
     })
 }
 
-function getFandom(id, cb) {
-	var o_id = new ObjectId(id);
-	fandomSchema.find({_id:o_id}, function(err,fandom) {
+function getFandom(req, res) {
+	
+	fandomSchema.find({name: req.params.name}, function(err,fandom) {
 		if(err) {
-			cb(err, null)
+			res.send(err.message);
+		}		
+		else if (fandom == '')
+			res.status(404).send("Fandom '" + req.params.username + "' not found");
+		else{
+			res.status(200).send(fandom);
 		}
-		cb(null,fandom)
-	})
+	});
 }
 
 function addFandom(fandom, res) {
