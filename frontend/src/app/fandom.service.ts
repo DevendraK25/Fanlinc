@@ -12,10 +12,10 @@ export class FandomService {
 	//}
 	
 	getFandom(name) {
-		return this.http.get(`${this.uri}/fandom/${name}`, { observe: 'response' });
+		return this.http.get(`${this.uri}/fandoms/${name}`, { observe: 'response' });
 	}
 	getAllFandoms(){
-		return this.http.get(`${this.uri}/fandom/getAllFandoms`, { observe: 'response' });
+		return this.http.get(`${this.uri}/fandoms/getAllFandoms`, { observe: 'response' });
 	}
 	addFandom(name) {
 		const fandom = {
@@ -27,7 +27,7 @@ export class FandomService {
 			mods: [],
 			events: []
 		};
-		return this.http.post(`${this.uri}/fandom/add`, fandom, { observe: 'response' });
+		return this.http.post(`${this.uri}/fandoms/add`, fandom, { observe: 'response' });
 	}
 
 	updateFandom(name, posts, subcount, admin, mods,events,image) {
@@ -40,11 +40,11 @@ export class FandomService {
 			mods: mods,
 			events: events
 		};
-		return this.http.post(`${this.uri}/fandom/update/${name}`, fandom, { observe: 'response' });
+		return this.http.post(`${this.uri}/fandoms/update/${name}`, fandom, { observe: 'response' });
 	}
 
 	deleteUser(name) {
-		return this.http.get(`${this.uri}/fandom/delete/${name}`);
+		return this.http.get(`${this.uri}/fandoms/delete/${name}`);
 	}
 }
 

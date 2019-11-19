@@ -12,7 +12,7 @@ import { FandomService } from '../fandom.service';
 	styleUrls: ['./fandom.component.css']
 })
 export class FandomComponent implements OnInit {
-
+	posts: any;
 	fandoms: any;
 	fandomNames = [];
 	fandomImages = [];
