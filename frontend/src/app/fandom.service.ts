@@ -17,13 +17,13 @@ export class FandomService {
 	getAllFandoms(){
 		return this.http.get(`${this.uri}/fandoms/getAllFandoms`, { observe: 'response' });
 	}
-	addFandom(name) {
+	addFandom(name, user) {
 		const fandom = {
 			image: "https://via.placeholder.com/100.jpg",
 			name: name,
 			posts: [],
 			subcount: 0,
-			admin: "",
+			admin: user,
 			mods: [],
 			events: []
 		};

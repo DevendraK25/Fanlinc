@@ -5,7 +5,10 @@
     <form style='float:right;padding-top:10px'>
         <button id='create-post' (click)="this.router.navigate(['/create-new-post'])">Create New Post</button>
         <input id='search-bar' type='text' placeholder='search fandoms'>
-        <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
+
+      <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
+
+        <button id='create-fandom' (click)="this.router.navigate(['/create-new-fandom'])">Create New Fandom</button>
     </form>
 </div>
 <body>
