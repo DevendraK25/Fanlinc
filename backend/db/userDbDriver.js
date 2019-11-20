@@ -46,7 +46,7 @@ function getUserByUsername(req, res) {
 	});
 }
 
-function updateUser(req, res) {
+function updateUser(req, res) { //for all other fields that's not array
 	userSchema.updateOne({username : req.params.username}, req.body, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -68,6 +68,8 @@ function deleteUser(req, res) {
 
 function addFriend(req, res) {
 	userSchema.updateOne({username : req.params.username}, 
+		//CORRECT WAY: {$push : {"profile.pending-friends" : req.body.friend}}, function(err, user) {
+		//waiting for f-end implementation first
 		{$push : {"profile.friends" : req.body.friend}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);

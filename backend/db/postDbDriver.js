@@ -78,7 +78,7 @@ function deletePost(req, res) {
 	});
 }
 
-function updatePost(req, res) {
+function updatePost(req, res) { //for all other fields that's not array
 	postSchema.updateOne({
 		_id : ObjectId(req.params.id)
 	}, req.body, function(err, post) {

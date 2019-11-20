@@ -32,7 +32,7 @@ function addFandom(fandom, res) {
     });
 }
 
-function updateFandom(req, res){
+function updateFandom(req, res){ //for all other fields that's not array
 	fandomSchema.updateOne({
 		_id : ObjectId(req.params.id)
 	}, req.body, function(err, fandom) {
@@ -43,6 +43,42 @@ function updateFandom(req, res){
 		else
 			res.status(200).send(fandom)
 	})
+}
+
+function setPosts(req, res) {
+	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"posts": req.body.newPost}},
+		function(err, fandom) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (fandom.n == 0)
+			res.status(404).send("Fandom '" + req.params.id + "' not found");
+		else
+			res.status(200).send(fandom);
+	});
+}
+
+function setMods(req, res) {
+	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"mods": req.body.newMod}},
+		function(err, fandom) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (fandom.n == 0)
+			res.status(404).send("Fandom '" + req.params.id + "' not found");
+		else
+			res.status(200).send(fandom);
+	});
+}
+
+function setEvents(req, res) {
+	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"events": req.body.newEvent}},
+		function(err, fandom) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (fandom.n == 0)
+			res.status(404).send("Fandom '" + req.params.id + "' not found");
+		else
+			res.status(200).send(fandom);
+	});
 }
 
 function deleteFandom(req, res) {
