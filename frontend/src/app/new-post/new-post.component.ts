@@ -30,7 +30,7 @@ export class NewPostComponent implements OnInit {
     if (title!=''&&tags!=''&&content!=''){
       var tags1 = [];
       tags1.push(tags);
-      if (image == null) {
+      if (image == "") {
         image = 'https://via.placeholder.com/100.jpg';
       }
       var author = this.session.retrieve("logged-in");

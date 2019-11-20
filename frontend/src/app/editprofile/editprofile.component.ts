@@ -20,13 +20,13 @@ export class EditprofileComponent implements OnInit {
 	ngOnInit() {
 		this.userService.getUserByUsername(this.route.snapshot.queryParamMap.get('user')).subscribe(
 			res => {
-				if (res.status == 200)
+				if (res.status == 200){
 					this.username = res.body[0].username;
 				(<HTMLInputElement>document.getElementById("password")).value = res.body[0].password;
 				(<HTMLInputElement>document.getElementById("email")).value = res.body[0].email;
 				(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
 				(<HTMLInputElement>document.getElementById("age")).value = res.body[0].profile.age;
-				(<HTMLInputElement>document.getElementById("image")).value = res.body[0].image;
+				(<HTMLInputElement>document.getElementById("image")).value = res.body[0].image;}
 
 			},
 			err => {
