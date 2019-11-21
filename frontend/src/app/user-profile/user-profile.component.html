@@ -4,17 +4,13 @@
 <div id='wrap'>
 	<div class='row'>
 		<div class='column'>
-			<p><img src="https://via.placeholder.com/100.jpg" alt="John" style="width:50%;border-radius:50%"></p>
-			<div #friend></div>
-			<!-- <p><img [src]="imagelink" alt="John" style="width:50%;border-radius:50%;max-width:100px;max-height:100px;"></p> -->
+			<p style='height:130px;width:130px'><img src="{{imagelink}}" alt="user-img" style="width:130px;height:130px;border-radius:50%"></p>
+			<button *ngIf='isShow' id='friendB' (click)="addPending(session.retrieve('logged-in'), username)">{{friendB}}</button>
 			<div><span id='color1'>Username:</span> {{username}}</div>
 			<div><span id='color1'>Email:</span> {{email}}</div>
 			<p></p>
 			<div id='color1'>Bio</div>
-			<div>
-				<a id='edit-bio' class="glyphicon glyphicon-edit" (click)="editBio(biotext, save)"></a>
-			</div>
-			<textarea id='bio' #biotext type="text" readonly></textarea>
+			<textarea id='bio' #biotext value='{{bio}}' type="text" readonly></textarea>
 
 			<div><span id='color1'>Age:</span> {{age}}</div>
 			<p></p>

@@ -107,5 +107,8 @@ module.exports = {
 	getAllFandoms : getAllFandoms,
 	deleteAll : deleteAll,
 	updateFandom : updateFandom,
-	deleteFandom : deleteFandom
+	deleteFandom : deleteFandom,
+	setMods : setMods,
+	setPosts : setPosts,
+	setEvents : setEvents,
 }

@@ -7,44 +7,53 @@ import { Router } from '@angular/router';
 export class FandomService {
 	uri = 'http://localhost:8080';
 	constructor(private http: HttpClient, private router: Router) { }
-	//getAllFandoms() {
-		//return this.http.get(`${this.uri}/fandoms`);
-	//}
-	
+
+	getAllFandoms(){
+		return this.http.get(`${this.uri}/fandoms/`, { observe: 'response' });
+	}
+
 	getFandom(name) {
 		return this.http.get(`${this.uri}/fandoms/${name}`, { observe: 'response' });
 	}
-	getAllFandoms(){
-		return this.http.get(`${this.uri}/fandoms/getAllFandoms`, { observe: 'response' });
-	}
-	addFandom(name, user) {
+
+	addFandom(name, desc, admin) {
 		const fandom = {
 			image: "https://via.placeholder.com/100.jpg",
 			name: name,
+			description: desc,
 			posts: [],
 			subcount: 0,
-			admin: user,
+			admin: admin,
 			mods: [],
 			events: []
 		};
 		return this.http.post(`${this.uri}/fandoms/add`, fandom, { observe: 'response' });
 	}
 
-	updateFandom(name, posts, subcount, admin, mods,events,image) {
+	setPosts(post){
+		return this.http.post(`${this.uri}/fandoms/setPosts/${name}`, {newPost: post}, { observe: 'response' });
+	}
+
+	setMods(mod){
+		return this.http.post(`${this.uri}/fandoms/setMods/${name}`, {newMod: mod}, { observe: 'response' });
+	}
+
+	setEvents(event){
+		return this.http.post(`${this.uri}/fandoms/setEvents/${name}`, {newEvent: event}, { observe: 'response' });
+	}
+
+	updateFandom(image, name, subcount, admin) {
 		const fandom = {
 			image: image,
 			name: name,
-			posts: posts,
 			subcount: subcount,
-			admin: admin,
-			mods: mods,
-			events: events
+			admin: admin
 		};
 		return this.http.post(`${this.uri}/fandoms/update/${name}`, fandom, { observe: 'response' });
 	}
 
-	deleteUser(name) {
-		return this.http.get(`${this.uri}/fandoms/delete/${name}`);
+	deleteFandom(id) {
+		return this.http.post(`${this.uri}/fandoms/delete/${id}`, { observe: 'response' });
 	}
 }
 

@@ -1,0 +1,85 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<div id='header' style='text-align: left;'>
+    <span style='font-size:30px;'>Posts Feed</span>
+    <form style='float:right;padding-top:10px'>
+        <button id='create-post' (click)="toNewPost()">Create New Post</button>
+        <input id='search-bar' type='text' placeholder='search fandoms'>
+
+        <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
+
+        <button id='create-fandom' (click)="toNewFandom()">Create New Fandom</button>
+    </form>
+</div>
+<body>
+    <div style='width:700px; margin:0 auto 0 auto;'>
+        <b>Most Popular Fandoms</b>
+        <button id='fullList' (click)='toFullFandomsPg()'>view full list</button>
+    </div>
+    <p></p>
+    <div class="scrollmenu" >
+    <table>
+		<tr>
+            <th *ngFor="let image of fandomImages; let i = index"><input value='{{fandomNames[i]}}' #fdImage style='display:none'>
+                <a (click)="redirectToFandom(fdImage.value)"><img src="{{image}}" style="max-width:100px;max-height:100px"></a>
+                <p style="text-align:center">{{fandomNames[i]}}</p>
+            </th>
+		</tr>
+	</table>
+    </div>  
+
+    <p></p>
+    <p style='margin-left:-2%'><b>Popular posts</b></p>
+    <div class='row'>
+        <div style='width:70%' class='column'>
+            <div *ngFor="let post of postIds; let i = index" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
+                <div class='column' id='column1'>
+                    <input value='{{postAuthors[i]}}' #author style='display:none'>
+                    <a (click)="toUserProfile(author.value)"><img src="{{postImages[i]}}" alt="user" id='postImg'></a>
+                    <hr style='width:50px;margin:10px auto 5px auto;'>
+                    <div style='font-size:13px;'>{{postAuthors[i]}}</div>
+                </div>
+                <div class='column' id='column2'>
+                    <div id='column2-header'>
+                        {{postTags[i]}}
+                        <div style='float:right'>{{postTimestamps[i]}}</div>
+                    </div>
+                    <h4><b>{{postTitles[i]}}</b></h4>
+                    <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
+                    <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} comments</button>
+                </div>
+                <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
+                <div class='column' style='margin:auto auto auto auto'>
+                    <div (click)='upvote(postId.value, numVotes.value)' id='arrow-up'></div>
+                    <input value='{{postNumVotes[i]}}' #numVotes style='display:none'>
+                    <p id='{{postIds[i]}}' class='numVotes' style='text-align: center;'>{{postNumVotes[i]}}</p>
+                    <div (click)='downvote(postId.value, numVotes.value)' id="arrow-down"></div>
+                </div>
+            </div>   
+        </div>
+
+        <div style='float:right;padding:10px 20px 20px 20px;width:30%;height:100%;background: white;' class='column'>
+            Sort by:
+            <div style='margin-left:-10px;'>
+            <div style='margin-left:10px' ngbDropdown class="d-inline-block">
+            <button class="form-control btn-outline" id='recent-filter'>Most Recent</button>
+            </div>
+
+            <div style='margin-left:10px' ngbDropdown class="d-inline-block">
+            <button class="form-control btn-outline" id='pop-filter'>Popularity</button>
+            </div>
+
+            <div style='margin-left:10px' class="dropdown">
+            <button class="btn-outline dropdown-toggle" data-toggle='dropdown' id='category-filter'>Category</button>
+            <div class='dropdown-menu' id='categories'>
+            </div>
+            </div>
+            </div>
+
+            <!-- <br>
+            <button class="btn-outline" type='submit' id='apply'>Apply</button> -->
+        </div>
+
+    </div>
+
+</body>

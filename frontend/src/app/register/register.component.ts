@@ -25,13 +25,18 @@ export class RegisterComponent implements OnInit {
   
   addUser(username, email, password) {
     if (this.form.valid){
-      this.userService.addUser(username, email, password).subscribe(res => {
-        if (res.status == 200) {
-          console.log('User \''+username+'\' was successfully created');
-          console.log(res);
-          this.router.navigate(['/login']); //redirect to login page if sign up successful
+      this.userService.addUser(username, email, password).subscribe(
+        res => {
+          if (res.status == 200) {
+            console.log('User \''+username+'\' was successfully created');
+            console.log(res);
+            this.router.navigate(['/login']); //redirect to login page if sign up successful
+          }        
+        },
+        err => {
+            this.router.navigate(['/page-not-found']);
         }
-      });
+      );
     }
   }
 

@@ -12,9 +12,10 @@ body{
 }
 
 #box div{
-    margin: 0 0 20px 0;
+    margin: 0 0 10px 0;
     text-align: center;
 }
+
 #title{
     margin: 10px 0 0 0;
     width:100%;
@@ -25,35 +26,10 @@ body{
     background: #EAEDED;
     padding:10px;
 }
-#fandom{
-    margin: 0 5% 0 0;
-    width:47.5%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
-}
-#category{
-    width:47.5%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
-}
-#tags{
-    width:100%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
-}
 
 #description{
     width:100%;
-    height:100px;
+    height:120px;
     border-width: 1.1px;
     border-color:#EAEDED;
     border-radius:4px;
@@ -61,6 +37,7 @@ body{
     background: #EAEDED;
     padding:10px;
 }
+
 #submit{
     color:white;
     border-radius:4px;

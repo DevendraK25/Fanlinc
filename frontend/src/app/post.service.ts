@@ -10,8 +10,6 @@ export class PostService {
   uri = 'http://localhost:8080';
   constructor(private http: HttpClient, private router: Router) { }
 
-  // addPost(tags, title, content, image, author, timestamp, comments, numVotes) {
-  //   const body = {
   addPost(tags, title, content, image, author, timestamp, comments, numVotes, fandom) {
     const body = {
       "tags":tags,
@@ -35,12 +33,26 @@ export class PostService {
     return this.http.get(`${this.uri}/posts/${id}`, {observe: 'response'});
   }
 
-  setComments(id, newComment){
-    return this.http.post(`${this.uri}/posts/setComments/${id}`, {"newComment":newComment}, {observe: 'response'});
+  addComment(id, newComment, author){
+    return this.http.post(`${this.uri}/posts/addComment/${id}`, {"newComment":newComment,"author":author}, {observe: 'response'});
   }
 
   setNumVotes(id, numVotes){
     return this.http.post(`${this.uri}/posts/setNumVotes/${id}`, {"numVotes":numVotes}, {observe: 'response'});
+  }
+
+  updatePost(id, title, author, timestamp, numVotes){
+    const body = {
+      title:title,
+      author:author,
+      timestamp:timestamp,
+      numVotes:numVotes
+    }
+    return this.http.post(`${this.uri}/posts/update/${id}`, body, {observe: 'response'});
+  }
+
+  deletePost(id){
+    return this.http.post(`${this.uri}/posts/delete/${id}`, {observe: 'response'});
   }
 
 }

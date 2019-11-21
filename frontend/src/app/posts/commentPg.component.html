@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+<div id='wrapper' #wrapper>
+    <div class='post-box row'><input value='{{postId}}' #postId style='display:none'>
+        <div class='column' id='column1'>
+            <img src="{{postImage}}" alt="user" id='postImg'>
+            <hr style='width:50px;margin:10px auto 5px auto;'>
+            <div style='font-size:13px;'>{{postAuthor}}</div>
+        </div>
+        <div class='column' id='column2'>
+            <div id='column2-header'>
+                {{postTag}}
+                <div style='float:right'>{{postTimestamp}}</div>
+            </div>
+            <h4><b>{{postTitle}}</b></h4>
+            <div style='margin-bottom: 10px;'>{{postContent}}</div>
+            <button class="btn-outline" id='comments'>{{postNumComment}} comments</button>
+            <button id='replyB' (click)="replyClick()">reply</button>
+        </div>
+        <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
+        <div class='column' style='margin:auto auto auto auto'>
+            <div (click)='upvote()' id='arrow-up'></div>
+            <input value='{{postNumVote}}' #numVotes style='display:none'>
+            <p id='numVote' class='numVotes' style='text-align: center;'>{{postNumVote}}</p>
+            <div (click)='downvote()' id="arrow-down"></div>
+        </div>
+        <p></p>
+        <div *ngIf="isShow">
+            <textarea #tArea placeholder="Reply..."></textarea>
+            <button id='sendB' type='submit' (click)='sendComment(tArea.value)'>Send</button>
+        </div>
+    </div>
+    <div id='cBox'>
+        <div *ngIf="postNumComment == 0" style='text-align: center;'>no comments</div>
+        <div id='commentItem' *ngFor="let comment of postComments; let i = index">{{comment?.comment}}
+            <span style='float:right;color:grey;font-size:13px'><input value='{{comment?.author}}' #sender style='display:none'>sent by: 
+                <a (click)="router.navigate(['/profile'], {queryParams:{user:sender.value}})">{{comment?.author}}</a></span><hr *ngIf='i < postNumComment-1'></div>
+    </div>
+</div>

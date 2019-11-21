@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FandomService } from '../fandom.service';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Component({
     selector: 'app-new-fandom',
@@ -10,27 +11,24 @@ import { FandomService } from '../fandom.service';
   })
 export class NewFandomComponent implements OnInit {
 
-    constructor(private router: Router, private fandomService: FandomService) {
+    constructor(private router: Router, private fandomService: FandomService, private session: SessionStorageService) {}
 
-    }
+    ngOnInit() {}
 
-    ngOnInit() {
-
-    }
-
-    createFandom(name, admin) {
-        if (name != '' && admin != '') {
-        this.fandomService.addFandom(name, admin).subscribe(
-            res => {
-                if (res.status == 200) {
-                    console.log("Post succesfully created");
-                    this.router.navigate(['/fandoms/'+name]);
-                }
+    createFandom(name, desc) {
+        if (name != '' && desc != '') {
+            this.fandomService.addFandom(name, desc, this.session.retrieve('logged-in')).subscribe(
+                res => {
+                    if (res.status == 200) {
+                        console.log(res.body);
+                        this.router.navigate(['/fandoms/'], {queryParams: {fandom: name}});
+                    }
                 },
                 err => {
-                    console.log("i got here");
+                    console.log(err);
+                    this.router.navigate(['/page-not-found']);
                 }
-        );
-            }
+            );
+        }
     }
 }

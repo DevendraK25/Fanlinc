@@ -62,15 +62,46 @@ function deleteUser(req, res) {
 		if (err)
 			res.status(400).send(err.errmsg)
 		else
-			res.status(200).send('ok')
+			res.status(200).send('deleted')
+	});
+}
+
+function deleteAll(req, res) {
+	userSchema.deleteMany({}, function(err) {
+		if (err)
+			res.status(400).send(err.errmsg)
+		else
+			res.status(200).send('deleted')
 	});
 }
 
 function addFriend(req, res) {
 	userSchema.updateOne({username : req.params.username}, 
-		//CORRECT WAY: {$push : {"profile.pending-friends" : req.body.friend}}, function(err, user) {
-		//waiting for f-end implementation first
 		{$push : {"profile.friends" : req.body.friend}}, function(err, user) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (user.n == 0)
+			res.status(404).send("User '" + req.params.id + "' not found");
+		else
+			res.status(200).send(user);
+	});
+}
+
+function addPending(req, res) {
+	userSchema.updateOne({username : req.params.username}, 
+		{$push : {"profile.pending_friends" : req.body.friend}}, function(err, user) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (user.n == 0)
+			res.status(404).send("User '" + req.params.id + "' not found");
+		else
+			res.status(200).send(user);
+	});
+}
+
+function removePending(req, res) {
+	userSchema.update({username : req.params.username}, 
+		{$pull : {"profile.pending_friends" : req.body.friend}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
@@ -137,4 +168,7 @@ module.exports = {
 	removeFriend : removeFriend,
 	subscribe : subscribe,
 	unsubscribe : unsubscribe,
+	deleteAll : deleteAll,
+	addPending : addPending,
+	removePending : removePending
 }

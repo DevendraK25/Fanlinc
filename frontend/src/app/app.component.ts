@@ -1,4 +1,4 @@
-import { Component, HostListener, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -9,12 +9,50 @@ import { SessionStorageService } from 'ngx-webstorage';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Fanlinc';
-  constructor(private router: Router, private session: SessionStorageService){}
+  user=''
+  pendingNames = []
+  numPendings = 0
+  isShow=false
+  constructor(private userService: UserService, private router: Router, private session: SessionStorageService){}
+
+  ngOnInit(){
+    this.user = this.session.retrieve("logged-in")
+    if (this.user != null){
+      this.isShow = !this.isShow
+      this.userService.getUserByUsername(this.user).subscribe(
+        res => {
+          this.numPendings = res.body[0].profile.pending_friends.length
+          for (var i=0; i<res.body[0].profile.pending_friends.length; i++){
+            this.pendingNames.push(res.body[0].profile.pending_friends[i])
+          }
+        },
+        err => {
+          console.log(err)
+        }
+      )
+    }
+  }
 
   navig(){
-    var user = this.session.retrieve("logged-in")
-    this.router.navigate(['/profile'], {queryParams: {user: user}}).then(()=>window.location.reload())
+    if (this.user != null){
+      this.router.navigate(['/profile'], {queryParams: {user: this.user}}).then(()=>window.location.reload())
+    }
+    else{
+      alert('Sign in first')
+      this.router.navigate(['/login'])
+    }
   }
+
+  toUserProfile(username){
+    this.router.navigate(['/profile'], {queryParams: {user: username, cond:true}})
+  }
+
+  addFriend(toBeAdded){
+		console.log(this.user, toBeAdded)
+		this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+    this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+    this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+	}
 }

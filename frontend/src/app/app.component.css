@@ -12,7 +12,7 @@ html {
 
 mat-toolbar {
     background-color: orange;
-    height:52px;
+    height:48px;
 }
 
 #title {
@@ -31,16 +31,35 @@ mat-toolbar a:hover{
     color:grey;
 }
 
-#about,#login{
+#about, #login{
     margin-right:30px;
 }
 
 #menu{
+    margin-right:20px;
+    background: orange;
+    width:70px;
+    height:30px;
+    color:white;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    border-color: white;
+}
+
+#notif{
     margin-right:15px;
     background: orange;
-    width:80px;
     color:white;
+    width:30px;
+    height:30px;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
     border-color: white;
+}
+.dropdown-toggle::after {
+    display:none;
 }
 
 #dropDownItemBack{
@@ -54,4 +73,11 @@ mat-toolbar a:hover{
 #dropDownItem:hover{
     color:white;
     background: orange;
+}
+
+#friend{
+    color:white
+}
+#friend:hover{
+    color: grey;
 }

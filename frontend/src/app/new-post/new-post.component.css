@@ -42,7 +42,7 @@ body{
     border-style:solid;
     padding:10px;
 }
-#tags{
+#fandom, #image, #tags{
     width:100%;
     border-width: 1.1px;
     border-color:#CACFD2;

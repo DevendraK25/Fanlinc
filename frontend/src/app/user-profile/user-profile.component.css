@@ -38,6 +38,14 @@ button {
 	color:#F5B041;
 }
 
-#friendButton{
-	margin: 0 0 15px 42px
+#friendB{
+	margin: 0 0 15px 28px;
+	font-size:13px;
+	background: #F5B041;
+	border:none;
+	border-radius:3px;
+	color:white;
+}
+#friendB:hover{
+	background: #F39C12;
 }

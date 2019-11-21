@@ -24,27 +24,25 @@ export class NewPostComponent implements OnInit {
     var dd = today.getDate();
     var mm = today.getMonth() + 1; //January is 0!
     var yyyy = today.getFullYear();
-    var date = dd + '/' + mm + '/' + yyyy;
+    var timestamp = dd + '/' + mm + '/' + yyyy;
     this.message = "";
-    // if (tags!=''&&title!=''&&content!=''&&image!=''&&author!=''&&date!=''&&comments!=''&&numVotes!=''){
-    if (title!=''&&tags!=''&&content!=''){
-      var tags1 = [];
-      tags1.push(tags);
+    if (title!=''&&tags!=''&&content!=''&&fandom!=''){
       if (image == "") {
         image = 'https://via.placeholder.com/100.jpg';
       }
       var author = this.session.retrieve("logged-in");
       var comments = []
       var numVotes = 0;
-      this.postService.addPost(tags1, title, content, image, author, date, comments, numVotes, fandom).subscribe(
+      this.postService.addPost(tags, title, content, image, author, timestamp, comments, numVotes, fandom).subscribe(
         // this.postService.createPost(title, fandom, tags, content).subscribe(
         res => {
           if (res.status == 200) {
             console.log("Post succesfully created");
-            this.router.navigate(['/fandoms']);
+            this.router.navigate(['/posts']);
           }
         },
         err => {
+          this.router.navigate(['/page-not-found']);
         }
       );
     }

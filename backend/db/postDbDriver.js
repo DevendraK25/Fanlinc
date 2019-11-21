@@ -13,7 +13,7 @@ function getAllPosts(req, res) {
 
 function getPost(req, res) {
 	postSchema.find({
-		_id : req.params.id
+		_id : ObjectId(req.params.id)
 	}, function(err, post) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -37,7 +37,7 @@ function addPost(post, res) {
 function deleteAll(req, res) {
 	postSchema.deleteMany({}, function(err) {
 		if (err)
-			res.status(400).send(err);
+			res.status(400).send(err.errmsg);
 		else
 			res.status(200).send('deleted');
 	});
@@ -55,8 +55,9 @@ function setNumVotes(req, res) {
 	});
 }
 
-function setComments(req, res) {
-	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"comments": req.body.newComment}},
+function addComment(req, res) {
+	postSchema.updateOne({_id : ObjectId(req.params.id)}, 
+	{$push: {"comments": {"comment":req.body.newComment, "author":req.body.author}}},
 		function(err, post) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -97,7 +98,7 @@ module.exports = {
 	getAllPosts : getAllPosts,
 	deleteAll : deleteAll,
 	setNumVotes:setNumVotes,
-	setComments : setComments,
+	addComment : addComment,
 	deletePost : deletePost,
 	updatePost : updatePost
 }

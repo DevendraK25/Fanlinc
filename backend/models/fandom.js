@@ -12,6 +12,10 @@ let fandomSchema = new Schema({
 		type : String,
 		required : true
 	},
+	description : {
+		type : String,
+		required : true
+	},
 	posts : [],
 	subcount : {
 		type : Number

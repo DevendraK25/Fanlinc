@@ -5,11 +5,10 @@
 
         <div [formGroup]='form'>
         <div><input id='title' #title placeholder='Enter Fandom name'></div>
-        <!-- <div><input id='fandom' #fandom placeholder='Enter fandom name'>
-        <input id='category' #category placeholder='Enter category'></div> -->
-        <div><input id='admin' #admin placeholder='Admin Name'></div>
+        <div><textarea id='description' #desc placeholder='Enter Fandom description'></textarea></div>
+        <!-- no need for admin as admin is the loggedin user -->
         
-        <button id='submit' (click)='createFandom(title.value,admin.value)'>submit</button>
+        <button id='submit' (click)='createFandom(title.value,desc.value)'>submit</button>
         <div style='margin-top:10px;color:red'>{{message}}</div>
         </div>
     </div>

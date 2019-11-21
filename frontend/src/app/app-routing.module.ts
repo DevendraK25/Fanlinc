@@ -6,15 +6,14 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { FandomComponent } from './fandom/fandom.component';
+import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
-import { FandomPageComponent } from './fandom-page/fandom-page.component';
+import { FandomComponent } from './fandom/fandom.component';
 import { NewFandomComponent } from './new-fandom/new-fandom.component';
-import { CommentPgComponent } from './fandom/commentPg.component'
+import { CommentPgComponent } from './posts/commentPg.component'
 
 const routes: Routes = [
-	{ path: 'fandoms/:name', component: FandomPageComponent},
 	{ path: 'editprofile', component: EditprofileComponent },
 	{ path: 'about', component: AboutComponent },
 	{ path: 'login', component: LoginComponent },
@@ -22,10 +21,11 @@ const routes: Routes = [
 	{ path: 'profile', component: UserProfileComponent },
 	{ path: 'page-not-found', component: PageNotFoundComponent },
 	{ path: 'fandoms', component: FandomComponent },
-  { path: 'create-new-post', component: NewPostComponent },
-  { path: 'post-comments', component: CommentPgComponent },
-  { path: '', component: HomepageComponent},
-  { path: 'create-new-fandom', component: NewFandomComponent },
+	{ path: 'create-new-post', component: NewPostComponent },
+	{ path: 'post-comments', component: CommentPgComponent },
+	{ path: '', component: HomepageComponent},
+	{ path: 'create-new-fandom', component: NewFandomComponent },
+	{ path: 'posts', component: PostsComponent },
 ];
 
 @NgModule({
@@ -34,7 +34,6 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents = [
-	FandomPageComponent,
 	EditprofileComponent,
 	AboutComponent,
 	LoginComponent,
@@ -42,8 +41,9 @@ export const routingComponents = [
 	UserProfileComponent,
 	PageNotFoundComponent,
 	FandomComponent,
-  NewPostComponent,
-  CommentPgComponent,
-  HomepageComponent,
-  NewFandomComponent
+	PostsComponent,
+	NewPostComponent,
+	CommentPgComponent,
+	HomepageComponent,
+	NewFandomComponent
 ]

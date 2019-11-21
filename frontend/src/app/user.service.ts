@@ -9,8 +9,7 @@ import { Config } from 'protractor';
 @Injectable({
 	providedIn: 'root'
 })
-export class UserService {
-	
+export class UserService {	
 	uri = 'http://localhost:8080';
 	constructor(private http: HttpClient, private router: Router) { }
 
@@ -31,7 +30,7 @@ export class UserService {
 			username: username,
 			email: email,
 			password: password,
-			image: "https://via.placeholder.com/100.jpg"
+			image: "https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png"
 		};
 		return this.http.post(`${this.uri}/users/add`, user, { observe: 'response' });
 	}
@@ -48,6 +47,14 @@ export class UserService {
 			image: image
 		};
 		return this.http.post(`${this.uri}/users/update/${username}`, user, {observe: 'response'});
+	}
+
+	addPending(username, friend) {
+		return this.http.post(`${this.uri}/users/addPending/${username}`, {friend: friend}, {observe: 'response'});
+	}
+
+	removePending(username, friend) {
+		return this.http.post(`${this.uri}/users/removePending/${username}`, {friend: friend}, {observe: 'response'});
 	}
 
 	addFriend(username, friend) {
