@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
           if (res.status == 200) {
             console.log("User '"+username+"' retrieved");
             this.session.store("logged-in", username);
-            // this.router.navigate(['/profile'], {'queryParams': {'user': username}});
             this.router.navigate(['/posts']).then(()=>{window.location.reload()});
           }
         },

@@ -52,7 +52,7 @@ export class PostService {
   }
 
   deletePost(id){
-    return this.http.post(`${this.uri}/posts/delete/${id}`, {observe: 'response'});
+    return this.http.delete(`${this.uri}/posts/delete/${id}`, {observe: 'response'});
   }
 
 }

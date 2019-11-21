@@ -20,13 +20,13 @@
     </div>
 
     <div *ngIf='isShow' ngbDropdown class="d-inline-block">
-      <button class="btn-outline fa fa-bell" id='notif' ngbDropdownToggle><span style='font-size:10px'> {{numPendings}}</span></button>
+      <button class="btn-outline fa fa-bell" id='notif' ngbDropdownToggle><span style='font-size:10px;margin:0 0 0 -2px'> {{numPendings}}</span></button>
       <div id='dropDownItemBack' ngbDropdownMenu>
         <p style='padding:10px' *ngFor="let item of pendingNames;">Friend Request from <a (click)='toUserProfile(item)' id='friend'>{{item}} </a><button class='btn-outline' (click)='addFriend(item)'>Accept</button></p>
       </div>
     </div>
     
-    <a style='margin:0 10px 0 0' title='{{user}}' (click)="navig()"><img id='userImg' src="{{userImg}}">{{user}}</a>
+    <a *ngIf='isShow' style='margin:0 10px 0 0' title='{{user}}' (click)="navig()"><img id='userImg' src="{{userImg}}">{{user}}</a>
   </mat-toolbar>
 
 <body>

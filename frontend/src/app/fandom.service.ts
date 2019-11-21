@@ -53,7 +53,7 @@ export class FandomService {
 	}
 
 	deleteFandom(id) {
-		return this.http.post(`${this.uri}/fandoms/delete/${id}`, { observe: 'response' });
+		return this.http.delete(`${this.uri}/fandoms/delete/${id}`, { observe: 'response' });
 	}
 }
 

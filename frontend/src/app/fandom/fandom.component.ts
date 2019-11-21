@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
+import { SessionStorageService } from 'ngx-webstorage';
 @Component({
 	selector: 'app-fandom-page',
 	templateUrl: './fandom.component.html',
@@ -16,7 +17,8 @@ export class FandomComponent implements OnInit {
 	mods = [];
 	events = [];
 	image = "";
-	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService) { }
+	id = ""
+	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: SessionStorageService) { }
 
 	ngOnInit() {
 		this.fandomService.getFandom(this.route.snapshot.queryParamMap.get("fandom")).subscribe(
@@ -31,6 +33,7 @@ export class FandomComponent implements OnInit {
 					this.mods = res.body[0].mods;
 					this.events = res.body[0].events;
 					this.image = res.body[0].image;
+					this.id = res.body[0]._id;
 				}
 			},
 			err => {
@@ -44,4 +47,28 @@ export class FandomComponent implements OnInit {
 		this.router.navigate(['/profile'], {queryParams: {user: username, cond:false}})
 	}
 
+	subscribe(){
+
+	}
+
+	deleteFandom(){
+		if (this.admin == this.session.retrieve('logged-in')){
+		  var username = prompt("Confirm username");
+		  var password = prompt("Confirm password");
+		  if (username!=null && password!=null){
+			this.fandomService.deleteFandom(this.id).subscribe(
+			  res => {
+				console.log(res.body)
+				this.router.navigate(['/posts'])
+			  },
+			  err => {
+				console.log(err)
+			  }
+			)
+		  }
+		}
+		else{
+		  alert("You are not the admin of this fandom!!")
+		}
+	  }
 }

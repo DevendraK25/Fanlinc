@@ -36,7 +36,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
       res => {
         if (res.status == 200){
           this.posts = res.body;
-          // console.log(this.posts)
           for (var i = 0; i < this.posts.length; i++){
             this.postTitles.push(this.posts[i].title);
             this.postContents.push(this.posts[i].content);
@@ -86,7 +85,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
 
   id="";num=0;
   upvote(postId, numVotes){ 
-    console.log(postId, numVotes, "up")
     var numVotes1 = parseInt(numVotes)
     if (this.id == ""){ //first post clicked
       this.id = postId
@@ -120,7 +118,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
   downvote(postId, numVotes){
-    console.log(postId, numVotes, "down")
     var numVotes1 = parseInt(numVotes)
     if (this.id == ""){ //first post clicked
       this.id = postId
@@ -154,7 +151,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
 	redirectToFandom(fandom){
-    console.log(fandom)
 		this.router.navigate(['/fandoms'], {queryParams: {"fandom": fandom}});
 	}
 
@@ -171,8 +167,8 @@ export class PostsComponent implements OnInit, AfterViewInit{
     if (user != null)
       this.router.navigate(['/create-new-post'])
     else{
-      alert('Sign in first!')
-      this.router.navigate(['/login'])
+      if (confirm('Sign in first!'))
+        this.router.navigate(['/login'])
     }
   }
 
@@ -181,8 +177,8 @@ export class PostsComponent implements OnInit, AfterViewInit{
     if (user != null)
       this.router.navigate(['/create-new-fandom'])
     else{
-      alert('Sign in first!')
-      this.router.navigate(['/login'])
+      if (confirm('Sign in first!'))
+        this.router.navigate(['/login'])
     }
   }
 
@@ -192,5 +188,26 @@ export class PostsComponent implements OnInit, AfterViewInit{
 
   toFullFandomsPg(){
     console.log("ok")
+  }
+
+  deletePost(id, author){
+    if (author == this.session.retrieve('logged-in')){
+      var username = prompt("Confirm username");
+      var password = prompt("Confirm password");
+      if (username!=null && password!=null){
+        this.postService.deletePost(id).subscribe(
+          res => {
+            console.log(res.body)
+            this.router.navigate(['/posts'])
+          },
+          err => {
+            console.log(err)
+          }
+        )
+      }
+    }
+    else{
+      alert("That's not your post!!")
+    }
   }
 }

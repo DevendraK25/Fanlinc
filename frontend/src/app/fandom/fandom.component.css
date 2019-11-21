@@ -5,14 +5,37 @@ body{
 }
 #wrapper{
     margin: 2em auto 0 auto;
-    padding: 12px 20px 12px 20px;
+    padding: 12px 23px 12px 23px;
     width:70%;
-    height: 80%;
+    height:88%;
     background:white;
 }
 #admin{
-    color:#F5CBA7;
+    color:orange;
 }
 #admin:hover{
     color:grey;
+}
+#subsB{
+    color:white;
+    border-radius:4px;
+    background:orange;
+    border-color:orange;
+    border-style:solid;  
+    height:28px;
+    font-size:14px
+}
+#subsB:hover, #deleteB:hover{
+    color:grey
+}
+#deleteB{
+    color:white;
+    border-radius:4px;
+    background:orange;
+    border-color:orange;
+    border-style:solid;  
+    height:28px;
+    width:28px;
+    font-size:16px;
+    margin:0 0 0 16px
 }

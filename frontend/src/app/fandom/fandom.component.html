@@ -1,8 +1,17 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+
 <body>
     <div id='wrapper'>
-        <h2>{{name}}</h2>
-        <p>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></p>
-        <p>description: {{desc}}</p>
-        <p>subcount: {{subcount}}</p>
+        <div style='height:50px;text-align:left'>
+            <span style='font-size:30px;font-weight:bold'>{{name}} Fandom</span>
+            <span style='float:right; text-align: left;'>
+                <span style='margin:11px 0 0 0'><button id='subsB' (click)="subscribe()">follow</button></span>
+                <span style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
+            </span>
+        </div>
+        
+        <div>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></div>
+        <div>description: {{desc}}</div>
+        <div>followers: {{subcount}}</div>
     </div>
 </body>

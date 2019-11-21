@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
 <div id='header' style='text-align: left;'>
     <span style='font-size:30px;'>Posts Feed</span>
@@ -29,7 +29,7 @@
     </div>  
 
     <p></p>
-    <p style='margin-left:-2%'><b>Popular posts</b></p>
+    <p style='margin-left:-1%'><b>Popular posts</b></p>
     <div class='row'>
         <div style='width:70%' class='column'>
             <div *ngFor="let post of postIds; let i = index" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
@@ -42,7 +42,10 @@
                 <div class='column' id='column2'>
                     <div id='column2-header'>
                         {{postTags[i]}}
-                        <div style='float:right'>{{postTimestamps[i]}}</div>
+                        <span style='float:right;text-align: left;'>
+                        <span>{{postTimestamps[i]}}</span>
+                        <span style='float:right'><a (click)="deletePost(postId.value, author.value)" id='edit'><i class='fa fa-trash'></i></a></span>
+                        </span>
                     </div>
                     <h4><b>{{postTitles[i]}}</b></h4>
                     <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
