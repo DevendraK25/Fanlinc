@@ -1,13 +1,13 @@
 <!doctype html>
 <html>
   <mat-toolbar>
-    <a routerLink='' routerLinkActive='active' id='title'>{{title}}</a>
+    <a routerLink='' id='title'>{{title}}</a>
   
     <!-- This fills the remaining space of the current row -->
     <span class="example-fill-remaining-space"></span>
-
-    <a id='about' routerLink='/about' routerLinkActive='active'>About</a>
-    <a id='login' routerLink='/login' routerLinkActive='active'>Login</a>
+    
+    <a id='about' routerLink='/about'>About</a>
+    <a id='login' routerLink='/login'>Login</a>
     
     <div ngbDropdown class="d-inline-block">
       <button class="btn-outline" id='menu' ngbDropdownToggle>Menu</button>
@@ -16,7 +16,6 @@
         <button id='dropDownItem' ngbDropdownItem>Fandoms</button>
         <button id='dropDownItem' ngbDropdownItem>Events</button>
         <button id='dropDownItem' ngbDropdownItem>Messaging</button>
-        <button (click)="navig()" id='dropDownItem' ngbDropdownItem>Profile</button>
       </div>
     </div>
 
@@ -26,6 +25,8 @@
         <p style='padding:10px' *ngFor="let item of pendingNames;">Friend Request from <a (click)='toUserProfile(item)' id='friend'>{{item}} </a><button class='btn-outline' (click)='addFriend(item)'>Accept</button></p>
       </div>
     </div>
+    
+    <a style='margin:0 10px 0 0' title='{{user}}' (click)="navig()"><img id='userImg' src="{{userImg}}">{{user}}</a>
   </mat-toolbar>
 
 <body>

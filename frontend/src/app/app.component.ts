@@ -12,6 +12,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 export class AppComponent implements OnInit {
   title = 'Fanlinc';
   user=''
+  userImg=""
   pendingNames = []
   numPendings = 0
   isShow=false
@@ -27,12 +28,14 @@ export class AppComponent implements OnInit {
           for (var i=0; i<res.body[0].profile.pending_friends.length; i++){
             this.pendingNames.push(res.body[0].profile.pending_friends[i])
           }
+          this.userImg = res.body[0].image
         },
         err => {
           console.log(err)
         }
       )
     }
+    console.log(this.userImg)
   }
 
   navig(){
