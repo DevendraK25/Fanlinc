@@ -12,7 +12,8 @@ body{
 
 .scrollmenu {
     background-color: white;
-    overflow: auto;
+    overflow-y: hidden;
+    overflow-x: auto;
     white-space: nowrap;
     width:700px;
     margin:0px auto 0 auto;
@@ -55,32 +56,37 @@ body{
     background: #2E86C1;
 }
 #create-fandom {
-
     color:white;
     border-radius:4px;
     background:orange;
     border-color:orange;
     border-style:solid;
-    margin-left: 25px;
-    
+    margin:0 20px 0 0px;  
+    height:32px;
 }
 
-#create-post, #search-button {
+#create-post {
     color:white;
     border-radius:4px;
     background:#76D7C4;
     border-color:#76D7C4;
     border-style:solid;
-}
-
-#create-post{
-    margin:0 30px 0 0;
+    margin:0 20px 0 0;
     height:32px;
 }
 
-#search-button{
+#search-button {
     margin:0 0 0 -3px;
     height:32px;
+    color:white;
+    border-radius:4px;
+    background:orange;
+    border-color:orange;
+    border-style:solid;
+}
+
+#create-post:hover, #create-fandom:hover, #search-button:hover{
+    color:grey
 }
 
 #search-bar{
@@ -102,7 +108,10 @@ body{
     width:10%;text-align: center;
 }
 #postImg{
-    width:60px;border-radius: 50%;
+    width:60px;height:60px;border-radius: 50%;
+}
+#postImg:hover{
+    border:1px solid #3498DB
 }
 #column2{
     width:80%; margin-left:20px;padding:0 10px 0 10px
@@ -116,6 +125,9 @@ body{
     border-radius:2px;
     border:none;
     background: #EAEDED;
+}
+#comments:hover{
+    color:#3498DB
 }
 #seperator{
     margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;

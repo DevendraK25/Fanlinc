@@ -4,11 +4,11 @@
     <span style='font-size:30px;'>Posts Feed</span>
     <form style='float:right;padding-top:10px'>
         <button id='create-post' (click)="toNewPost()">Create New Post</button>
-        <input id='search-bar' type='text' placeholder='search fandoms'>
-
-        <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
 
         <button id='create-fandom' (click)="toNewFandom()">Create New Fandom</button>
+        
+        <input id='search-bar' type='text' placeholder='search fandoms'>
+        <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
     </form>
 </div>
 <body>
