@@ -8,7 +8,8 @@
     
     <a id='about' routerLink='/about'>About</a>
     <a id='login' routerLink='/login'>Login</a>
-    
+    <a *ngIf='isShow' style='margin:0 25px 0 0' title='{{user}}' (click)="navig()"><img id='userImg' src="{{userImg}}">{{user}}</a>
+
     <div ngbDropdown class="d-inline-block">
       <button class="btn-outline" id='menu' ngbDropdownToggle>Menu</button>
       <div id='dropDownItemBack' ngbDropdownMenu>
@@ -26,7 +27,6 @@
       </div>
     </div>
     
-    <a *ngIf='isShow' style='margin:0 10px 0 0' title='{{user}}' (click)="navig()"><img id='userImg' src="{{userImg}}">{{user}}</a>
   </mat-toolbar>
 
 <body>

@@ -12,7 +12,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 export class NewPostComponent implements OnInit {
 
   form:FormGroup;
-  message = "hello";
+  message = "";
   constructor(private router:Router, private postService: PostService, private session: SessionStorageService) {
   }
 
