@@ -5,7 +5,8 @@
 	<div class='row'>
 		<div class='column'>
 			<p style='height:130px;width:130px'><img src="{{imagelink}}" alt="user-img" style="width:130px;height:130px;border-radius:50%"></p>
-			<button *ngIf='isShow' id='friendB' (click)="addPending(session.retrieve('logged-in'), username)">{{friendB}}</button>
+			<button *ngIf='isShow' id='friendB' (click)="addFriendClicked(username)">{{friendB}}</button>
+			<button *ngIf='isLinked' id='friendBLinked' [disabled]=true>{{friendB}}</button>
 			<div><span id='color1'>Username:</span> {{username}}</div>
 			<div><span id='color1'>Email:</span> {{email}}</div>
 			<p></p>

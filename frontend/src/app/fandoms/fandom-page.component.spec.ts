@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FandomComponent } from './fandom.component';
+import { FandomPageComponent } from './fandom-page.component';
 
 describe('FandomPageComponent', () => {
-  let component: FandomComponent;
-  let fixture: ComponentFixture<FandomComponent>;
+  let component: FandomPageComponent;
+  let fixture: ComponentFixture<FandomPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FandomComponent ]
+      declarations: [ FandomPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FandomComponent);
+    fixture = TestBed.createComponent(FandomPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

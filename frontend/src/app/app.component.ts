@@ -49,11 +49,13 @@ export class AppComponent implements OnInit {
   }
 
   toUserProfile(username){
-    this.router.navigate(['/profile'], {queryParams: {user: username, cond:true}})
+    if (this.numPendings > 0)
+      this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+    else
+      this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
   }
 
   addFriend(toBeAdded){
-		console.log(this.user, toBeAdded)
 		this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
     this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
     this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})

@@ -25,10 +25,10 @@ body{
     height:28px;
     font-size:14px
 }
-#subsB:hover, #deleteB:hover{
+#subsB:hover, #deleteB:hover, #editB:hover{
     color:grey
 }
-#deleteB{
+#deleteB, #editB{
     color:white;
     border-radius:4px;
     background:orange;
@@ -37,5 +37,5 @@ body{
     height:28px;
     width:28px;
     font-size:16px;
-    margin:0 0 0 16px
+    margin:0 0 0 11px
 }

@@ -42,7 +42,7 @@ export class FandomService {
 		return this.http.post(`${this.uri}/fandoms/setEvents/${name}`, {newEvent: event}, { observe: 'response' });
 	}
 
-	updateFandom(image, name, subcount, admin) {
+	updateFandom(name, image, subcount, admin) {
 		const fandom = {
 			image: image,
 			name: name,
@@ -55,5 +55,6 @@ export class FandomService {
 	deleteFandom(id) {
 		return this.http.delete(`${this.uri}/fandoms/delete/${id}`, { observe: 'response' });
 	}
+
 }
 

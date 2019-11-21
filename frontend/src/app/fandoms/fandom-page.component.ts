@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
 import { SessionStorageService } from 'ngx-webstorage';
+
 @Component({
 	selector: 'app-fandom-page',
-	templateUrl: './fandom.component.html',
-	styleUrls: ['./fandom.component.css']
+	templateUrl: './fandom-page.component.html',
+	styleUrls: ['./fandom-page.component.css']
 })
-export class FandomComponent implements OnInit {
+export class FandomPageComponent implements OnInit {
 	name = "";
 	posts = [];
 	subcount = 0;
@@ -48,7 +49,20 @@ export class FandomComponent implements OnInit {
 	}
 
 	subscribe(){
+		
+	}
 
+	toEditFandom(){
+		if (this.admin == this.session.retrieve('logged-in')){
+			var username = prompt("Confirm username");
+			var password = prompt("Confirm password");
+			if (username!=null && password!=null){
+				this.router.navigate(['/editfandom'], {queryParams: {id: this.id}})
+			}
+		}
+		else {
+			alert("You are not the admin of this fandom!!")
+		}
 	}
 
 	deleteFandom(){
@@ -70,5 +84,5 @@ export class FandomComponent implements OnInit {
 		else{
 		  alert("You are not the admin of this fandom!!")
 		}
-	  }
+	}
 }

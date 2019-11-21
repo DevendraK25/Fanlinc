@@ -8,7 +8,7 @@ import { FandomService } from '../fandom.service';
 import { UserService } from '../user.service';
 
 @Component({
-	selector: 'app-fandom',
+	selector: 'app-posts',
 	templateUrl: './posts.component.html',
 	styleUrls: ['./posts.component.css']
 })
@@ -151,7 +151,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
 	redirectToFandom(fandom){
-		this.router.navigate(['/fandoms'], {queryParams: {"fandom": fandom}});
+		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});
 	}
 
   toCommentPg(postId){
@@ -159,7 +159,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
   toUserProfile(username){
-    this.router.navigate(['/profile'], {queryParams: {user: username, cond:false}})
+    this.router.navigate(['/profile'], {queryParams: {user: username}})
   }
 
   toNewPost(){
@@ -184,10 +184,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
 
   toFandom(fandom){
     this.router.navigate(['/fandoms'], {queryParams: {fandom:fandom}})
-  }
-
-  toFullFandomsPg(){
-    console.log("ok")
   }
 
   deletePost(id, author){

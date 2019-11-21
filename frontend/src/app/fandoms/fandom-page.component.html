@@ -5,7 +5,8 @@
         <div style='height:50px;text-align:left'>
             <span style='font-size:30px;font-weight:bold'>{{name}} Fandom</span>
             <span style='float:right; text-align: left;'>
-                <span style='margin:11px 0 0 0'><button id='subsB' (click)="subscribe()">follow</button></span>
+                <span><button id='subsB' (click)="subscribe()">follow</button></span>
+                <span><button id='editB' class='fa fa-edit' (click)="toEditFandom()"></button></span>
                 <span style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
             </span>
         </div>

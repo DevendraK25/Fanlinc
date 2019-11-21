@@ -9,9 +9,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { PostsComponent } from './posts/posts.component';
 import { NewPostComponent } from './new-post/new-post.component';
 import { EditprofileComponent } from './editprofile/editprofile.component';
-import { FandomComponent } from './fandom/fandom.component';
+import { FandomsComponent } from './fandoms/fandoms.component';
+import { FandomPageComponent } from './fandoms/fandom-page.component';
 import { NewFandomComponent } from './new-fandom/new-fandom.component';
-import { CommentPgComponent } from './posts/commentPg.component'
+import { CommentPgComponent } from './posts/commentPg.component';
+import { EditfandomComponent } from './editfandom/editfandom.component'
 
 const routes: Routes = [
 	{ path: 'editprofile', component: EditprofileComponent },
@@ -20,12 +22,14 @@ const routes: Routes = [
 	{ path: 'register', component: RegisterComponent },
 	{ path: 'profile', component: UserProfileComponent },
 	{ path: 'page-not-found', component: PageNotFoundComponent },
-	{ path: 'fandoms', component: FandomComponent },
+	{ path: 'fandoms', component: FandomsComponent },
+	{ path: 'fandom-page', component: FandomPageComponent },
 	{ path: 'create-new-post', component: NewPostComponent },
 	{ path: 'post-comments', component: CommentPgComponent },
 	{ path: '', component: HomepageComponent},
 	{ path: 'create-new-fandom', component: NewFandomComponent },
 	{ path: 'posts', component: PostsComponent },
+	{ path: 'editfandom', component: EditfandomComponent },
 ];
 
 @NgModule({
@@ -40,10 +44,12 @@ export const routingComponents = [
 	RegisterComponent,
 	UserProfileComponent,
 	PageNotFoundComponent,
-	FandomComponent,
+	FandomsComponent,
+	FandomPageComponent,
 	PostsComponent,
 	NewPostComponent,
 	CommentPgComponent,
 	HomepageComponent,
-	NewFandomComponent
+	NewFandomComponent,
+	EditfandomComponent
 ]

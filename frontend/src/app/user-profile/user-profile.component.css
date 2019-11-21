@@ -49,3 +49,11 @@ button {
 #friendB:hover{
 	background: #F39C12;
 }
+#friendBLinked{
+	margin: 0 0 15px 28px;
+	font-size:13px;
+	background: #F5B041;
+	border:none;
+	border-radius:3px;
+	color:white;
+}
