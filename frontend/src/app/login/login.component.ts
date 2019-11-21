@@ -3,7 +3,6 @@ import { UserService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
-import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-login',

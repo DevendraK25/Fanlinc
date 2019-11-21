@@ -1,6 +1,5 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from './user.service';
-import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
 
@@ -20,7 +19,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(){
     this.user = this.session.retrieve("logged-in")
-    if (this.user != null){
+    if (this.user != null && this.user != ""){
       this.isShow = !this.isShow
       this.userService.getUserByUsername(this.user).subscribe(
         res => {
@@ -35,7 +34,6 @@ export class AppComponent implements OnInit {
         }
       )
     }
-    console.log(this.userImg)
   }
 
   navig(){

@@ -2,10 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, Rend
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { SessionStorageService } from 'ngx-webstorage';
-import { $ } from 'protractor';
-
 
 @Component({
 	selector: 'app-user-profile',
@@ -78,10 +75,6 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 		}
 	}
 
-	addPending(user, toBeAdded){
-		
-	}
-
 	redirectToEditProfile() {
 		this.router.navigate(['/editprofile'], { 'queryParams': { 'user': this.user } });
 	}
@@ -96,6 +89,11 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 			this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
 			this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
 		}
+	}
+
+	logout(){
+		this.session.store("logged-in", "");
+		this.router.navigate(['/login']).then(() => {window.location.reload()})
 	}
 
 }

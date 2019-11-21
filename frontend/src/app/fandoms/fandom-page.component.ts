@@ -10,6 +10,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 	styleUrls: ['./fandom-page.component.css']
 })
 export class FandomPageComponent implements OnInit {
+	user = ""
 	name = "";
 	posts = [];
 	subcount = 0;
@@ -22,6 +23,7 @@ export class FandomPageComponent implements OnInit {
 	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: SessionStorageService) { }
 
 	ngOnInit() {
+		this.user = this.session.retrieve('logged-in')
 		this.fandomService.getFandom(this.route.snapshot.queryParamMap.get("fandom")).subscribe(
 			res => {
 				console.log(res.body)
@@ -53,7 +55,7 @@ export class FandomPageComponent implements OnInit {
 	}
 
 	toEditFandom(){
-		if (this.admin == this.session.retrieve('logged-in')){
+		if (this.admin == this.user){
 			var username = prompt("Confirm username");
 			var password = prompt("Confirm password");
 			if (username!=null && password!=null){
@@ -66,7 +68,7 @@ export class FandomPageComponent implements OnInit {
 	}
 
 	deleteFandom(){
-		if (this.admin == this.session.retrieve('logged-in')){
+		if (this.admin == this.user){
 		  var username = prompt("Confirm username");
 		  var password = prompt("Confirm password");
 		  if (username!=null && password!=null){

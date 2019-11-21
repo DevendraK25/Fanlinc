@@ -3,7 +3,6 @@ import * as $ from 'jquery';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
 import { SessionStorageService } from 'ngx-webstorage';
-import { LoginComponent } from '../login/login.component';
 import { FandomService } from '../fandom.service';
 import { UserService } from '../user.service';
 
@@ -16,6 +15,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   
   posts: any;
   fandoms: any;
+  user = ''
   postImages = []
   postTags = []
   postIds = []
@@ -32,6 +32,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   constructor(private userService:UserService, private fandomService: FandomService, private el: ElementRef, private router: Router, private postService:PostService, private session: SessionStorageService, private renderer: Renderer2) {}
 
   ngOnInit(){
+    this.user = this.session.retrieve("logged-in")
     this.postService.getAllPosts().subscribe(
       res => {
         if (res.status == 200){
@@ -163,8 +164,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
   toNewPost(){
-    var user = this.session.retrieve('logged-in');
-    if (user != null)
+    if (this.user != null)
       this.router.navigate(['/create-new-post'])
     else{
       if (confirm('Sign in first!'))
@@ -173,8 +173,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
   toNewFandom(){
-    var user = this.session.retrieve('logged-in');
-    if (user != null)
+    if (this.user != null)
       this.router.navigate(['/create-new-fandom'])
     else{
       if (confirm('Sign in first!'))
@@ -187,7 +186,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   }
 
   deletePost(id, author){
-    if (author == this.session.retrieve('logged-in')){
+    if (author == this.user){
       var username = prompt("Confirm username");
       var password = prompt("Confirm password");
       if (username!=null && password!=null){
