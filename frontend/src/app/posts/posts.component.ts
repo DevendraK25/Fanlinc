@@ -59,7 +59,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
             this.postAuthors.push(this.posts[sortedPosts[i][1]].author);
             this.postTags.push(this.posts[sortedPosts[i][1]].tags);
             this.postNumComments.push(this.posts[sortedPosts[i][1]].comments.length);
-            this.postTimestamps.push(this.posts[sortedPosts[i][1]].timestamp);
+            this.postTimestamps.push(this.timeDifference((new Date().getTime()), this.posts[sortedPosts[i][1]].timestamp));
             this.postIds.push(this.posts[sortedPosts[i][1]]._id);
             this.postFandoms.push(this.posts[sortedPosts[i][1]].fandom);
           }
@@ -78,6 +78,14 @@ export class PostsComponent implements OnInit, AfterViewInit{
 
   sortByFandom(){
 
+  }
+
+  timeDifference(now, date2) {
+
+    var hours = Math.round(Math.abs(now - date2) / (60*60*1000));
+    var mins = Math.round(Math.abs(now - date2) / (60*1000));
+    if (hours > mins) return (hours+" mins ago")
+    return (mins+" mins ago")
   }
 
   ngOnInit(){

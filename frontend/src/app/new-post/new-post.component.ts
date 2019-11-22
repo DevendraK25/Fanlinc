@@ -42,11 +42,11 @@ export class NewPostComponent implements OnInit {
   }
 
   createPost(title, tags, content, image){
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1; //January is 0!
-    var yyyy = today.getFullYear();
-    var timestamp = dd + '/' + mm + '/' + yyyy;
+    // var today = new Date();
+    // var dd = today.getDate();
+    // var mm = today.getMonth() + 1; //January is 0!
+    // var yyyy = today.getFullYear();
+    var timestamp = new Date().getTime();
     this.message = "";
     if (title!=''&&tags!=''&&content!=''){
       var author = this.session.retrieve('logged-in');
@@ -61,7 +61,7 @@ export class NewPostComponent implements OnInit {
             res => {
               if (res.status == 200) {
                 console.log("Post succesfully created");
-                this.router.navigate(['/posts']);
+                this.router.navigate(['/posts']).then(()=>{window.location.reload()})
               }
             },
             err => {
