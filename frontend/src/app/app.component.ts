@@ -1,7 +1,7 @@
 import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { UserService } from './user.service';
 import { Router } from '@angular/router';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-root',
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   pendingNames = []
   numPendings = 0
   isShow=false
-  constructor(private userService: UserService, private router: Router, private session: SessionStorageService){}
+  constructor(private userService: UserService, private router: Router, private session: LocalStorageService){}
 
   ngOnInit(){
     this.user = this.session.retrieve("logged-in")

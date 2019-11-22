@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 
 @Component({
 	selector: 'app-fandom-page',
@@ -20,7 +20,7 @@ export class FandomPageComponent implements OnInit {
 	events = [];
 	image = "";
 	id = ""
-	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: SessionStorageService) { }
+	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService) { }
 
 	ngOnInit() {
 		this.user = this.session.retrieve('logged-in')

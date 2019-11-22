@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, ModuleWithComp
 import { UserService } from '../user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   // @ViewChild('check', {static:false}) check: ElementRef;
   form: FormGroup;
   message = "";
-  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private session: SessionStorageService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private router: Router, private session: LocalStorageService) { }
 
   ngOnInit() {
     this.form = this.fb.group({

@@ -1,13 +1,13 @@
 #header{
     background: white;
     width:100%;
-    padding:15px 10% 15px 10%;
+    padding:8px 10% 14px 10%;
 }
 
 body{
     background: #EAEDED;
     padding:1em 10% 10% 10%; 
-    height:100vh  
+     
 }
 
 .scrollmenu {
@@ -33,8 +33,13 @@ body{
 }
   
 
-#pop-filter,#category-filter,#recent-filter{
+#pop-filter,#recent-filter{
     margin:10px 0 0 0;
+    color:#626567
+}
+#category-filter{
+    margin:10px 0 0 10px;
+    color:#626567
 }
 
 #category-filter{
@@ -45,13 +50,6 @@ body{
     padding:5px 10px 5px 10px;
 }
 
-/* #apply{
-    border-radius: 4px;
-    color:white;
-    border:none;
-    background:#5DADE2;
-    padding:0 5px 5px 5px;
-} */
 #apply:hover{
     background: #2E86C1;
 }
@@ -107,10 +105,10 @@ body{
 #column1{
     width:10%;text-align: center;
 }
-#postImg{
+#userImg{
     width:60px;height:60px;border-radius: 50%;
 }
-#postImg:hover{
+#userImg:hover{
     border:1px solid #3498DB
 }
 #column2{
@@ -171,4 +169,7 @@ body{
 #edit {
     font-size:13px;
     margin:0 0 0 10px
+}
+#post2Fd:hover{
+    color:#F8C471
 }

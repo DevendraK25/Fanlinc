@@ -27,7 +27,6 @@ export class EditprofileComponent implements OnInit {
 				(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
 				(<HTMLInputElement>document.getElementById("age")).value = res.body[0].profile.age;
 				(<HTMLInputElement>document.getElementById("image")).value = res.body[0].image;}
-
 			},
 			err => {
 				console.log(err)
@@ -38,9 +37,9 @@ export class EditprofileComponent implements OnInit {
 	saveChanges(password, email, bio, age, image) {
 		this.userService.updateUser(this.username, email, password, bio, age, image).subscribe(
 			res => {
+				console.log(res.body);
 				if (res.status == 200)
-					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } });
-				console.log(res);
+					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } }).then(()=>{window.location.reload()})
 			},
 			err => {
 				console.log(err);

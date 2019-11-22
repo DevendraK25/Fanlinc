@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2, Que
 import * as $ from 'jquery';
 import { PostService } from '../post.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 import { DOCUMENT } from '@angular/common';
 import { UserService } from '../user.service';
 
@@ -29,7 +29,7 @@ export class CommentPgComponent implements OnInit, AfterViewInit{
     postFandom:string
     postNumComment:number
     postComments=[]
-    constructor(private userService: UserService, private el: ElementRef, private router: Router, private route: ActivatedRoute, private postService:PostService, private session: SessionStorageService, private renderer: Renderer2){}
+    constructor(private userService: UserService, private el: ElementRef, private router: Router, private route: ActivatedRoute, private postService:PostService, private session: LocalStorageService){}
 
     ngAfterViewInit(): void {
         (document.querySelector(".replyBox") as HTMLElement).style.display = "auto"

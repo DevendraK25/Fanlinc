@@ -32,16 +32,16 @@
     <p style='margin-left:-1%'><b>Popular posts</b></p>
     <div class='row'>
         <div style='width:70%' class='column'>
-            <div *ngFor="let post of postIds; let i = index" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
+            <div *ngFor="let post of posts;let i = index; trackBy: trackByFn;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
                 <div class='column' id='column1'>
                     <input value='{{postAuthors[i]}}' #author style='display:none'>
-                    <a (click)="toUserProfile(author.value)"><img src="{{postImages[i]}}" alt="user" id='postImg'></a>
+                    <a (click)="toUserProfile(author.value)"><img src="{{userImages[i]}}" alt="user" id='userImg'></a>
                     <hr style='width:50px;margin:10px auto 5px auto;'>
                     <div style='font-size:13px;'>{{postAuthors[i]}}</div>
                 </div>
                 <div class='column' id='column2'>
                     <div id='column2-header'>
-                        <span style='margin:0 20px 0 0'><b>f/{{postFandoms[i]}}</b></span>
+                        <span style='margin:0 20px 0 0'><b>f/<a (click)="redirectToFandom(postFandoms[i])" id='post2Fd' *ngIf="postFandoms[i]!='none-selected'">{{postFandoms[i]}}</a></b></span>
                         <span style='float:right;text-align: left;'>
                             <span style='margin:0 15px 0 0'>{{postTags[i]}}</span>
                             <span>{{postTimestamps[i]}}</span>
@@ -50,6 +50,7 @@
                     </div>
                     <h4><b>{{postTitles[i]}}</b></h4>
                     <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
+                    <p *ngIf="postImages[i]!=''"><img img style='max-width:150px;max-height:300px;' src="{{postImages[i]}}"></p>
                     <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} comments</button>
                 </div>
                 <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
@@ -73,15 +74,13 @@
             <button class="form-control btn-outline" id='pop-filter'>Popularity</button>
             </div>
 
-            <div style='margin-left:10px' class="dropdown">
-            <button class="btn-outline dropdown-toggle" data-toggle='dropdown' id='category-filter'>Category</button>
-            <div class='dropdown-menu' id='categories'>
+            <div ngbDropdown class="d-inline-block">
+                <button id='category-filter' class="btn-outline" ngbDropdownToggle>Choose a fandom</button>
+                <div id='dropDownItemBack' ngbDropdownMenu>
+                    <a style='width:200px' id="{{item}}" *ngFor="let item of fandomNames" id='dropDownItem' (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
+                </div>
             </div>
             </div>
-            </div>
-
-            <!-- <br>
-            <button class="btn-outline" type='submit' id='apply'>Apply</button> -->
         </div>
 
     </div>

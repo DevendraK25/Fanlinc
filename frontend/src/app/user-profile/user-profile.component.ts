@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy, HostListener, ViewChild, ElementRef, Rend
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 
 @Component({
 	selector: 'app-user-profile',
@@ -23,7 +23,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 	isShow = false;
 	isLinked = false
 	friendB = ""
-	constructor(private renderer: Renderer2, private userService: UserService, private route: ActivatedRoute, private router: Router, private session: SessionStorageService) { }
+	constructor(private renderer: Renderer2, private userService: UserService, private route: ActivatedRoute, private router: Router, private session: LocalStorageService) { }
 
 	ngAfterViewInit() {
 		var userParam = this.route.snapshot.queryParamMap.get('user')
@@ -80,14 +80,20 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 	}
 
 	addFriendClicked(toBeAdded){
-		if (this.friendB == 'Add Friend'){
-			this.friendB = "Friend Request Sent";
-			this.userService.addPending(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+		if (this.user != null && this.user != ""){
+			if (this.friendB == 'Add Friend'){
+				this.friendB = "Friend Request Sent";
+				this.userService.addPending(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+			}
+			else if (this.friendB == 'Accept Friend Request'){
+				this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+				this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+				this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+			}
 		}
-		else if (this.friendB == 'Accept Friend Request'){
-			this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
-			this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
-			this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+		else {
+			if (confirm("Sign in first!!"))
+				this.router.navigate(['/login'])
 		}
 	}
 

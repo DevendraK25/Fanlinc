@@ -71,3 +71,10 @@ body{
     width:15%;
     padding:5px;
 }
+#dDown{
+    width:200px;
+    height:40px;
+    border:grey;
+    border-radius: 3px;
+    background: #EAEDED;
+}

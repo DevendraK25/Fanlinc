@@ -2,9 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2, Que
 import * as $ from 'jquery';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
-import { SessionStorageService } from 'ngx-webstorage';
+import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 import { FandomService } from '../fandom.service';
 import { UserService } from '../user.service';
+import { fn } from '@angular/compiler/src/output/output_ast';
+import { timingSafeEqual } from 'crypto';
 
 @Component({
 	selector: 'app-posts',
@@ -16,6 +18,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
   posts: any;
   fandoms: any;
   user = ''
+  userImages = []
   postImages = []
   postTags = []
   postIds = []
@@ -27,34 +30,38 @@ export class PostsComponent implements OnInit, AfterViewInit{
   postFandoms = []
   postNumComments = []
 	fandomNames = [];
-	fandomImages = [];
+  fandomImages = [];
+  containsImg = []
   categories = ['movies', 'anime', 'tv shows', 'sports']
-  constructor(private userService:UserService, private fandomService: FandomService, private el: ElementRef, private router: Router, private postService:PostService, private session: SessionStorageService, private renderer: Renderer2) {}
-
-  ngOnInit(){
-    this.user = this.session.retrieve("logged-in")
+  
+  constructor(private userService:UserService, private fandomService: FandomService, private router: Router, private postService:PostService, private session: LocalStorageService) {}
+  
+  sortByPopularity(){
+    var arr = []
     this.postService.getAllPosts().subscribe(
       res => {
         if (res.status == 200){
           this.posts = res.body;
           for (var i = 0; i < this.posts.length; i++){
-            this.postTitles.push(this.posts[i].title);
-            this.postContents.push(this.posts[i].content);
-            this.userService.getUserByUsername(this.posts[i].author).subscribe(
-              res => {
-                this.postImages.push(res.body[0].image)
-              },
-              err => {
-                console.log(err)
-              }
-            )
-            this.postAuthors.push(this.posts[i].author);
-            this.postTags.push(this.posts[i].tags);
-            this.postNumComments.push(this.posts[i].comments.length);
-            this.postTimestamps.push(this.posts[i].timestamp);
-            this.postNumVotes.push(this.posts[i].numVotes);
-            this.postIds.push(this.posts[i]._id);
-            this.postFandoms.push(this.posts[i].fandom);
+            arr.push([this.posts[i].numVotes, i]);
+          }
+          var sortedPosts = arr.sort((a,b)=>b[0]-a[0])
+          for (var i = 0; i < sortedPosts.length; i++){
+            this.postNumVotes.push(this.posts[sortedPosts[i][1]].numVotes);
+            this.postTitles.push(this.posts[sortedPosts[i][1]].title);
+            this.postContents.push(this.posts[sortedPosts[i][1]].content);
+            this.userImages.push(this.posts[sortedPosts[i][1]].userImage);
+            if (this.posts[sortedPosts[i][1]].image != null)
+              this.postImages.push(this.posts[sortedPosts[i][1]].image)
+            else{
+              this.postImages.push("")
+            }
+            this.postAuthors.push(this.posts[sortedPosts[i][1]].author);
+            this.postTags.push(this.posts[sortedPosts[i][1]].tags);
+            this.postNumComments.push(this.posts[sortedPosts[i][1]].comments.length);
+            this.postTimestamps.push(this.posts[sortedPosts[i][1]].timestamp);
+            this.postIds.push(this.posts[sortedPosts[i][1]]._id);
+            this.postFandoms.push(this.posts[sortedPosts[i][1]].fandom);
           }
         }
       },
@@ -63,6 +70,19 @@ export class PostsComponent implements OnInit, AfterViewInit{
         this.router.navigate(['/page-not-found']);
       }
     )
+  }
+
+  sortByMostRecent(){
+
+  }
+
+  sortByFandom(){
+
+  }
+
+  ngOnInit(){
+    this.user = this.session.retrieve("logged-in")
+    this.sortByPopularity();
 
     this.fandomService.getAllFandoms().subscribe(
       res => {
@@ -79,7 +99,6 @@ export class PostsComponent implements OnInit, AfterViewInit{
         this.router.navigate(['/page-not-found']);
       }
     );
-    console.log(this.fandomImages)
   }
 
   ngAfterViewInit() {}
@@ -193,7 +212,7 @@ export class PostsComponent implements OnInit, AfterViewInit{
         this.postService.deletePost(id).subscribe(
           res => {
             console.log(res.body)
-            this.router.navigate(['/posts'])
+            window.location.reload()
           },
           err => {
             console.log(err)

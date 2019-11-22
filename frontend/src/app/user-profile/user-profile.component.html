@@ -58,7 +58,7 @@
 	</div>
 
 	<hr>
-	<div>
+	<div *ngIf="!isShow">
 		<button mdbBtn color="info" #edit (click)="redirectToEditProfile()">edit profile</button>
 		<button mdbBtn color="info" #save (click)="logout()">Logout</button>
 	</div>		

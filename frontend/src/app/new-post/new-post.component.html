@@ -3,15 +3,19 @@
     <div id='box'>
         <h4><b>Create a new post</b></h4>
 
-        <div [formGroup]='form'>
+        <div>
         <div><input id='title' #title placeholder='Enter topic title'></div>
-        <!-- <div><input id='fandom' #fandom placeholder='Enter fandom name'>
-        <input id='category' #category placeholder='Enter category'></div> -->
-        <div><input id='fandom' #fandom placeholder='Enter fandom'></div>
+        <!-- <div><input id='fandom' #fandom placeholder='Enter fandom'></div> -->
+        <div ngbDropdown class="d-inline-block">
+            <button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a fandom</button>
+            <div id='dropDownItemBack' ngbDropdownMenu>
+              <a style='width:200px' id="{{item}}" *ngFor="let item of fandoms" id='dropDownItem' (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
+            </div>
+        </div>
         <div><input id='tags' #tags placeholder='Enter tags (e.g: #tag1 #tag2)'></div>
         <div><input id='image' #image placeholder='Image link (optional)'></div>
         <div><textarea id='description' #content placeholder='Enter description'></textarea></div>
-        <button id='submit' (click)='createPost(title.value,tags.value,content.value,fandom.value,image.value)'>submit</button>
+        <button id='submit' (click)='createPost(title.value,tags.value,content.value,image.value)'>submit</button>
         <div style='margin-top:10px;color:red'>{{message}}</div>
         </div>
     </div>

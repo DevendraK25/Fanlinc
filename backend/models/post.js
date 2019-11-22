@@ -28,6 +28,10 @@ let postSchema = new Schema({
 	fandom : {
 		type : String,
 		required : true
+	},
+	userImage : {
+		type : String,
+		required : true
 	}
 });
 
