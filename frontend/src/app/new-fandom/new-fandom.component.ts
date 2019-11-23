@@ -30,5 +30,8 @@ export class NewFandomComponent implements OnInit {
                 }
             );
         }
+        else {
+            alert("some fields are still missing")
+        }
     }
 }

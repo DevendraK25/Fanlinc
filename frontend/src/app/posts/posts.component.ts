@@ -84,8 +84,15 @@ export class PostsComponent implements OnInit, AfterViewInit{
     var days = Math.round(Math.abs(now - date2) / (24*60*60*1000));
     var hours = Math.round(Math.abs(now - date2) / (60*60*1000));
     var mins = Math.round(Math.abs(now - date2) / (60*1000));
-    if (hours > 23) return (days+" days ago")
-    if (mins > 59) return (hours+" hours ago")
+    if (hours > 23) {
+      if (days == 1) return (days+" day ago")
+      return (days+" days ago")
+    }
+    if (mins > 59) {
+      if (hours == 1) return (hours+" day ago")
+      return (hours+" hours ago")
+    }
+    if (mins == 1) return (mins+" min ago")
     return (mins+" mins ago")
   }
 
