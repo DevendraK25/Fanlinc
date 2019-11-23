@@ -180,6 +180,8 @@ export class PostsComponent implements OnInit{
       this.postAuthors.push(this.posts[sortedPosts[i][1]].author);
       this.postTags.push(this.posts[sortedPosts[i][1]].tags);
       this.postNumComments.push(this.posts[sortedPosts[i][1]].comments.length);
+      if (this.posts[sortedPosts[i][1]].comments.length <= 1) this.comments.push("comment")
+      else this.comments.push("comments")
       this.postTimestamps.push(this.timeDifference((new Date().getTime()), this.posts[sortedPosts[i][1]].timestamp));
       this.postIds.push(this.posts[sortedPosts[i][1]]._id);
       this.postFandoms.push(this.posts[sortedPosts[i][1]].fandom);
