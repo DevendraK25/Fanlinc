@@ -192,5 +192,26 @@ export class CommentPgComponent implements OnInit{
         }
         )
     }
+
+    deletePost(id, author){
+        if (author == this.user){
+          var username = prompt("Confirm username");
+          var password = prompt("Confirm password");
+          if (username!=null && password!=null){
+            this.postService.deletePost(id).subscribe(
+              res => {
+                console.log(res.body)
+                window.location.reload()
+              },
+              err => {
+                console.log(err)
+              }
+            )
+          }
+        }
+        else{
+          alert("That's not your post!!")
+        }
+    }
     
 }

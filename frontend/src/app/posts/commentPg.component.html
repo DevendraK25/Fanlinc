@@ -25,10 +25,10 @@
         </div>
         <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
         <div class='column' style='margin:auto auto auto auto'>
-            <div (click)='upvote(postId.value, numVotes.value)' id='arrow-up'></div>
+            <div (click)='upvote()' id='arrow-up'></div>
             <input value='{{postNumVote}}' #numVotes style='display:none'>
-            <p id='{{postId}}' class='numVotes' style='text-align: center;'>{{postNumVote}}</p>
-            <div (click)='downvote(postId.value, numVotes.value)' id="arrow-down"></div>
+            <p id='numVote' class='numVotes' style='text-align: center;'>{{postNumVote}}</p>
+            <div (click)='downvote()' id="arrow-down"></div>
         </div>
 
         <p></p>
