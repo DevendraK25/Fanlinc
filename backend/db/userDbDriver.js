@@ -51,16 +51,18 @@ function updateUser(req, res) { //for all other fields that's not array
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
 }
 
 function deleteUser(req, res) {
-	userSchema.deleteOne({username: req.body.username, password: req.body.password}, function(err) {
+	userSchema.deleteOne({username: req.params.username, password: req.body.password}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg)
+		else if (user.n == 0)
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send('deleted')
 	});
@@ -81,7 +83,7 @@ function addFriend(req, res) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
@@ -93,7 +95,7 @@ function addPending(req, res) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
@@ -105,7 +107,7 @@ function removePending(req, res) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
@@ -117,7 +119,7 @@ function removeFriend(req, res) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
@@ -125,37 +127,27 @@ function removeFriend(req, res) {
 
 function subscribe(req, res) {
 	userSchema.update({username : req.params.username}, 
-		{$push : {"profile.fandoms" : req.body.fandom}}, function(err, user) {
+		{$push : {"profile.subscribed" : req.body.fandom}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
 }
 
 function unsubscribe(req, res) {
-	userSchema.update({username : req.params.username}, {$pull : {"profile.fandoms" : req.body.fandom}}, 
+	userSchema.update({username : req.params.username}, {$pull : {"profile.subscribed" : req.body.fandom}}, 
 	function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (user.n == 0)
-			res.status(404).send("User '" + req.params.id + "' not found");
+			res.status(404).send("User '" + req.params.username + "' not found");
 		else
 			res.status(200).send(user);
 	});
 }
-
-// // no need for getsubscribed, can get it from getUser() instead
-// function getSubscribed(req, res) {
-// 	userSchema.find({username : req.body.username},function(err, user) {
-// 		if (err)
-// 			res.status(400).send(err.errmsg);
-// 		else
-// 			res.status(200).send(user.body.profile.fandoms);
-// 	})
-// }
 
 module.exports = {
 	getAllUsers : getAllUsers,

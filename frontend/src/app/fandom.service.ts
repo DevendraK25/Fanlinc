@@ -30,6 +30,10 @@ export class FandomService {
 		return this.http.post(`${this.uri}/fandoms/add`, fandom, { observe: 'response' });
 	}
 
+	setSubCount(name, subcount){
+		return this.http.post(`${this.uri}/fandoms/setSubCount/${name}`, {subcount: subcount},  { observe: 'response' });
+	}
+
 	setPosts(post){
 		return this.http.post(`${this.uri}/fandoms/setPosts/${name}`, {newPost: post}, { observe: 'response' });
 	}
@@ -52,8 +56,8 @@ export class FandomService {
 		return this.http.post(`${this.uri}/fandoms/update/${name}`, fandom, { observe: 'response' });
 	}
 
-	deleteFandom(id) {
-		return this.http.delete(`${this.uri}/fandoms/delete/${id}`, { observe: 'response' });
+	deleteFandom(name) {
+		return this.http.delete(`${this.uri}/fandoms/delete/${name}`, { observe: 'response' });
 	}
 
 }

@@ -23,8 +23,14 @@ let userSchema = new Schema({
 		max : 40
 	},
 	profile : {
-		subscribed : {
-			type : Array
+		subscribed: {
+			type: Array
+		},
+		level : {
+			type : String
+		},
+		type : {
+			type : String
 		},
 		friends : {
 			type : Array
@@ -36,12 +42,6 @@ let userSchema = new Schema({
 			type : Number
 		},
 		interests : {
-			type : Array
-		},
-		fandoms : {
-			type : Array
-		},
-		groups : {
 			type : Array
 		},
 		friends : {

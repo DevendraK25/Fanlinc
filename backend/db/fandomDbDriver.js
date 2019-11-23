@@ -34,59 +34,71 @@ function addFandom(fandom, res) {
 
 function updateFandom(req, res){ //for all other fields that's not array
 	fandomSchema.updateOne({
-		_id : ObjectId(req.params.id)
+		name : req.params.name
 	}, req.body, function(err, fandom) {
 		if (err) 
 			res.status(404).send(err.errmsg);
 		else if (fandom.n == 0)
-			res.status(404).send("fandom '" + req.params.id + "' not found");
+			res.status(404).send("fandom '" + req.params.name + "' not found");
 		else
 			res.status(200).send(fandom)
 	})
 }
 
 function setPosts(req, res) {
-	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"posts": req.body.newPost}},
+	fandomSchema.updateOne({name : req.params.name}, {$push: {"posts": req.body.newPost}},
 		function(err, fandom) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (fandom.n == 0)
-			res.status(404).send("Fandom '" + req.params.id + "' not found");
+			res.status(404).send("Fandom '" + req.params.name + "' not found");
 		else
 			res.status(200).send(fandom);
 	});
 }
 
 function setMods(req, res) {
-	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"mods": req.body.newMod}},
+	fandomSchema.updateOne({name : req.params.name}, {$push: {"mods": req.body.newMod}},
 		function(err, fandom) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (fandom.n == 0)
-			res.status(404).send("Fandom '" + req.params.id + "' not found");
+			res.status(404).send("Fandom '" + req.params.name + "' not found");
 		else
 			res.status(200).send(fandom);
 	});
 }
 
 function setEvents(req, res) {
-	postSchema.updateOne({_id : ObjectId(req.params.id)}, {$push: {"events": req.body.newEvent}},
+	fandomSchema.updateOne({name : req.params.name}, {$push: {"events": req.body.newEvent}},
 		function(err, fandom) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (fandom.n == 0)
-			res.status(404).send("Fandom '" + req.params.id + "' not found");
+			res.status(404).send("Fandom '" + req.params.name + "' not found");
+		else
+			res.status(200).send(fandom);
+	});
+}
+
+function setSubCount(req, res) {
+	fandomSchema.updateOne({name : req.params.name}, {subcount: req.body.subcount},
+		function(err, fandom) {
+		if (err)
+			res.status(400).send(err.errmsg);
+		else if (fandom.n == 0)
+			res.status(404).send("Fandom '" + req.params.name + "' not found");
 		else
 			res.status(200).send(fandom);
 	});
 }
 
 function deleteFandom(req, res) {
-    fandomSchema.deleteOne({_id : ObjectId(req.params.id)}, function(err, fandom) {
+    fandomSchema.deleteOne({name : req.params.name}, function(err, fandom) {
 		if (err)
 			res.status(400).send(err.errmsg);
 		else if (fandom.n == 0)
-			res.status(404).send("fandom '" + req.params.id + "' not found");
+			res.status(404).send("fandom '" + req.params.name + "' not found");
 		else
 			res.status(200).send(fandom);
 	});
@@ -111,4 +123,5 @@ module.exports = {
 	setMods : setMods,
 	setPosts : setPosts,
 	setEvents : setEvents,
+	setSubCount : setSubCount
 }

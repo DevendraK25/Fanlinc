@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
+import { UserService } from '../user.service';
 
 @Component({
 	selector: 'app-fandom-page',
@@ -20,7 +21,13 @@ export class FandomPageComponent implements OnInit {
 	events = [];
 	image = "";
 	id = ""
-	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService) { }
+	followB = "follow"
+	adminB = "admin"
+	showAdminB = false
+	showFollowB = true
+	showUnfollowB = false
+	showB = false
+	constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService) { }
 
 	ngOnInit() {
 		this.user = this.session.retrieve('logged-in')
@@ -37,6 +44,21 @@ export class FandomPageComponent implements OnInit {
 					this.events = res.body[0].events;
 					this.image = res.body[0].image;
 					this.id = res.body[0]._id;
+					if (this.admin == this.user) {
+						this.showFollowB = !this.showFollowB
+						this.showB = !this.showB
+						this.showAdminB = !this.showAdminB
+					}
+					this.userService.getUserByUsername(this.user).subscribe(
+						res => {
+							if ((res.body[0].profile.subscribed).includes(this.name)) {
+								this.followB = "unfollow"
+								this.showFollowB = !this.showFollowB;
+								this.showUnfollowB = !this.showUnfollowB;
+							}
+						},
+						err => {console.log(err)}
+					)
 				}
 			},
 			err => {
@@ -47,11 +69,47 @@ export class FandomPageComponent implements OnInit {
 	}
 
 	toUserProfile(username){
-		this.router.navigate(['/profile'], {queryParams: {user: username, cond:false}})
+		this.router.navigate(['/profile'], {queryParams: {user: username}})
 	}
 
-	subscribe(){
-		
+	subscribe(fandom){	
+		this.userService.subscribe(this.user, fandom).subscribe(
+			res => {
+				console.log(res.body)
+				this.followB = "unfollow";
+				this.showFollowB = !this.showFollowB;
+				this.showUnfollowB = !this.showUnfollowB;
+				this.fandomService.setSubCount(this.name, this.subcount+1).subscribe(
+					res => {
+						console.log(res.body)
+					},
+					err => {console.log(err)}
+				)
+			},
+			err => {
+				console.log(err)
+			}
+		)
+	}
+
+	unsubscribe(fandom){
+		this.userService.unsubscribe(this.user, fandom).subscribe(
+			res => {
+				console.log(res.body)
+				this.followB = "follow";
+				this.showFollowB = !this.showFollowB;
+				this.showUnfollowB = !this.showUnfollowB;
+				this.fandomService.setSubCount(this.name, this.subcount-1).subscribe(
+					res => {
+						console.log(res.body)
+					},
+					err => {console.log(err)}
+				)
+			},
+			err => {
+				console.log(err)
+			}
+		)
 	}
 
 	toEditFandom(){

@@ -14,7 +14,7 @@ router.post('/unfriend/:username', function(req, res){ udb.removeFriend(req, res
 router.post('/subscribe/:username', function(req, res){ udb.subscribe(req, res) });
 router.post('/unsubscribe/:username', function(req, res){ udb.unsubscribe(req, res) });
 
-router.delete('/delete', function(req, res){ udb.deleteUser(req, res) });
+router.delete('/delete/:username', function(req, res){ udb.deleteUser(req, res) });
 router.delete('/deleteAll', function(req, res){ udb.deleteAll(req, res) });
 
 module.exports = router;

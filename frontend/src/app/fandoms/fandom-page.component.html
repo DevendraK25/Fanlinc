@@ -5,9 +5,11 @@
         <div style='height:50px;text-align:left'>
             <span style='font-size:30px;font-weight:bold'>{{name}} Fandom</span>
             <span style='float:right; text-align: left;'>
-                <span><button id='subsB' (click)="subscribe()">follow</button></span>
-                <span><button id='editB' class='fa fa-edit' (click)="toEditFandom()"></button></span>
-                <span style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
+                <span *ngIf="showAdminB"><button id='subsB' [disabled]='true'>{{adminB}}</button></span>
+                <span *ngIf="showFollowB"><button id='subsB' (click)="subscribe(name)">{{followB}}</button></span>
+                <span *ngIf="showUnfollowB"><button id='subsB' (click)="unsubscribe(name)">{{followB}}</button></span>
+                <span *ngIf="showB"><button id='editB' class='fa fa-edit' (click)="toEditFandom()"></button></span>
+                <span *ngIf="showB" style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
             </span>
         </div>
         

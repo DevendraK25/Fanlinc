@@ -1,3 +1,43 @@
+body{
+	background: #EAEDED;
+	padding:3em 0 3em 0
+}
+
+#wrapper{
+	text-align:center;
+	background:white;
+	margin: 0 auto 0 auto;
+	width: 40%;
+	padding:12px 12px 12px -60px
+}
+.row{
+	margin:0 0 5px -35%;
+}
+.col{
+	margin: 0 0 0 -16%
+}
 p{
 	color:#F5B041;
+}
+
+#saveB{
+	margin:1em auto 1.5em auto;
+}
+#password, #email, #bio, #age, #image, #interests, #type, #level, #dDown{
+	border-width: 1.1px;
+    border-color:#EAEDED;
+    border-radius:3px;
+    border-style:solid;
+	background: #EAEDED;
+	padding:2px 4px 2px 4px;
+	width:250px;
+}
+#existingInterest{
+	background: #F5B041;
+	color:white;
+	border-color:#F5B041;
+	border-style:solid;
+	border-width: 1px;
+	border-radius:3px;
+	margin:0 4px 2px 0
 }

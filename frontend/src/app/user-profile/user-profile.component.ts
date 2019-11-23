@@ -15,11 +15,16 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 	@ViewChild("friend", {static:false}) friendRef: ElementRef
 
 	user = ""
+	level = ""
+	type = ""
 	username = ""
 	email = "";
 	age = "";
 	imagelink = "";
 	bio = ""
+	interests = []
+	fandoms = []
+	friends = []
 	isShow = false;
 	isLinked = false
 	friendB = ""
@@ -37,6 +42,17 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 						this.age = res.body[0].profile.age;
 						this.imagelink = res.body[0].image;
 						this.bio = res.body[0].profile.bio;
+						this.level = res.body[0].profile.level;
+						this.type = res.body[0].profile.type;
+						for (var i=0; i<res.body[0].profile.interests.length; i++){
+							this.interests.push(res.body[0].profile.interests[i])
+						}
+						for (var i=0; i<res.body[0].profile.friends.length; i++){
+							this.friends.push(res.body[0].profile.friends[i])
+						}
+						for (var i=0; i<res.body[0].profile.subscribed.length; i++){
+							this.fandoms.push(res.body[0].profile.subscribed[i])
+						}
 					}			
 				},
 				err => {
@@ -54,6 +70,17 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 					this.age = res.body[0].profile.age;
 					this.imagelink = res.body[0].image;
 					this.bio = res.body[0].profile.bio;
+					this.level = res.body[0].profile.level;
+					this.type = res.body[0].profile.type;
+					for (var i=0; i<res.body[0].profile.interests.length; i++){
+						this.interests.push(res.body[0].profile.interests[i])
+					}
+					for (var i=0; i<res.body[0].profile.friends.length; i++){
+						this.friends.push(res.body[0].profile.friends[i])
+					}
+					for (var i=0; i<res.body[0].profile.subscribed.length; i++){
+						this.fandoms.push(res.body[0].profile.subscribed[i])
+					}
 					if (!(res.body[0].profile.friends).includes(this.user)){
 						if (this.route.snapshot.queryParamMap.get('req'))
 							this.friendB = "Accept Friend Request"
@@ -95,6 +122,15 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 			if (confirm("Sign in first!!"))
 				this.router.navigate(['/login'])
 		}
+	}
+
+	toUserProfile(username){
+		this.router.navigate(['/profile'], {queryParams: {user: username}}).then(()=>{window.location.reload()})
+	}
+
+	toFandomPg(fandom){
+		console.log(fandom)
+		this.router.navigate(['/fandom-page'], {queryParams: {fandom: fandom}})
 	}
 
 	logout(){

@@ -30,19 +30,29 @@ export class UserService {
 			username: username,
 			email: email,
 			password: password,
-			image: "https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png"
+			image: "https://hockeydev2.wpengine.com/wp-content/uploads/2019/08/Default-Profile.png",
+			profile: {
+				type: "general fan",
+				level: "limited"
+			}
 		};
 		return this.http.post(`${this.uri}/users/add`, user, { observe: 'response' });
 	}
 
-	updateUser(username, email, password, bio, age, image) {
+	updateUser(username, email, password, bio, age, image, interests, type, level, friends, pendingF, fandoms) {
 		const user = {
 			username: username,
 			email: email,
 			password: password,
 			profile: {
+				type: type,
+				level: level,
 				bio: bio,
-				age: age
+				age: age,
+				interests: interests,
+				friends: friends, 
+				pending_friends: pendingF, 
+				fandoms: fandoms
 			},
 			image: image
 		};
@@ -61,7 +71,15 @@ export class UserService {
 		return this.http.post(`${this.uri}/users/addfriend/${username}`, {friend: friend}, {observe: 'response'});
 	}
 	
-	deleteUser(username) {
-		return this.http.delete(`${this.uri}/users/delete/${username}`);
+	// deleteUser(username) {
+	// 	return this.http.delete(`${this.uri}/users/delete/${username}`);
+	// }
+
+	subscribe(username, fandom){
+		return this.http.post(`${this.uri}/users/subscribe/${username}`, {fandom: fandom}, {observe: 'response'});
+	}
+
+	unsubscribe(username, fandom){
+		return this.http.post(`${this.uri}/users/unsubscribe/${username}`, {fandom: fandom}, {observe: 'response'});
 	}
 }

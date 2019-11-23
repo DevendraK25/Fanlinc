@@ -1,7 +1,7 @@
 body{
     background: #EAEDED; 
     height:100vh;  
-    padding: 5% 0 0 0 ;
+    padding: 3em 0 3em 0 ;
 }
 
 #box{
@@ -15,8 +15,7 @@ body{
     margin: 0 0 20px 0;
     text-align: center;
 }
-#title{
-    margin: 10px 0 0 0;
+#title, #fandom, #image, #tags, #category, #dDown{
     width:100%;
     border-width: 1.1px;
     border-color:#EAEDED;
@@ -24,31 +23,7 @@ body{
     border-style:solid;
     background: #EAEDED;
     padding:10px;
-}
-#fandom{
-    margin: 0 5% 0 0;
-    width:47.5%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
-}
-#category{
-    width:47.5%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
-}
-#fandom, #image, #tags{
-    width:100%;
-    border-width: 1.1px;
-    border-color:#CACFD2;
-    border-radius:4px;
-    border-style:solid;
-    padding:10px;
+    margin:0 0 -5px 0
 }
 
 #description{
@@ -70,11 +45,4 @@ body{
     margin:0 auto 0 auto;
     width:15%;
     padding:5px;
-}
-#dDown{
-    width:200px;
-    height:40px;
-    border:grey;
-    border-radius: 3px;
-    background: #EAEDED;
 }

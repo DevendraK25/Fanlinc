@@ -4,19 +4,15 @@
 <meta charset="ISO-8859-1">
 </head>
 <body>
-	<div class="row">
-		<div class="col">
-			<p style="text-align: center; font-size:20px">Edit profile</p>
-		</div>
-	</div>
 
+<div id='wrapper'>
+    <h4 style='text-align: left;padding:10px 0 0 25px'><b>Edit Profile</b></h4><br>
 	<div class="row">
 		<div class="col">
 			<p style="float: right">Password</p>
 		</div>
 		<div class="col">
-			<input style='width:200px' id="password" #password>
-
+			<input type='password' id="password" #password>
 		</div>
 	</div>
 	<div class="row">
@@ -24,8 +20,36 @@
 			<p style="float: right">Email</p>
 		</div>
 		<div class="col">
-			<input style='width:200px' id="email" #email>
+			<input id="email" #email>
+		</div>
+	</div>
 
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Type</p>
+		</div>
+		<div class="col">
+			<input [disabled]='true' id="type" #type>
+			<div style='margin:3px 0 4px 110px;float:left' ngbDropdown class="d-inline-block">
+				<button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a type</button>
+				<div id='dropDownItemBack' ngbDropdownMenu>
+					<a style='width:200px' (click)="setType(typeval.value)" *ngFor="let type of types" id="{{type}}" ngbDropdownItem>{{type}}<input #typeval value="{{type}}" style='display:none'></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Level</p>
+		</div>
+		<div class="col">
+			<input [disabled]='true' id="level" #level>
+			<div style='margin:3px 0 4px 110px;float:left' ngbDropdown class="d-inline-block">
+				<button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a level</button>
+				<div id='dropDownItemBack' ngbDropdownMenu>
+					<a style='width:200px' (click)="setLevel(levelval.value)" *ngFor="let level of levels" id="{{level}}" ngbDropdownItem>{{level}}<input #levelval value="{{level}}" style='display:none'></a>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -33,7 +57,7 @@
 			<p style="float: right">Bio</p>
 		</div>
 		<div class="col">
-			<textarea style='width:200px' id="bio" #bio></textarea>
+			<textarea id="bio" #bio></textarea>
 		</div>
 	</div>
 	<div class="row">
@@ -41,24 +65,32 @@
 			<p style="float: right">Age</p>
 		</div>
 		<div class="col">
-			<input style='width:200px' id="age" type="number" min="0"
+			<input id="age" type="number" min="0"
 				oninput="validity.valid||(value='');" #age>
-
 		</div>
 	</div>
-		<div class="row">
+	<div class="row">
 		<div class="col">
 			<p style="float: right">ImageURL</p>
 		</div>
 		<div class="col">
-			<input style='width:200px' id="image" #image>
-
+			<input id="image" #image>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col">
+			<p style="float: right">Interests</p>
+		</div>
+		<div class="col">
+			<div style='margin: 0 0 3px 100px; width:250px;float:left'><button id='existingInterest' *ngFor="let item of interests" [disabled]='true'>{{item}}</button></div>
+			<input placeholder="add an interest" id='interests' #interest>
 		</div>
 	</div>
 	<div>
-		<button mdbBtn color="info" #edit
-			(click)="saveChanges(password.value, email.value, bio.value, age.value, image.value)" style="margin:0 auto; display:block;">save
-			changes</button>
+		<button mdbBtn color="info" (click)="saveChanges(password.value, email.value, bio.value, age.value, image.value, interest.value)" id='saveB'>
+			save changes
+		</button>
 	</div>
+</div>
 </body>
 </html>

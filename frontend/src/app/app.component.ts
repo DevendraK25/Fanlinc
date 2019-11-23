@@ -56,6 +56,10 @@ export class AppComponent implements OnInit {
   addFriend(toBeAdded){
 		this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
     this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
-    this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+    this.userService.removePending(this.user, toBeAdded).subscribe(res=>{
+      console.log(res.body);
+      window.location.reload()
+    },
+    err=>{console.log(err)})
 	}
 }

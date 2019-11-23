@@ -42,10 +42,6 @@ export class NewPostComponent implements OnInit {
   }
 
   createPost(title, tags, content, image){
-    // var today = new Date();
-    // var dd = today.getDate();
-    // var mm = today.getMonth() + 1; //January is 0!
-    // var yyyy = today.getFullYear();
     var timestamp = new Date().getTime();
     this.message = "";
     if (title!=''&&tags!=''&&content!=''){
