@@ -11,17 +11,19 @@ import { UserService } from '../user.service';
   templateUrl: './commentPg.component.html',
   styleUrls: ['./commentPg.component.css']
 })
-export class CommentPgComponent implements OnInit, AfterViewInit{
+export class CommentPgComponent implements OnInit{
 
     @ViewChild('replyBox', {static:false}) replyBox:ElementRef
 
     isShow = false;
 
+    user = ""
     post: any;
     postImage:string
     postTag:string
     postId:string
     postTitle:string
+    userImage=""
     postAuthor:string
     postContent:string
     postTimestamp :string
@@ -29,14 +31,11 @@ export class CommentPgComponent implements OnInit, AfterViewInit{
     postFandom:string
     postNumComment:number
     postComments=[]
+    comments = ""
     constructor(private userService: UserService, private el: ElementRef, private router: Router, private route: ActivatedRoute, private postService:PostService, private session: LocalStorageService){}
 
-    ngAfterViewInit(): void {
-        (document.querySelector(".replyBox") as HTMLElement).style.display = "auto"
-    }
-
     ngOnInit(): void {
-        console.log()
+        this.user = this.session.retrieve("logged-in")
         this.postService.getPost(this.route.snapshot.queryParamMap.get('postId')).subscribe(
             res => {
                 if (res.status == 200){
@@ -44,23 +43,22 @@ export class CommentPgComponent implements OnInit, AfterViewInit{
                     this.post = res.body;
                     this.postTitle = this.post[0].title
                     this.postContent = this.post[0].content
-                    this.userService.getUserByUsername(this.post[0].author).subscribe(
-                        res => {
-                            console.log(res.body)
-                            this.postImage = res.body[0].image
-                        },
-                        err => {
-                            console.log(err)
-                        }
-                    )
+                    if (this.post[0].image != null)
+                        this.postImage = this.post[0].image
+                    else {
+                        this.postImage = ""
+                    }
                     this.postAuthor = this.post[0].author
                     this.postTag = this.post[0].tags
                     this.postNumComment = this.post[0].comments.length
-                    this.postTimestamp = this.post[0].timestamp
+                    if (this.post[0].comments.length <= 1) this.comments = "comment"
+                    else this.comments = "comments"
+                    this.postTimestamp = this.timeDifference((new Date().getTime()), this.post[0].timestamp)
                     this.postNumVote = this.post[0].numVotes
                     this.postId = this.post[0]._id
                     this.postFandom = this.post[0].fandom
                     this.postComments = this.post[0].comments
+                    this.userImage = this.post[0].userImage
                 }
             },
             err => {
@@ -68,6 +66,22 @@ export class CommentPgComponent implements OnInit, AfterViewInit{
                 this.router.navigate(['/page-not-found']);
             }
         )
+    }
+
+    timeDifference(now, date2) {
+        var days = Math.round(Math.abs(now - date2) / (24*60*60*1000));
+        var hours = Math.round(Math.abs(now - date2) / (60*60*1000));
+        var mins = Math.round(Math.abs(now - date2) / (60*1000));
+        if (hours > 23) {
+          if (days == 1) return (days+" day ago")
+          return (days+" days ago")
+        }
+        if (mins > 59) {
+          if (hours == 1) return (hours+" day ago")
+          return (hours+" hours ago")
+        }
+        if (mins == 1) return (mins+" min ago")
+        return (mins+" mins ago")
     }
 
     replyClick(){
@@ -158,6 +172,24 @@ export class CommentPgComponent implements OnInit, AfterViewInit{
             err => {
                 console.log(err)
             }
+        )
+    }
+
+    redirectToFandom(fandom){
+		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});
+    }
+    
+    toUserProfile(username){
+        this.userService.getUserByUsername(this.user).subscribe(
+        res => {
+            if (res.body[0].profile.pending_friends.includes(username)){
+            this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+            }
+            else this.router.navigate(['/profile'], {queryParams: {user: username}})
+        },
+        err => {
+            console.log(err)
+        }
         )
     }
     

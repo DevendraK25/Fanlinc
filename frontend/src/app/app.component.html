@@ -13,7 +13,7 @@
     <div ngbDropdown class="d-inline-block">
       <button class="btn-outline" id='menu' ngbDropdownToggle>Menu</button>
       <div id='dropDownItemBack' ngbDropdownMenu>
-        <button routerLink='/posts' id='dropDownItem' ngbDropdownItem>Posts Feed</button>
+        <button (click)="toPostsPg()" id='dropDownItem' ngbDropdownItem>Posts Feed</button>
         <button routerLink='/fandoms' id='dropDownItem' ngbDropdownItem>Fandoms</button>
         <button id='dropDownItem' ngbDropdownItem>Events</button>
         <button id='dropDownItem' ngbDropdownItem>Messaging</button>
@@ -24,10 +24,9 @@
       <button class="btn-outline fa fa-bell" id='notif' ngbDropdownToggle><span style='font-size:10px;margin:0 0 0 -2px'> {{numPendings}}</span></button>
       <div id='dropDownItemBack' ngbDropdownMenu>
         <p style='padding:10px' *ngFor="let item of pendingNames;">
-          <span *ngIf="item!=''">Friend Request from </span>
-          <span *ngIf="item==''">no notifications</span>
-          <a *ngIf="item!=''" (click)='toUserProfile(item)' id='friend'>{{item}} </a>
-          <button *ngIf="item!=''" class='btn-outline' (click)='addFriend(item)' id="acceptB">Accept</button></p>
+          <span>Friend Request from </span>
+          <a (click)='toUserProfile(item)' id='friend'>{{item}} </a>
+          <button class='btn-outline' (click)='addFriend(item)' id="acceptB">Accept</button></p>
       </div>
     </div>
     

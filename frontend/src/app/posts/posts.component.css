@@ -6,7 +6,7 @@
 
 body{
     background: #EAEDED;
-    padding:1em 10% 3em 10%; 
+    padding:1em 12% 3em 12%; 
 }
 
 .scrollmenu {
@@ -36,17 +36,24 @@ body{
     margin:10px 0 0 0;
     color:#626567
 }
-#category-filter{
-    margin:10px 0 0 10px;
-    color:#626567
-}
 
-#category-filter{
+#fandom-filter{
+    margin:10px 0 0 10px;
+    color:#626567;
     background: white;
     border-radius: 5px;
     border-style: solid;
     border-width: 1.1px;
     padding:5px 10px 5px 10px;
+}
+
+#apply{
+    border-radius: 4px;
+    color:white;
+    border:none;
+    background:#5DADE2;
+    padding:0 5px 5px 5px;
+    float:right;
 }
 
 #apply:hover{

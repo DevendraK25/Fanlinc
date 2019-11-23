@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
           if (res.status == 200) {
             console.log("User '"+username+"' retrieved");
             this.session.store("logged-in", username);
-            this.router.navigate(['/posts']).then(()=>{window.location.reload()});
+            this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}}).then(()=>{window.location.reload()});
           }
         },
         err => {

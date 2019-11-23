@@ -53,7 +53,7 @@
 	</div>
 
 	<hr>
-	<div style='text-align: center;' *ngIf="!isShow">
+	<div style='text-align: center;' *ngIf="!isShow && !isLinked">
 		<button style='font-size:12px' mdbBtn color="info" #edit (click)="redirectToEditProfile()">edit profile</button>
 		<button style='font-size:12px' mdbBtn color="info" #save (click)="logout()">Logout</button>
 	</div>		

@@ -12,10 +12,13 @@
     margin: 0 auto 0 5%
 }
 #column1{
-    width:10%;text-align: center;
+    width:10%;text-align: center;padding-left:25px
 }
-#postImg{
-    width:60px;border-radius: 50%;
+#userImg{
+    width:60px;height:60px;border-radius: 50%;
+}
+#userImg:hover{
+    border:1px solid #3498DB
 }
 #column2{
     width:80%; margin-left:20px;padding:0 10px 0 10px
@@ -95,125 +98,9 @@ textarea{
 #commentItem{
     text-align: left;
 }
-
-/**/
-/* .div1{
-    width:60%;
-    background:white;
-    padding:15px 0px 15px 0;
-    margin: 0 auto 0 5%
+#post2Fd:hover{
+    color:#F8C471
 }
-#newC{
-    width:60%;
-    background:white;
-    padding:15px 0px 15px 0;
-    margin: 0 auto 0 5%
+#sender:hover{
+    color:#5DADE2
 }
-#cBox{
-    margin:0 0 0 20px;
-    width:400px;
-    height:50px
-}
-#sendC{
-    margin: 10px 0 0 0;
-    float: right;
-    font-size:14px;
-    height:30px;
-    width:18%;
-    border-radius:2px;
-    border:none;
-    color:white;
-    background: #5DADE2;
-}
-#div2{
-    width:10%;text-align: center;
-}
-#imgCont{
-    width:60px;border-radius: 50%;
-}
-#hr{
-    width:50px;margin:10px auto 5px auto;
-}
-#div3{
-    font-size:13px;
-}
-#div4{
-    width:80%; margin-left:20px;padding:0 10px 0 10px
-}
-#div5{
-    font-size:13px;margin-top:-10px;color:#A6ACAF;text-align: left;
-}
-#div6{
-    float:right
-}
-#div7{
-    margin-bottom: 10px;
-}
-#button{
-    margin:5px 10px 0px 0px;
-    font-size:14px;
-    border:none;
-    border-radius:2px;
-    background: #EAEDED;
-}
-#button1{
-    margin:5px 10px 0px 0px;
-    font-size:14px;
-    border-radius:2px;
-    border:none;
-    color:white;
-    background: #5DADE2;
-}
-#div9{
-    width:500px
-}
-#div10{
-    margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;
-}
-#div11{
-    margin:auto auto auto auto
-}
-#div12{
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #D7DBDD;
-}
-.p{
-    text-align: center;
-}
-#div13{
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #D7DBDD;
-    margin-top:-65%;
-}
-#div12:hover {
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #909497;
-}
-
-#div13:hover {
-    width: 0; 
-    height: 0; 
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-top: 10px solid #909497;
-    margin-top:-65%;
-}
-
-#cdiv{
-    width:60%;
-    margin: 5px 0 0 10%;
-    background: white;
-    padding:10px 15px 10px 15px
-}
-#cdiv1{
-    margin: 0 0 5px 0;
-} */

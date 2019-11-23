@@ -1,32 +1,39 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 <div id='wrapper' #wrapper>
     <div class='post-box row'><input value='{{postId}}' #postId style='display:none'>
+
         <div class='column' id='column1'>
-            <img src="{{postImage}}" alt="user" id='postImg'>
+            <input value='{{postAuthor}}' #author style='display:none'>
+            <a (click)="toUserProfile(author.value)"><img src="{{userImage}}" alt="user" id='userImg'></a>
             <hr style='width:50px;margin:10px auto 5px auto;'>
             <div style='font-size:13px;'>{{postAuthor}}</div>
         </div>
         <div class='column' id='column2'>
             <div id='column2-header'>
-                {{postTag}}
-                <div style='float:right'>{{postTimestamp}}</div>
+                <span style='margin:0 20px 0 0'><b>f/<a (click)="redirectToFandom(postFandom)" id='post2Fd' *ngIf="postFandom!='none-selected'">{{postFandom}}</a></b></span>
+                <span style='float:right;text-align: left;'>
+                    <span style='margin:0 15px 0 0'>{{postTag}}</span>
+                    <span style='margin:0 8px 0 0'>{{postTimestamp}}</span>
+                    <span style='float:right'><a (click)="deletePost(postId.value, author.value)"><i class='fa fa-trash'></i></a></span>
+                </span>
             </div>
             <h4><b>{{postTitle}}</b></h4>
             <div style='margin-bottom: 10px;'>{{postContent}}</div>
-            <button class="btn-outline" id='comments'>{{postNumComment}} comments</button>
+            <p *ngIf="postImage!=''"><img style='max-width:150px;max-height:300px;' src="{{postImage}}"></p>
+            <button class="btn-outline" id='comments'>{{postNumComment}} {{comments}}</button>
             <button id='replyB' (click)="replyClick()">reply</button>
         </div>
         <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
         <div class='column' style='margin:auto auto auto auto'>
-            <div (click)='upvote()' id='arrow-up'></div>
+            <div (click)='upvote(postId.value, numVotes.value)' id='arrow-up'></div>
             <input value='{{postNumVote}}' #numVotes style='display:none'>
-            <p id='numVote' class='numVotes' style='text-align: center;'>{{postNumVote}}</p>
-            <div (click)='downvote()' id="arrow-down"></div>
+            <p id='{{postId}}' class='numVotes' style='text-align: center;'>{{postNumVote}}</p>
+            <div (click)='downvote(postId.value, numVotes.value)' id="arrow-down"></div>
         </div>
+
         <p></p>
-        <div *ngIf="isShow">
-            <textarea #tArea placeholder="Reply..."></textarea>
+        <div style='margin:0 0 0 10%' *ngIf="isShow">
+            <textarea style='padding: 0 0 0 5px' #tArea placeholder="Reply..."></textarea>
             <button id='sendB' type='submit' (click)='sendComment(tArea.value)'>Send</button>
         </div>
     </div>
@@ -34,6 +41,6 @@
         <div *ngIf="postNumComment == 0" style='text-align: center;'>no comments</div>
         <div id='commentItem' *ngFor="let comment of postComments; let i = index">{{comment?.comment}}
             <span style='float:right;color:grey;font-size:13px'><input value='{{comment?.author}}' #sender style='display:none'>sent by: 
-                <a (click)="router.navigate(['/profile'], {queryParams:{user:sender.value}})">{{comment?.author}}</a></span><hr *ngIf='i < postNumComment-1'></div>
+                <a id='sender' (click)="toUserProfile(sender.value)">{{comment?.author}}</a></span><hr *ngIf='i < postNumComment-1'></div>
     </div>
 </div>

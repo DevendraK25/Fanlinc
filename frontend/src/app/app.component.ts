@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   userImg=""
   pendingNames = []
   numPendings = 0
-  isShow=false
+  isShow = false
   constructor(private userService: UserService, private router: Router, private session: LocalStorageService){}
 
   ngOnInit(){
@@ -47,10 +47,11 @@ export class AppComponent implements OnInit {
   }
 
   toUserProfile(username){
-    if (this.numPendings > 0)
-      this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
-    else
-      this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+      this.router.navigate(['/profile'], {queryParams: {user: username, req: true}}).then(()=>window.location.reload())
+  }
+
+  toPostsPg(){
+    this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}})
   }
 
   addFriend(toBeAdded){

@@ -5,7 +5,6 @@ import { PostService } from '../post.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 import { UserService } from '../user.service';
 import { FandomService } from '../fandom.service';
-import { $ } from 'protractor';
 
 @Component({
   selector: 'app-new-post',
@@ -44,7 +43,7 @@ export class NewPostComponent implements OnInit {
   createPost(title, tags, content, image){
     var timestamp = new Date().getTime();
     this.message = "";
-    if (title!=''&&tags!=''&&content!=''){
+    if (title!=''&&tags!=''&&content!=''&&this.fandom!=""){
       var author = this.session.retrieve('logged-in');
       var comments = []
       var numVotes = 0;
@@ -57,7 +56,7 @@ export class NewPostComponent implements OnInit {
             res => {
               if (res.status == 200) {
                 console.log("Post succesfully created");
-                this.router.navigate(['/posts']).then(()=>{window.location.reload()})
+                this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}}).then(()=>{window.location.reload()})
               }
             },
             err => {

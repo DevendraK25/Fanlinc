@@ -13,7 +13,7 @@
 </div>
 <body>
     <div style='width:700px; margin:0 auto 0 auto;'>
-        <b>Most Popular Fandoms</b>
+        <b>Trending Fandoms</b>
         <button id='fullList' routerLink='/fandoms'>view full list</button>
     </div>
     <p></p>
@@ -29,10 +29,10 @@
     </div>  
 
     <p></p>
-    <p style='margin-left:-1%'><b>Popular posts</b></p>
+    <p style='margin-left:-1%'><b>{{postHeader}}</b></p>
     <div class='row'>
         <div style='width:70%' class='column'>
-            <div *ngFor="let post of posts;let i = index; trackBy: trackByFn;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
+            <div *ngFor="let post of posts;let i = index;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
                 <div class='column' id='column1'>
                     <input value='{{postAuthors[i]}}' #author style='display:none'>
                     <a (click)="toUserProfile(author.value)"><img src="{{userImages[i]}}" alt="user" id='userImg'></a>
@@ -50,8 +50,8 @@
                     </div>
                     <h4><b>{{postTitles[i]}}</b></h4>
                     <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
-                    <p *ngIf="postImages[i]!=''"><img img style='max-width:150px;max-height:300px;' src="{{postImages[i]}}"></p>
-                    <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} comments</button>
+                    <p *ngIf="postImages[i]!=''"><img style='max-width:150px;max-height:300px;' src="{{postImages[i]}}"></p>
+                    <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} {{comments[i]}}</button>
                 </div>
                 <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
                 <div class='column' style='margin:auto auto auto auto'>
@@ -64,23 +64,30 @@
         </div>
 
         <div style='float:right;padding:10px 20px 20px 20px;width:30%;height:100%;background: white;' class='column'>
-            Sort by:
-            <div style='margin-left:-10px;'>
+            <b>Sort by:</b>
+            <div style='margin:5px 0 0 -10px;'>
             <div style='margin-left:10px' ngbDropdown class="d-inline-block">
-            <button class="form-control btn-outline" id='recent-filter'>Most Recent</button>
+            <!-- <button class="form-control btn-outline" (click)="sortByMostRecent()" id='recent-filter'> -->
+                Most Recent <input id='recent-filter' type="checkbox">
+            <!-- </button> -->
             </div>
 
-            <div style='margin-left:10px' ngbDropdown class="d-inline-block">
-            <button class="form-control btn-outline" id='pop-filter'>Popularity</button>
+            <div style='margin-left:12px' ngbDropdown class="d-inline-block">
+            <!-- <button class="form-control btn-outline" (click)="sortByPopularity()" id='pop-filter'> -->
+                Popularity <input id='pop-filter' type="checkbox">
+            <!-- </button> -->
             </div>
 
             <div ngbDropdown class="d-inline-block">
-                <button id='category-filter' class="btn-outline" ngbDropdownToggle>Choose a fandom</button>
+                <button id='fandom-filter' class="btn-outline" ngbDropdownToggle>Choose a fandom</button>
                 <div id='dropDownItemBack' ngbDropdownMenu>
-                    <a style='width:200px' id="{{item}}" *ngFor="let item of fandomNames" id='dropDownItem' (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
+                    <a style='width:200px' id="{{item}}" *ngFor="let item of fandomNames1" id='dropDownItem' (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
                 </div>
             </div>
             </div>
+
+            <p></p>
+            <button class="btn-outline" type='submit' id='apply' (click)='toSortedPostPg()'>Apply</button>
         </div>
 
     </div>
