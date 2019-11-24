@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 import { UserService } from '../user.service';
+import { PostService } from '../post.service';
+import * as $ from 'jquery';
 
 @Component({
 	selector: 'app-fandom-page',
@@ -13,7 +15,6 @@ import { UserService } from '../user.service';
 export class FandomPageComponent implements OnInit {
 	user = ""
 	name = "";
-	posts = [];
 	subcount = 0;
 	desc = ""
 	admin = "";
@@ -27,7 +28,33 @@ export class FandomPageComponent implements OnInit {
 	showFollowB = true
 	showUnfollowB = false
 	showB = false
-	constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService) { }
+
+	posts: any;
+	fandoms: any;
+	postsByFandom = []
+	postHeader = ""
+	userImages = []
+	postImages = []
+	postTags = []
+	postIds = []
+	postTitles = []
+	postAuthors = []
+	postContents = []
+	postTimestamps = []
+	postNumVotes = []
+	postFandoms = []
+	postNumComments = []
+	fandomNames = [];
+	fandomNames1 = ['none-selected'];
+	fandomImages = [];
+	containsImg = []
+	fandom = ""
+	comments = []
+	checkPopularity = false;
+	checkMostRecent = false;
+	categories = ['movies', 'anime', 'tv shows', 'sports']
+	constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService,
+		private postService: PostService) { }
 
 	ngOnInit() {
 		this.user = this.session.retrieve('logged-in')
@@ -36,7 +63,6 @@ export class FandomPageComponent implements OnInit {
 				console.log(res.body)
 				if (res.status == 200){
 					this.name = res.body[0].name
-					this.posts = res.body[0].posts;
 					this.desc = res.body[0].description
 					this.subcount = res.body[0].subcount;
 					this.admin = res.body[0].admin;
@@ -62,16 +88,220 @@ export class FandomPageComponent implements OnInit {
 				}
 			},
 			err => {
-				console.log(err)
+				console.log("nani")
 				this.router.navigate(['/page-not-found']);
 			}
 		)
+		this.postService.getAssociatedPosts(this.route.snapshot.queryParamMap.get("fandom")).subscribe(
+			res => {
+				if (res.status == 200) {
+					this.posts = res.body;	
+					  if (this.route.snapshot.queryParamMap.get("fandom")){
+						this.postHeader = "Popular posts related to "+ this.route.snapshot.queryParamMap.get("fandom")
+						this.sortByFandomImp(this.route.snapshot.queryParamMap.get("fandom"), "popularity");
+					  }
+					  else {
+						this.postHeader = "Popular posts"
+						this.sortByPopularityImp();
+					  }
+				}
+			},
+			err => {}
+		)
 	}
 
-	toUserProfile(username){
-		this.router.navigate(['/profile'], {queryParams: {user: username}})
-	}
+	toSortedPostPg(){
+		if (this.checkMostRecent){
+		  if (this.fandom == "" || this.fandom == "none-selected"){
+			this.router.navigate(['/posts'], {queryParams: {sort: "most-recent"}}).then(()=>{window.location.reload()})
+		  }
+		  else {
+			this.router.navigate(['/posts'], {queryParams: {sort: "most-recent", fandom: this.fandom}}).then(()=>{window.location.reload()})
+		  }
+		}
+		else if (this.checkPopularity){
+		  if (this.fandom == "" || this.fandom == "none-selected"){
+			this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}}).then(()=>{window.location.reload()})
+		  }
+		  else {
+			this.router.navigate(['/posts'], {queryParams: {sort: "popularity", fandom: this.fandom}}).then(()=>{window.location.reload()})
+		  }
+		}
+		else {
+		  alert("Select a sort option!!")
+		}
+	  }
+	
+	  sortByPopularityImp(){
+		var arr = []
+		for (var i = 0; i < this.posts.length; i++){
+		  arr.push([this.posts[i].numVotes, i]);
+		}
+		var sortedPosts = arr.sort((a,b) => b[0]-a[0])
+		for (var i = 0; i < sortedPosts.length; i++){
+		  this.postNumVotes.push(this.posts[sortedPosts[i][1]].numVotes);
+		  this.postTitles.push(this.posts[sortedPosts[i][1]].title);
+		  this.postContents.push(this.posts[sortedPosts[i][1]].content);
+		  this.userImages.push(this.posts[sortedPosts[i][1]].userImage);
+		  if (this.posts[sortedPosts[i][1]].image != null)
+			this.postImages.push(this.posts[sortedPosts[i][1]].image)
+		  else {
+			this.postImages.push("")
+		  }
+		  this.postAuthors.push(this.posts[sortedPosts[i][1]].author);
+		  this.postTags.push(this.posts[sortedPosts[i][1]].tags);
+		  this.postNumComments.push(this.posts[sortedPosts[i][1]].comments.length);
+		  if (this.posts[sortedPosts[i][1]].comments.length <= 1) this.comments.push("comment")
+		  else this.comments.push("comments")
+		  this.postTimestamps.push(this.timeDifference((new Date().getTime()), this.posts[sortedPosts[i][1]].timestamp));
+		  this.postIds.push(this.posts[sortedPosts[i][1]]._id);
+		  this.postFandoms.push(this.posts[sortedPosts[i][1]].fandom);
+		}
+	  }
+	
+	  sortByMostRecentImp(){
+		console.log(this.posts)
+		var arr = []
+		for (var i = 0; i < this.posts.length; i++){
+		  arr.push([this.posts[i].timestamp, i]);
+		}
+		var sortedPosts = arr.sort((a,b) => b[0]-a[0])
+		for (var i = 0; i < sortedPosts.length; i++){
+		  this.postNumVotes.push(this.posts[sortedPosts[i][1]].numVotes);
+		  this.postTitles.push(this.posts[sortedPosts[i][1]].title);
+		  this.postContents.push(this.posts[sortedPosts[i][1]].content);
+		  this.userImages.push(this.posts[sortedPosts[i][1]].userImage);
+		  if (this.posts[sortedPosts[i][1]].image != null)
+			this.postImages.push(this.posts[sortedPosts[i][1]].image)
+		  else {
+			this.postImages.push("")
+		  }
+		  this.postAuthors.push(this.posts[sortedPosts[i][1]].author);
+		  this.postTags.push(this.posts[sortedPosts[i][1]].tags);
+		  this.postNumComments.push(this.posts[sortedPosts[i][1]].comments.length);
+		  if (this.posts[sortedPosts[i][1]].comments.length <= 1) this.comments.push("comment")
+		  else this.comments.push("comments")
+		  this.postTimestamps.push(this.timeDifference((new Date().getTime()), this.posts[sortedPosts[i][1]].timestamp));
+		  this.postIds.push(this.posts[sortedPosts[i][1]]._id);
+		  this.postFandoms.push(this.posts[sortedPosts[i][1]].fandom);
+		}
+	  }
+	
+	  sortByFandomImp(name, cond){
+		for (var i = 0; i < this.posts.length; i++){
+		  if (this.posts[i].fandom == name){
+			this.postsByFandom.push(this.posts[i]);
+		  }
+		}
+		this.posts = this.postsByFandom
+		if (cond == "popularity") this.sortByPopularityImp()
+		else this.sortByMostRecentImp() 
+	  }
+	
+	  timeDifference(now, date2) {
+		var days = Math.round(Math.abs(now - date2) / (24*60*60*1000));
+		var hours = Math.round(Math.abs(now - date2) / (60*60*1000));
+		var mins = Math.round(Math.abs(now - date2) / (60*1000));
+		if (hours > 23) {
+		  if (days == 1) return (days+" day ago")
+		  return (days+" days ago")
+		}
+		if (mins > 59) {
+		  if (hours == 1) return (hours+" day ago")
+		  return (hours+" hours ago")
+		}
+		if (mins == 1) return (mins+" min ago")
+		return (mins+" mins ago")
+	  }
+		num=0;
+	  upvote(postId, numVotes){ 
+		var numVotes1 = parseInt(numVotes)
+		if (this.id == ""){ //first post clicked
+		  this.id = postId
+		  this.num = numVotes1+1;
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+		else if (this.id == postId){//same post clicked
+		  this.num += 1;
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+		else { //different post
+		  this.id = postId
+		  this.num = numVotes1+1
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+	  }
+	
+	  downvote(postId, numVotes){
+		var numVotes1 = parseInt(numVotes)
+		if (this.id == ""){ //first post clicked
+		  this.id = postId
+		  this.num = numVotes1-1;
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+		else if (this.id == postId){ //same post clicked
+		  this.num -= 1;
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+		else { //different post
+		  this.id = postId
+		  this.num = numVotes1-1
+		  $("#"+postId).html(this.num)
+		  this.postService.setNumVotes(postId, this.num).subscribe(
+			res=>{
+			  console.log(res.body)
+			}
+		  )
+		}
+	  }
+	
+		redirectToFandom(fandom){
+			this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});
+		}
+	
+	  toCommentPg(postId){
+		this.router.navigate(['/post-comments'], {queryParams: {postId: postId}})
+	  }
 
+
+	  toUserProfile(username){
+		this.userService.getUserByUsername(this.user).subscribe(
+		  res => {
+			if (res.body[0].profile.pending_friends.includes(username)){
+			  this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+			}
+			else this.router.navigate(['/profile'], {queryParams: {user: username}})
+		  },
+		  err => {
+			console.log(err)
+		  }
+		)
+	  }
 	subscribe(fandom){	
 		this.userService.subscribe(this.user, fandom).subscribe(
 			res => {

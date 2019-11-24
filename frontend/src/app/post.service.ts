@@ -27,7 +27,7 @@ export class PostService {
   }
 
   getAssociatedPosts(fandom_name) {
-    return this.http.get(`${this.uri}/posts/${fandom_name}`, {observe: 'response'});
+    return this.http.get(`${this.uri}/posts/allposts/${fandom_name}`, {observe: 'response'});
   }
 
   getAllPosts() {

@@ -17,9 +17,11 @@
         <div>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></div>
         <div>description: {{desc}}</div>
         <div>followers: {{subcount}}</div>
-        
+        <p>
+            <b>Most Popular Posts</b>
+        </p>
         <div class='row'>
-            <div style='width:70%' class='column'>
+            <div style='width:100%' class='column'>
                 <div *ngFor="let post of posts;let i = index;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
                     <div class='column' id='column1'>
                         <input value='{{postAuthors[i]}}' #author style='display:none'>
