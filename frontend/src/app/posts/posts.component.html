@@ -21,7 +21,7 @@
     <table>
 		<tr>
             <th *ngFor="let image of fandomImages; let i = index"><input value='{{fandomNames[i]}}' #fdImage style='display:none'>
-                <a (click)="redirectToFandom(fdImage.value)"><img src="{{image}}" style="max-width:100px;max-height:100px"></a>
+                <a (click)="redirectToFandom(fdImage.value)"><img src="{{image}}" style="max-width:100px; height:100px"></a>
                 <p style="text-align:center">{{fandomNames[i]}}</p>
             </th>
 		</tr>

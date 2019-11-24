@@ -12,9 +12,44 @@
                 <span *ngIf="showB" style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
             </span>
         </div>
-        
+
+        <div><img src='{{image}}'  style="max-width:100px; height:100px"></div>
         <div>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></div>
         <div>description: {{desc}}</div>
         <div>followers: {{subcount}}</div>
+        
+        <div class='row'>
+            <div style='width:70%' class='column'>
+                <div *ngFor="let post of posts;let i = index;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
+                    <div class='column' id='column1'>
+                        <input value='{{postAuthors[i]}}' #author style='display:none'>
+                        <a (click)="toUserProfile(author.value)"><img src="{{userImages[i]}}" alt="user" id='userImg'></a>
+                        <hr style='width:50px;margin:10px auto 5px auto;'>
+                        <div style='font-size:13px;'>{{postAuthors[i]}}</div>
+                    </div>
+                    <div class='column' id='column2'>
+                        <div id='column2-header'>
+                            <span style='margin:0 20px 0 0'><b>f/<a (click)="redirectToFandom(postFandoms[i])" id='post2Fd' *ngIf="postFandoms[i]!='none-selected'">{{postFandoms[i]}}</a></b></span>
+                            <span style='float:right;text-align: left;'>
+                                <span style='margin:0 15px 0 0'>{{postTags[i]}}</span>
+                                <span>{{postTimestamps[i]}}</span>
+                                <span style='float:right'><a (click)="deletePost(postId.value, author.value)" id='edit'><i class='fa fa-trash'></i></a></span>
+                            </span>
+                        </div>
+                        <h4><b>{{postTitles[i]}}</b></h4>
+                        <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
+                        <p *ngIf="postImages[i]!=''"><img style='max-width:150px;max-height:300px;' src="{{postImages[i]}}"></p>
+                        <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} {{comments[i]}}</button>
+                    </div>
+                    <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
+                    <div class='column' style='margin:auto auto auto auto'>
+                        <div (click)='upvote(postId.value, numVotes.value)' id='arrow-up'></div>
+                        <input value='{{postNumVotes[i]}}' #numVotes style='display:none'>
+                        <p id='{{postIds[i]}}' class='numVotes' style='text-align: center;'>{{postNumVotes[i]}}</p>
+                        <div (click)='downvote(postId.value, numVotes.value)' id="arrow-down"></div>
+                    </div>
+                </div>   
+            </div>
+        </div>
     </div>
 </body>
