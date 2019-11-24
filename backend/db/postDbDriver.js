@@ -11,6 +11,19 @@ function getAllPosts(req, res) {
 	})
 }
 
+function getAssociatedPosts(req, res) {
+	postSchema.find({
+		fandom : req.params.fandom
+	}, function(err, posts) {
+		if (err)
+		res.status(400).send(err.errmsg);
+	else if (posts == '')
+		res.status(404).send("Post '" + req.params.fandom + "' not found");
+	else
+		res.status(200).json(posts);
+	}) 
+}
+
 function getPost(req, res) {
 	postSchema.find({
 		_id : ObjectId(req.params.id)
@@ -93,6 +106,7 @@ function updatePost(req, res) { //for all other fields that's not array
 }
 
 module.exports = {
+	getAssociatedPosts : getAssociatedPosts,
 	getPost : getPost,
 	addPost : addPost,
 	getAllPosts : getAllPosts,

@@ -3,6 +3,7 @@ const path = require('path');
 var pdb = require('./../db/postDbDriver');
 
 router.get('/', function(req, res) {pdb.getAllPosts(req, res)});
+router.get('/:fandom', function(req, res) {pdb.getAssociatedPosts(req,res)});
 router.get('/:id', function(req, res){ pdb.getPost(req, res) });
 
 router.post('/add', function(req, res){ pdb.addPost(req, res) });

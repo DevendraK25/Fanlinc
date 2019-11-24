@@ -26,6 +26,10 @@ export class PostService {
     return this.http.post(`${this.uri}/posts/add`, body, {observe: 'response'});
   }
 
+  getAssociatedPosts(fandom_name) {
+    return this.http.get(`${this.uri}/posts/${fandom_name}`, {observe: 'response'});
+  }
+
   getAllPosts() {
     return this.http.get(`${this.uri}/posts`, {observe: 'response'});
   }
