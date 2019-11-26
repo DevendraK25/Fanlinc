@@ -1,36 +1,36 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-<div id='header' style='text-align: left;'>
-    <span style='font-size:30px;'>Posts Feed</span>
-    <form style='float:right;padding-top:10px'>
+<div id='header'>
+    <span style='font-size:26px;padding-top:20px'><b>Posts Feed</b></span>
+    <div style='margin:4px 0 0 0;float:right;'>
         <button id='create-post' (click)="toNewPost()">Create New Post</button>
 
         <button id='create-fandom' (click)="toNewFandom()">Create New Fandom</button>
         
         <input id='search-bar' type='text' placeholder='search fandoms'>
         <button id='search-button' (click)="this.router.navigate(['/fandom-list'])" type="submit"><i class="fa fa-search"></i></button>
-    </form>
+    </div>
 </div>
 <body>
-    <div style='width:700px; margin:0 auto 0 auto;'>
+    <div style='width:100%; margin:-4px 0 0 -15px;'>
         <b>Trending Fandoms</b>
-        <button id='fullList' routerLink='/fandoms'>view full list</button>
+        <button id='fullList' routerLink='/fandoms'>view all</button>
     </div>
     <p></p>
     <div class="scrollmenu" >
-    <table>
-		<tr>
-            <th *ngFor="let image of fandomImages; let i = index"><input value='{{fandomNames[i]}}' #fdImage style='display:none'>
-                <a (click)="redirectToFandom(fdImage.value)"><img src="{{image}}" style="max-width:100px;max-height:100px"></a>
-                <p style="text-align:center">{{fandomNames[i]}}</p>
-            </th>
-		</tr>
-	</table>
+        <table>
+            <tr>
+                <th style='padding:0' *ngFor="let image of fandomImages; let i = index"><input value='{{fandomNames[i]}}' #fdImage style='display:none'>
+                    <a (click)="redirectToFandom(fdImage.value)"><img src="{{image}}" style="width:100px;height:100px"></a>
+                    <p style="text-align:center">{{fandomNames[i]}}</p>
+                </th>
+            </tr>
+        </table>
     </div>  
 
     <p></p>
-    <p style='margin-left:-1%'><b>{{postHeader}}</b></p>
-    <div class='row'>
+    <div style='width:100%; margin:10px 0 8px -15px;'><b>{{postHeader}}</b></div>
+    <div class='row' style="width:100%">
         <div style='width:70%' class='column'>
             <div *ngFor="let post of posts;let i = index;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
                 <div class='column' id='column1'>
@@ -63,7 +63,7 @@
             </div>   
         </div>
 
-        <div style='float:right;padding:10px 20px 20px 20px;width:30%;height:100%;background: white;' class='column'>
+        <div id='sort-box' class='column'>
             <b>Sort by:</b>
             <div style='margin:5px 0 0 -10px;'>
             <div style='margin-left:10px' ngbDropdown class="d-inline-block">

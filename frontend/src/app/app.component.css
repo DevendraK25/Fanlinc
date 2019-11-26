@@ -11,8 +11,9 @@ html {
 }
 
 mat-toolbar {
-    background-color: orange;
+    background-color: #F5B041;
     height:48px;
+    /* position:fixed; */
 }
 
 #title {
@@ -36,31 +37,32 @@ mat-toolbar a:hover{
 }
 
 #menu{
-    margin-right:15px;
-    background: orange;
-    width:70px;
-    height:30px;
+    margin:0 15px 0 0;
+    background: #F5B041;
+    width:60px;
+    padding:4px 0 4px 0;
     color:white;
     border-style: solid;
     border-width: 1px;
     border-radius: 3px;
     border-color: white;
 }
+
 #menu:hover{
     color:grey;
-    border-color:grey
+    border-color: grey;
 }
 
 #notif{
-    margin-right:15px;
-    background: orange;
+    margin:0 15px 0 0;
+    background: #F5B041;
     color:white;
-    width:30px;
-    height:30px;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    border-color: white;
+    /* width:30px;
+    height:30px; */
+    border-style: none;
+    /* border-width: 1px;
+    border-radius: 3px; */
+    /* border-color: white; */
 }
 #notif:hover{
     color:grey;
@@ -79,7 +81,7 @@ mat-toolbar a:hover{
 
 #dropDownItem:hover{
     color:white;
-    background: orange;
+    background: #F5B041;
 }
 
 #friend{

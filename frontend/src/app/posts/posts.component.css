@@ -1,12 +1,15 @@
 #header{
     background: white;
     width:100%;
-    padding:8px 10% 14px 10%;
+    text-align: left;
+    padding:12px 13% 12px 12.3%;
+    border-bottom: 1px solid #c9cccd;
 }
 
 body{
     background: #EAEDED;
-    padding:1em 12% 3em 12%; 
+    padding:1em 12% 3em 13.5%;
+    margin:0 
 }
 
 .scrollmenu {
@@ -14,9 +17,10 @@ body{
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    width:700px;
-    margin:-8px auto 0 auto;
-    border-radius: 5px;
+    width:100%;
+    margin:-8px 0 0 -15px;
+    border-radius: 3px;
+    box-shadow: 0.5px 1px 2px #c9cccd;
 }
 
 .scrollmenu a{
@@ -61,9 +65,9 @@ body{
 }
 #create-fandom {
     color:white;
-    border-radius:4px;
-    background:orange;
-    border-color:orange;
+    border-radius:3px;
+    background:#F5B041;
+    border-color:#F5B041;
     border-style:solid;
     margin:0 20px 0 0px;  
     height:32px;
@@ -71,9 +75,9 @@ body{
 
 #create-post {
     color:white;
-    border-radius:4px;
-    background:#76D7C4;
-    border-color:#76D7C4;
+    border-radius:3px;
+    background:#48C9B0;
+    border-color:#48C9B0;
     border-style:solid;
     margin:0 20px 0 0;
     height:32px;
@@ -84,8 +88,8 @@ body{
     height:32px;
     color:white;
     border-radius:4px;
-    background:orange;
-    border-color:orange;
+    background:#F5B041;
+    border-color:#F5B041;
     border-style:solid;
 }
 
@@ -95,18 +99,21 @@ body{
 
 #search-bar{
     border-width: 1.1px;
-    border-color:#CACFD2;
+    border-color:#EAEDED;
     border-radius:4px;
     border-style:solid;
     padding-left:10px;
     height:32px;
+    background: #EAEDED;
 }
 
 .post-box{
     width:95%;
     background:white;
     padding:15px 0px 15px 15px;
-    margin:0 0 18px 0
+    margin:0 0 18px 0;
+    box-shadow: 0.5px 1px 2px #c9cccd;
+    border-radius: 3px;
 }
 #column1{
     width:10%;text-align: center;
@@ -122,6 +129,15 @@ body{
 }
 #column2-header{
     font-size:13px;margin-top:-10px;color:#A6ACAF;text-align: left;
+}
+#sort-box{
+    box-shadow: 0.5px 1px 2px #c9cccd;
+    border-radius: 3px;
+    float:right;
+    padding:10px 20px 20px 20px;
+    width:30%;
+    height:100%;
+    background: white;
 }
 #comments{
     margin-top:5px;
@@ -167,7 +183,13 @@ body{
     margin-top:-65%;
 }
 #fullList{
-    float:right;background:orange;color:white;border:none;border-radius:3px;
+    float:right;
+    background:#F5B041;
+    color:white;
+    border:none;
+    font-size:14px;
+    margin-top:5px;
+    border-radius:3px;
 }
 #fullList:hover{
     color:grey

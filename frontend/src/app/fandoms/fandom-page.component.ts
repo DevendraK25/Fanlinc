@@ -51,7 +51,7 @@ export class FandomPageComponent implements OnInit {
 					}
 					this.userService.getUserByUsername(this.user).subscribe(
 						res => {
-							if ((res.body[0].profile.subscribed).includes(this.name)) {
+							if ((res.body[0].profile.subscribed).includes(this.name) && this.user!="" && this.user!=null) {
 								this.followB = "unfollow"
 								this.showFollowB = !this.showFollowB;
 								this.showUnfollowB = !this.showUnfollowB;
@@ -72,24 +72,30 @@ export class FandomPageComponent implements OnInit {
 		this.router.navigate(['/profile'], {queryParams: {user: username}})
 	}
 
-	subscribe(fandom){	
-		this.userService.subscribe(this.user, fandom).subscribe(
-			res => {
-				console.log(res.body)
-				this.followB = "unfollow";
-				this.showFollowB = !this.showFollowB;
-				this.showUnfollowB = !this.showUnfollowB;
-				this.fandomService.setSubCount(this.name, this.subcount+1).subscribe(
-					res => {
-						console.log(res.body)
-					},
-					err => {console.log(err)}
-				)
-			},
-			err => {
-				console.log(err)
-			}
-		)
+	subscribe(fandom){
+		if (this.user != "" && this.user != null) {
+			this.userService.subscribe(this.user, fandom).subscribe(
+				res => {
+					console.log(res.body)
+					this.followB = "unfollow";
+					this.showFollowB = !this.showFollowB;
+					this.showUnfollowB = !this.showUnfollowB;
+					this.fandomService.setSubCount(this.name, this.subcount+1).subscribe(
+						res => {
+							console.log(res.body)
+						},
+						err => {console.log(err)}
+					)
+				},
+				err => {
+					console.log(err)
+				}
+			)
+		}
+		else {
+			if (confirm("Sign in first!!"))
+				this.router.navigate(['/login'])
+		}
 	}
 
 	unsubscribe(fandom){

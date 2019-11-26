@@ -39,10 +39,13 @@ body{
 #submit{
     color:white;
     border-radius:4px;
-    background:#76D7C4;
-    border-color:#76D7C4;
+    background:#48C9B0;
+    border-color:#48C9B0;
     border-style:solid;
     margin:0 auto 0 auto;
     width:15%;
     padding:5px;
+}
+#submit:hover{
+    color:grey
 }

@@ -161,7 +161,6 @@ export class PostsComponent implements OnInit{
   }
 
   sortByMostRecentImp(){
-    console.log(this.posts)
     var arr = []
     for (var i = 0; i < this.posts.length; i++){
       arr.push([this.posts[i].timestamp, i]);

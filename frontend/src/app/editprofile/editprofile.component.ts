@@ -19,7 +19,7 @@ export class EditprofileComponent implements OnInit {
 	level = ""
 	newType = ""
 	newLevel = ""
-	types = ["General-fan", "Cosplayer", "Vendor", "Otaku"]
+	types = ["General-fan", "Cosplayer", "Vendor", "Artist"]
 	levels = ["Limited", "Casual", "Very-involved", "Expert"]
 	interests = []
 	pendingFriends = []

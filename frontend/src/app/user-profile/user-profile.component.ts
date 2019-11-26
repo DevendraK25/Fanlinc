@@ -4,15 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 
+
 @Component({
 	selector: 'app-user-profile',
 	templateUrl: './user-profile.component.html',
 	styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit, AfterViewInit {
-	ngOnInit(): void {}
-
-	@ViewChild("friend", {static:false}) friendRef: ElementRef
+export class UserProfileComponent implements OnInit {
 
 	user = ""
 	level = ""
@@ -30,7 +28,13 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 	friendB = ""
 	constructor(private renderer: Renderer2, private userService: UserService, private route: ActivatedRoute, private router: Router, private session: LocalStorageService) { }
 
-	ngAfterViewInit() {
+	@HostListener('window:popstate', ['$event'])
+	onPopState(event) {
+	  window.location.reload()
+	}
+
+	ngOnInit() {
+
 		var userParam = this.route.snapshot.queryParamMap.get('user')
 		this.user = this.session.retrieve("logged-in")
 		if (this.user == userParam){
@@ -99,6 +103,9 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
 				}
 			)
 
+		}
+		window.onhashchange = () => {
+			window.location.reload()
 		}
 	}
 

@@ -1,1 +1,16 @@
-full list of fandoms here displayed nicely
+<body>
+    <!-- <div style='background: white;padding:.5em 2em 1em 2em'> -->
+    <h3 style='margin:.5em 0 .5em 2px;'><b>All Fandoms</b></h3>
+    <div class='row'>
+        <a *ngFor="let item of fandomNames; let i=index" (click)='toFandomPg(item)' class='fdBox view overlay' id="{{item}}">
+            <img class='img-fluid' id='image' src='{{fandomImages[i]}}'>
+            <a class="mask flex-center rgba-orange-strong" >
+                <p style='font-size:14px' class="white-text"><b>{{fandomDesc[i]}}</b>
+                <br><br><b><i class='fa fa-user'></i> {{fandomSubcounts[i]}}</b>
+               </p>
+            </a>
+            <div style='padding:8px 0 0 0;font-size:18px;'>{{item}}</div>
+        </a>
+    </div>
+    <!-- </div> -->
+</body>

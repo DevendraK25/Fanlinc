@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { FandomService } from '../fandom.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
+import { $ } from 'protractor';
 
 @Component({
 	selector: 'app-fandoms',
@@ -11,7 +12,38 @@ import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
 })
 export class FandomsComponent implements OnInit {
 
+	fandoms: any
+	fandomNames = []
+	fandomImages = []
+	fandomDesc = []
+	fandomSubcounts = []
+
 	constructor(private route: ActivatedRoute, private router: Router, private fandomService: FandomService, private session: LocalStorageService) { }
 
-    ngOnInit() {}
+    ngOnInit() {
+		this.fandomService.getAllFandoms().subscribe(
+			res => {
+				console.log(res.body)
+				this.fandoms = res.body
+				var arr = []
+				for (var i = 0; i < this.fandoms.length; i++){
+				  arr.push([this.fandoms[i].name, i]);
+				}
+				var sortedFandoms = arr.sort()
+				for (var i = 0; i < sortedFandoms.length; i++){
+					this.fandomNames.push(this.fandoms[sortedFandoms[i][1]].name)
+					this.fandomImages.push(this.fandoms[sortedFandoms[i][1]].image)
+					this.fandomDesc.push(this.fandoms[sortedFandoms[i][1]].description)
+					this.fandomSubcounts.push(this.fandoms[sortedFandoms[i][1]].subcount)
+				}
+			},
+			err => {
+				console.log(err)
+			}
+		)
+	}
+
+	toFandomPg(name){
+		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": name}})
+	}
 }
