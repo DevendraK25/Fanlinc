@@ -29,8 +29,8 @@
 			<p style="float: right">Type</p>
 		</div>
 		<div class="col">
-			<input [disabled]='true' id="type" #type>
-			<div style='margin:3px 0 4px 110px;float:left' ngbDropdown class="d-inline-block">
+			<div><input [disabled]='true' id="type" #type></div>
+			<div style='margin:3px 0 3px 0' ngbDropdown class="d-inline-block">
 				<button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a type</button>
 				<div id='dropDownItemBack' ngbDropdownMenu>
 					<a style='width:200px' (click)="setType(typeval.value)" *ngFor="let type of types" id="{{type}}" ngbDropdownItem>{{type}}<input #typeval value="{{type}}" style='display:none'></a>
@@ -43,8 +43,8 @@
 			<p style="float: right">Level</p>
 		</div>
 		<div class="col">
-			<input [disabled]='true' id="level" #level>
-			<div style='margin:3px 0 4px 110px;float:left' ngbDropdown class="d-inline-block">
+			<div><input [disabled]='true' id="level" #level></div>
+			<div style='margin:3px 0 3px 0' ngbDropdown class="d-inline-block">
 				<button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a level</button>
 				<div id='dropDownItemBack' ngbDropdownMenu>
 					<a style='width:200px' (click)="setLevel(levelval.value)" *ngFor="let level of levels" id="{{level}}" ngbDropdownItem>{{level}}<input #levelval value="{{level}}" style='display:none'></a>
@@ -82,7 +82,7 @@
 			<p style="float: right">Interests</p>
 		</div>
 		<div class="col">
-			<div style='margin: 0 0 3px 100px; width:250px;float:left'><button id='existingInterest' *ngFor="let item of interests" [disabled]='true'>{{item}}</button></div>
+			<div style='margin:0 auto 2px auto;width:250px;text-align: left;'><button id='existingInterest' *ngFor="let item of interests" [disabled]='true'>{{item}}</button></div>
 			<input placeholder="add an interest" id='interests' #interest>
 		</div>
 	</div>

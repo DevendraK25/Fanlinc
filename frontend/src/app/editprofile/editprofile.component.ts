@@ -25,6 +25,7 @@ export class EditprofileComponent implements OnInit {
 	pendingFriends = []
 	friends = []
 	fandoms = []
+	subscribed = []
 	
 	constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private r: Renderer2) { }
 
@@ -47,6 +48,7 @@ export class EditprofileComponent implements OnInit {
 				for (var i=0; i<res.body[0].profile.interests.length; i++){
 					this.interests.push(res.body[0].profile.interests[i]);
 				}
+				this.subscribed = res.body[0].profile.subscribed;
 			},
 			err => {
 				console.log(err)
@@ -68,30 +70,19 @@ export class EditprofileComponent implements OnInit {
 	}
 
 	saveChanges(password, email, bio, age, image, interest) {
-		if (this.newType!="" && this.newLevel!=""){
-			if (interest != "") this.interests.push(interest)
-			var type="", level="";
-			if (this.newType!="" && this.newLevel!="") {
-				type = this.newType;
-				level = this.newLevel
+		if (interest != "") this.interests.push(interest)
+		var type=this.type, level=this.level;
+		if (this.newType!="") type = this.newType;
+		if (this.newLevel!="") level = this.newLevel
+		this.userService.updateUser(this.username, email, password, bio, age, image, this.interests, type, level, this.friends, this.pendingFriends, this.fandoms, this.subscribed).subscribe(
+			res => {
+				console.log(res.body);
+				if (res.status == 200)
+					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } })//.then(()=>{window.location.reload()})
+			},
+			err => {
+				console.log(err);
 			}
-			else if (this.newType=="" && this.newLevel=="") {
-				type = this.type;
-				level = this.level
-			}
-			this.userService.updateUser(this.username, email, password, bio, age, image, this.interests, type, level, this.friends, this.pendingFriends, this.fandoms).subscribe(
-				res => {
-					console.log(res.body);
-					if (res.status == 200)
-						this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } })//.then(()=>{window.location.reload()})
-				},
-				err => {
-					console.log(err);
-				}
-			)
-		}
-		else{
-			alert("Level or Type field is missing!! Both have to be filed")
-		}
+		)
 	}
 }

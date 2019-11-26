@@ -136,8 +136,7 @@ export class UserProfileComponent implements OnInit {
 	}
 
 	toFandomPg(fandom){
-		console.log(fandom)
-		this.router.navigate(['/fandom-page'], {queryParams: {fandom: fandom}})
+		this.router.navigate(['/fandom-page'], {queryParams: {fandom: fandom, sort:'popularity'}})
 	}
 
 	logout(){

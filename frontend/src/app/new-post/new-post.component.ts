@@ -50,7 +50,6 @@ export class NewPostComponent implements OnInit {
       var userImage = ""
       this.userService.getUserByUsername(author).subscribe(
         res => {
-          console.log(res.body[0].image)
           userImage = res.body[0].image
           this.postService.addPost(tags, title, content, image, author, timestamp, comments, numVotes, this.fandom, userImage).subscribe(
             res => {
