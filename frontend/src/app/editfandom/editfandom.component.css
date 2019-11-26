@@ -1,0 +1,51 @@
+body{
+    background: #EAEDED; 
+    height:100vh;  
+    padding: 3em 0 3em 0 ;
+}
+
+#box{
+    width:40%;
+    background:white;
+    margin:0 auto 0 auto;
+    padding:20px 0px 30px 30px;
+}
+
+#box div{
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+#title, #fandom, #image, #tags, #category, #dDown{
+    width:100%;
+    border-width: 1.1px;
+    border-color:#EAEDED;
+    border-radius:4px;
+    border-style:solid;
+    background: #EAEDED;
+    padding:10px;
+    margin:0 0 -5px 0
+}
+
+#description{
+    width:100%;
+    height:100px;
+    border-width: 1.1px;
+    border-color:#EAEDED;
+    border-radius:4px;
+    border-style:solid;
+    background: #EAEDED;
+    padding:10px;
+}
+#submit{
+    color:white;
+    border-radius:4px;
+    background:#48C9B0;
+    border-color:#48C9B0;
+    border-style:solid;
+    margin:0 auto 0 auto;
+    width:15%;
+    padding:5px;
+}
+#submit:hover{
+    color:grey
+}

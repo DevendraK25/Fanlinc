@@ -46,12 +46,11 @@ export class FandomService {
 		return this.http.post(`${this.uri}/fandoms/setEvents/${name}`, {newEvent: event}, { observe: 'response' });
 	}
 
-	updateFandom(name, image, subcount, admin) {
+	updateFandom(name, image, desc) {
 		const fandom = {
 			image: image,
 			name: name,
-			subcount: subcount,
-			admin: admin
+			description: desc
 		};
 		return this.http.post(`${this.uri}/fandoms/update/${name}`, fandom, { observe: 'response' });
 	}

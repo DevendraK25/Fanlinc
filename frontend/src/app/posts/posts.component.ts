@@ -37,20 +37,24 @@ export class PostsComponent implements OnInit{
   comments = []
   checkPopularity = false;
   checkMostRecent = false;
-  categories = ['movies', 'anime', 'tv shows', 'sports']
+  password=""
   
   constructor(private r: Renderer2, private route: ActivatedRoute, private userService:UserService, private fandomService: FandomService, private router: Router, private postService:PostService, private session: LocalStorageService) {}
   
   ngOnInit(){
     this.user = this.session.retrieve("logged-in")
-
+    this.userService.getUserByUsername(this.user).subscribe(
+			res => {
+				this.password = res.body[0].password
+			}
+		)
     this.postService.getAllPosts().subscribe(
       res => {
         if (res.status == 200){
           this.posts = res.body;
           if (this.route.snapshot.queryParamMap.get("sort") == "popularity"){
             if (this.route.snapshot.queryParamMap.get("fandom")){
-              this.postHeader = "Popular posts related to "+this.route.snapshot.queryParamMap.get("fandom")
+              this.postHeader = "Most Popular posts related to "+this.route.snapshot.queryParamMap.get("fandom")
               this.sortByFandomImp(this.route.snapshot.queryParamMap.get("fandom"), "popularity");
             }
             else {
@@ -60,7 +64,7 @@ export class PostsComponent implements OnInit{
           }
           else if (this.route.snapshot.queryParamMap.get("sort") == "most-recent"){
             if (this.route.snapshot.queryParamMap.get("fandom")){
-              this.postHeader = "Most recent posts related to "+this.route.snapshot.queryParamMap.get("fandom")
+              this.postHeader = "Most Recent posts related to "+this.route.snapshot.queryParamMap.get("fandom")
               this.sortByFandomImp(this.route.snapshot.queryParamMap.get("fandom"), "most-recent");
             }
             else {
@@ -80,10 +84,9 @@ export class PostsComponent implements OnInit{
       res => {
         if (res.status == 200) {
           this.fandoms = res.body;
+          this.sortFandoms();
           for (var i = 0; i < this.fandoms.length; i++){
-            this.fandomNames.push(this.fandoms[i].name);
             this.fandomNames1.push(this.fandoms[i].name);
-            this.fandomImages.push(this.fandoms[i].image);
           }
         }
       },
@@ -109,6 +112,18 @@ export class PostsComponent implements OnInit{
       this.r.setStyle(document.querySelector("#"+this.fandom), "background", "white")
     this.fandom = name;
     this.r.setStyle(document.querySelector("#"+name), "background", "orange")
+  }
+
+  sortFandoms(){
+    var arr = []
+    for (var i = 0; i < this.fandoms.length; i++){
+      arr.push([this.fandoms[i].subcount, i]);
+    }
+    var sortedFandoms = arr.sort((a,b) => b[0]-a[0])
+    for (var i = 0; (i < sortedFandoms.length && i < 12); i++){
+      this.fandomImages.push(this.fandoms[sortedFandoms[i][1]].image);
+      this.fandomNames.push(this.fandoms[sortedFandoms[i][1]].name);
+    }
   }
 
   toSortedPostPg(){
@@ -282,7 +297,7 @@ export class PostsComponent implements OnInit{
   }
 
 	redirectToFandom(fandom){
-		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});
+		this.router.navigate(['/fandom-page'], {queryParams: {fandom: fandom, sort:"popularity"}});
 	}
 
   toCommentPg(postId){
@@ -329,7 +344,7 @@ export class PostsComponent implements OnInit{
     if (author == this.user){
       var username = prompt("Confirm username");
       var password = prompt("Confirm password");
-      if (username!=null && password!=null){
+      if (username==this.user && password==this.password){
         this.postService.deletePost(id).subscribe(
           res => {
             console.log(res.body)

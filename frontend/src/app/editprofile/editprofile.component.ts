@@ -68,25 +68,30 @@ export class EditprofileComponent implements OnInit {
 	}
 
 	saveChanges(password, email, bio, age, image, interest) {
-		if (interest != "") this.interests.push(interest)
-		var type="", level="";
-		if (this.newType!="" && this.newLevel!="") {
-			type = this.newType;
-			level = this.newLevel
-		}
-		else if (this.newType=="" && this.newLevel=="") {
-			type = this.type;
-			level = this.level
-		}
-		this.userService.updateUser(this.username, email, password, bio, age, image, this.interests, type, level, this.friends, this.pendingFriends, this.fandoms).subscribe(
-			res => {
-				console.log(res.body);
-				if (res.status == 200)
-					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } })//.then(()=>{window.location.reload()})
-			},
-			err => {
-				console.log(err);
+		if (this.newType!="" && this.newLevel!=""){
+			if (interest != "") this.interests.push(interest)
+			var type="", level="";
+			if (this.newType!="" && this.newLevel!="") {
+				type = this.newType;
+				level = this.newLevel
 			}
-		)
+			else if (this.newType=="" && this.newLevel=="") {
+				type = this.type;
+				level = this.level
+			}
+			this.userService.updateUser(this.username, email, password, bio, age, image, this.interests, type, level, this.friends, this.pendingFriends, this.fandoms).subscribe(
+				res => {
+					console.log(res.body);
+					if (res.status == 200)
+						this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } })//.then(()=>{window.location.reload()})
+				},
+				err => {
+					console.log(err);
+				}
+			)
+		}
+		else{
+			alert("Level or Type field is missing!! Both have to be filed")
+		}
 	}
 }

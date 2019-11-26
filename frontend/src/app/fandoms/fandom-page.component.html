@@ -2,26 +2,72 @@
 
 <body>
     <div id='wrapper'>
-        <img id='banner' src="https://images.unsplash.com/photo-1499084732479-de2c02d45fcc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
-        <div id="wrapper1">
-        <div style='height:50px;text-align:left'>
-            <span style='font-size:30px;font-weight:bold'>{{name}} Fandom</span>
-            <span style='float:right; text-align: left;'>
-                <span *ngIf="showAdminB"><button id='subsB' [disabled]='true'>{{adminB}}</button></span>
-                <span *ngIf="showFollowB"><button id='subsB' (click)="subscribe(name)">{{followB}}</button></span>
-                <span *ngIf="showUnfollowB"><button id='subsB' (click)="unsubscribe(name)">{{followB}}</button></span>
-                <span *ngIf="showB"><button id='editB' class='fa fa-edit' (click)="toEditFandom()"></button></span>
-                <span *ngIf="showB" style='float:right'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
+        <div style='text-align:left'>
+            <div class='row' style='padding:3px 0 0 0'>
+                <div class='column' [ngStyle]="{'width.%':width,'min-height':'200px','max-height':'300px','padding':'8px 10px 8px 5px'}">
+                    <img src='{{image}}' style="width:100%; height:100%"></div>
+                <div class='column' [ngStyle]="{'width.%':width1}">
+                    <div style='text-align: left;'>
+                        <div class='row' style='padding:0 15px 0 15px'>
+                            <span class='column' [ngStyle]="{'font-size':'28px','font-weight':'bold','width.%':width2}">{{name}} Fandom</span>
+                            <span class='column' style='float:right;text-align: left; padding:8px 0 0 0'>
+                                <span *ngIf="showAdminB"><button id='subsB' [disabled]='true'>{{adminB}}</button></span>
+                                <span *ngIf="showFollowB"><button id='subsB' (click)="subscribe(name)">{{followB}}</button></span>
+                                <span *ngIf="showUnfollowB"><button id='subsB' (click)="unsubscribe(name)">{{followB}}</button></span>
+                                <span *ngIf="showB" style='float:right;'><button id='editB' class='fa fa-edit' (click)="toEditFandom()"></button></span>
+                                <span *ngIf="showB" style='float:right;'><button id='deleteB' class='fa fa-trash' (click)="deleteFandom()"></button></span>
+                            </span>
+                        </div>
+                    </div>
+                    <div>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></div>
+                    <div>followers: {{subcount}}</div>
+                    <div style='margin:5px 0 0 0; font-weight: bold;font-size: 17px;'>{{desc}}</div>
+                </div>
+            </div>
+        </div>
+        <p></p>
+        <p style='text-align: left;'>
+            <span style='margin:10px 0 0 0'><b>{{postHeader}}</b></span>
+            <span style='float:right;margin: 0 0 10px 0'>
+                <div ngbDropdown class="d-inline-block">
+                    <button id='dDown' class="btn-outline" ngbDropdownToggle>Sort by</button>
+                    <div id='dropDownItemBack' style='padding:5px 0 10px 10px' ngbDropdownMenu>
+                        <div>Most Recent <input id='recent-filter' type="checkbox"></div>
+                        <div>Popularity <input id='pop-filter' type="checkbox"></div>
+                        <div><button id='apply' (click)='toSortedPostPg()'>Apply</button></div>
+                    </div>
+                </div>
             </span>
-        </div>
-        
-        <div>admin: <a id='admin' (click)='toUserProfile(admin)'>{{admin}}</a></div>
-        <div>description: {{desc}}</div>
-        <div>followers: {{subcount}}</div>
-        <p>
-            Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph.
-            Paragraphs are the building blocks of papers. Many students define paragraphs in terms of length: a paragraph is a group of at least five sentences, a paragraph is half a page long, etc. In reality, though, the unity and coherence of ideas among sentences is what constitutes a paragraph. A paragraph is defined as “a group of sentences or a single sentence that forms a unit” (Lunsford and Connors 116). Length and appearance do not determine whether a section in a paper is a paragraph. For instance, in some styles of writing, particularly journalistic styles, a paragraph can be just one sentence long. Ultimately, a paragraph is a sentence or group of sentences that support one main idea. In this handout, we will refer to this as the “controlling idea,” because it controls what happens in the rest of the paragraph.
         </p>
-        </div>
+        <hr style='margin:-5px 0 20px 0'>
+        <div *ngFor="let post of posts;let i = index;" class='post-box row'><input value='{{postIds[i]}}' #postId style='display:none'>
+            <div class='column' id='column1'>
+                <input value='{{postAuthors[i]}}' #author style='display:none'>
+                <a (click)="toUserProfile(author.value)"><img src="{{userImages[i]}}" alt="user" id='userImg'></a>
+                <hr style='width:50px;margin:10px auto 5px auto;'>
+                <div style='font-size:13px;'>{{postAuthors[i]}}</div>
+            </div>
+            <div class='column' id='column2'>
+                <div id='column2-header'>
+                    <span style='margin:0 20px 0 0'><b>f/<span id='post2Fd' *ngIf="postFandoms[i]!='none-selected'">{{postFandoms[i]}}</span></b></span>
+                    <span style='float:right;text-align: left;'>
+                        <span style='margin:0 15px 0 0'>{{postTags[i]}}</span>
+                        <span>{{postTimestamps[i]}}</span>
+                        <span style='float:right'><a (click)="deletePost(postId.value, author.value)" id='edit'><i class='fa fa-trash'></i></a></span>
+                    </span>
+                </div>
+                <h4><b>{{postTitles[i]}}</b></h4>
+                <div style='margin-bottom: 10px;'>{{postContents[i]}}</div>
+                <p *ngIf="postImages[i]!=''"><img style='max-width:150px;max-height:300px;' src="{{postImages[i]}}"></p>
+                <button class="btn-outline" id='comments' (click)="toCommentPg(postId.value)">{{postNumComments[i]}} {{comments[i]}}</button>
+            </div>
+            <div class='column' id='seperator' style='margin:-5px 0 -5px 0;width:1px;background: #E5E7E9;'></div>
+            <div class='column' style='margin:auto auto auto auto'>
+                <div (click)='upvote(postId.value, numVotes.value)' id='arrow-up'></div>
+                <input value='{{postNumVotes[i]}}' #numVotes style='display:none'>
+                <p id='{{postIds[i]}}' class='numVotes' style='text-align: center;'>{{postNumVotes[i]}}</p>
+                <div (click)='downvote(postId.value, numVotes.value)' id="arrow-down"></div>
+            </div>
+        </div>   
     </div>
 </body>

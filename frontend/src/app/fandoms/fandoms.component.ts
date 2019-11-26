@@ -44,6 +44,6 @@ export class FandomsComponent implements OnInit {
 	}
 
 	toFandomPg(name){
-		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": name}})
+		this.router.navigate(['/fandom-page'], {queryParams: {fandom: name, sort:"popularity"}})
 	}
 }
