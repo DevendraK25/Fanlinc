@@ -102,7 +102,7 @@ function addPending(req, res) {
 }
 
 function removePending(req, res) {
-	userSchema.update({username : req.params.username}, 
+	userSchema.updateOne({username : req.params.username}, 
 		{$pull : {"profile.pending_friends" : req.body.friend}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -114,7 +114,7 @@ function removePending(req, res) {
 }
 
 function removeFriend(req, res) {
-	userSchema.update({username : req.params.username}, 
+	userSchema.updateOne({username : req.params.username}, 
 		{$pull : {"profile.friends" : req.body.friend}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -126,7 +126,7 @@ function removeFriend(req, res) {
 }
 
 function subscribe(req, res) {
-	userSchema.update({username : req.params.username}, 
+	userSchema.updateOne({username : req.params.username}, 
 		{$push : {"profile.subscribed" : req.body.fandom}}, function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);
@@ -138,7 +138,7 @@ function subscribe(req, res) {
 }
 
 function unsubscribe(req, res) {
-	userSchema.update({username : req.params.username}, {$pull : {"profile.subscribed" : req.body.fandom}}, 
+	userSchema.updateOne({username : req.params.username}, {$pull : {"profile.subscribed" : req.body.fandom}}, 
 	function(err, user) {
 		if (err)
 			res.status(400).send(err.errmsg);

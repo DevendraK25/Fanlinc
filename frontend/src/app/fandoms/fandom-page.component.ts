@@ -88,14 +88,9 @@ export class FandomPageComponent implements OnInit {
 					if ((this.imageH/this.imageW) > 1.3) {this.width = 30; this.width1=70}
 					else {this.width = 45; this.width1=55}
 					this.id = res.body[0]._id;
-					// if (this.admin == this.user) {
-					// 	this.showFollowB = !this.showFollowB
-					// 	this.showB = !this.showB
-					// 	this.showAdminB = !this.showAdminB
-					// 	this.width2 = 85
-					// }
 					this.userService.getUserByUsername(this.user).subscribe(
 						res => {
+							console.log(res.body)
 							if ((res.body[0].profile.subscribed).includes(this.name) && this.user!="" && this.user!=null) {
 								this.followB = "unfollow"
 								this.showFollowB = !this.showFollowB;
@@ -108,11 +103,13 @@ export class FandomPageComponent implements OnInit {
 								this.showAdminB = !this.showAdminB
 								this.width2 = 68
 							} 
-							else if (!(res.body[0].profile.subscribed).includes(this.name) && this.user!="" && this.user!=null){
+							else if ((!(res.body[0].profile.subscribed).includes(this.name) && this.user!="" && this.user!=null)||this.user==""){
 								this.width2 = 85
 							}
 						},
-						err => {console.log(err)}
+						err => {
+							console.log(err)
+						}
 					)
 				}
 			},
