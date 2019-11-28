@@ -58,7 +58,7 @@ export class PostsComponent implements OnInit{
               this.sortByFandomImp(this.route.snapshot.queryParamMap.get("fandom"), "popularity");
             }
             else {
-              this.postHeader = "Popular posts"
+              this.postHeader = "Most Popular posts"
               this.sortByPopularityImp();
             }
           }
@@ -120,7 +120,7 @@ export class PostsComponent implements OnInit{
       arr.push([this.fandoms[i].subcount, i]);
     }
     var sortedFandoms = arr.sort((a,b) => b[0]-a[0])
-    for (var i = 0; (i < sortedFandoms.length && i < 12); i++){
+    for (var i = 0; (i < sortedFandoms.length && i < 10); i++){
       this.fandomImages.push(this.fandoms[sortedFandoms[i][1]].image);
       this.fandomNames.push(this.fandoms[sortedFandoms[i][1]].name);
     }
@@ -319,7 +319,7 @@ export class PostsComponent implements OnInit{
   }
 
   toNewPost(){
-    if (this.user != null)
+    if (this.user != null && this.user != "")
       this.router.navigate(['/create-new-post'])
     else{
       if (confirm('Sign in first!'))
@@ -328,7 +328,7 @@ export class PostsComponent implements OnInit{
   }
 
   toNewFandom(){
-    if (this.user != null)
+    if (this.user != null && this.user != "")
       this.router.navigate(['/create-new-fandom'])
     else{
       if (confirm('Sign in first!'))

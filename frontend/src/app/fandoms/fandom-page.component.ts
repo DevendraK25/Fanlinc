@@ -367,6 +367,15 @@ export class FandomPageComponent implements OnInit {
 		)
 	}
 
+	toNewPost(){
+		if (this.user != null && this.user != "")
+		  	this.router.navigate(['/create-new-post'], {queryParams: {fandom: this.name}});
+		else {
+		  	if (confirm('Sign in first!'))
+				this.router.navigate(['/login'])
+		}
+	}
+
 	toEditFandom(){
 		if (this.admin == this.user){
 			var username = prompt("Confirm username");

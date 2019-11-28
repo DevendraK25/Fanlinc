@@ -49,7 +49,8 @@ body{
 	background: #EAEDED;
     padding:2px 4px 2px 4px;
     margin:0 0 10px 0;
-    font-size:15px
+    font-size:14px;
+    height:26px;
 }
 #header{
     background: white;
@@ -130,8 +131,9 @@ body{
     background:#76D7C4;
     border-color:#76D7C4;
     border-style:solid;
-    margin:0 20px 0 0;
-    height:32px;
+    margin:0 10px 0 0;
+    font-size:14px;
+    height:26px;
 }
 
 #search-button {

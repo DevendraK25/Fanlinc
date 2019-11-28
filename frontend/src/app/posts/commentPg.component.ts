@@ -85,12 +85,11 @@ export class CommentPgComponent implements OnInit{
     }
 
     replyClick(){
-        if (this.session.retrieve("logged-in") != null)
+        if (this.session.retrieve("logged-in") != null && this.session.retrieve("logged-in") != "")
             this.isShow = !this.isShow
         else{
-            alert("Sign in first!")
-            this.router.navigate(['/login'])
-        }            
+            if (confirm("Sign in first!")) this.router.navigate(['/login'])
+        }
     }
 
     id="";num=0;

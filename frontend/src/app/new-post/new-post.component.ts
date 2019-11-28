@@ -1,5 +1,5 @@
-import { Component, OnInit, Renderer2 } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Renderer2, AfterViewInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PostService } from '../post.service';
 import { SessionStorageService, LocalStorageService } from 'ngx-webstorage';
@@ -17,16 +17,25 @@ export class NewPostComponent implements OnInit {
   fandoms = ["none-selected"]
   fandom = ""
   body:any
-  constructor(private r: Renderer2, private fandomService: FandomService, private userService: UserService, private router:Router, private postService: PostService, private session: LocalStorageService) {
-  }
+  fandomPg = ""
+  fandomBacks = {"none-selected":"white"}
+  constructor(private r: Renderer2, private fandomService: FandomService, private userService: UserService,
+     private router:Router, private route: ActivatedRoute, private postService: PostService, private session: LocalStorageService) {}
 
   ngOnInit() {
+    if (this.route.snapshot.queryParamMap.get("fandom")){
+      this.fandomPg = this.route.snapshot.queryParamMap.get("fandom");
+    }
     this.fandomService.getAllFandoms().subscribe(
       res => {
         console.log(res.body)
         this.body = res.body
         for (var i=0; i<this.body.length; i++){
           this.fandoms.push(this.body[i].name)
+          if (this.fandomPg != ""){
+            if (this.body[i].name != this.fandomPg) this.fandomBacks[this.body[i].name] = "white"
+            else this.fandomBacks[this.body[i].name] = "orange"
+          }
         }
       },
       err => {console.log(err)}
@@ -34,16 +43,16 @@ export class NewPostComponent implements OnInit {
   }
 
   setFandom(name){
-    if (this.fandom != "")
-      this.r.setStyle(document.querySelector("#"+this.fandom), "background", "white")
+    if (this.fandom != "") this.fandomBacks[this.fandom] = "white"
+    if (name != this.fandomPg) this.fandomBacks[this.fandomPg] = "white"
     this.fandom = name;
-    this.r.setStyle(document.querySelector("#"+name), "background", "orange")
+    this.fandomBacks[name] = "orange"
   }
 
   createPost(title, tags, content, image){
     var timestamp = new Date().getTime();
     this.message = "";
-    if (title!=''&&tags!=''&&content!=''&&this.fandom!=""){
+    if (title!=''&&tags!=''&&content!=''&&(this.fandom!=""||this.fandomPg!="")){
       var author = this.session.retrieve('logged-in');
       var comments = []
       var numVotes = 0;
@@ -51,11 +60,15 @@ export class NewPostComponent implements OnInit {
       this.userService.getUserByUsername(author).subscribe(
         res => {
           userImage = res.body[0].image
-          this.postService.addPost(tags, title, content, image, author, timestamp, comments, numVotes, this.fandom, userImage).subscribe(
+          var fd = ""
+          if (this.fandom!="") fd = this.fandom
+          else fd = this.fandomPg
+          this.postService.addPost(tags, title, content, image, author, timestamp, comments, numVotes, fd, userImage).subscribe(
             res => {
               if (res.status == 200) {
                 console.log("Post succesfully created");
-                this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}}).then(()=>{window.location.reload()})
+                if (this.fandomPg != "") this.router.navigate(['/fandom-page'], {queryParams: {fandom: this.fandomPg, sort:'popularity'}})
+                else this.router.navigate(['/posts'], {queryParams: {sort: "popularity"}}).then(()=>{window.location.reload()})
               }
             },
             err => {

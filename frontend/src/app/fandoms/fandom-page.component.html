@@ -29,6 +29,7 @@
         <p style='text-align: left;'>
             <span style='margin:10px 0 0 0'><b>{{postHeader}}</b></span>
             <span style='float:right;margin: 0 0 10px 0'>
+                <button id='create-post' (click)="toNewPost()">Create New Post</button>
                 <div ngbDropdown class="d-inline-block">
                     <button id='dDown' class="btn-outline" ngbDropdownToggle>Sort by</button>
                     <div id='dropDownItemBack' style='padding:5px 0 10px 10px' ngbDropdownMenu>

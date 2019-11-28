@@ -7,7 +7,7 @@
         <div ngbDropdown class="d-inline-block">
             <button id='dDown' class="btn-outline" ngbDropdownToggle>Choose a fandom</button>
             <div id='dropDownItemBack' ngbDropdownMenu>
-              <a style='width:200px' id="{{item}}" *ngFor="let item of fandoms" (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
+              <a style='width:200px' id="{{item}}" [ngStyle]="{'background': fandomBacks[item]}" *ngFor="let item of fandoms" (click)="setFandom(fandom.value)" ngbDropdownItem>{{item}}<input #fandom value="{{item}}" style='display:none'></a>
             </div>
         </div>
         <div><input id='tags' #tags placeholder='Enter tags (e.g: #tag1 #tag2)'></div>
