@@ -56,6 +56,10 @@ export class PostService {
     return this.http.post(`${this.uri}/posts/update/${id}`, body, {observe: 'response'});
   }
 
+  setUserImage(id, image){
+    return this.http.post(`${this.uri}/posts/setUserImage/${id}`, {image: image}, {observe: 'response'});
+  }
+
   deletePost(id){
     return this.http.delete(`${this.uri}/posts/delete/${id}`, {observe: 'response'});
   }

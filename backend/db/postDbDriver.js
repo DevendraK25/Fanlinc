@@ -105,6 +105,17 @@ function updatePost(req, res) { //for all other fields that's not array
 	})
 }
 
+function setUserImage(req, res) {
+	postSchema.updateOne({_id: ObjectId(req.params.id)}, {userImage: req.body.image}, function(err, post){
+		if (err) 
+			res.status(400).send(err.errmsg);
+		else if (post.n == 0)
+			res.status(404).send("Post '" + req.params.id + "' not found");
+		else
+			res.status(200).send(post)
+	})
+}
+
 module.exports = {
 	getAssociatedPosts : getAssociatedPosts,
 	getPost : getPost,
@@ -114,5 +125,6 @@ module.exports = {
 	setNumVotes:setNumVotes,
 	addComment : addComment,
 	deletePost : deletePost,
-	updatePost : updatePost
+	updatePost : updatePost,
+	setUserImage : setUserImage
 }

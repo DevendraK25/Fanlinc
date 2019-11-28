@@ -175,20 +175,20 @@ export class CommentPgComponent implements OnInit{
     }
 
     redirectToFandom(fandom){
-		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});
+		this.router.navigate(['/fandom-page'], {queryParams: {fandom: fandom, sort: 'popularity'}});
     }
     
     toUserProfile(username){
         this.userService.getUserByUsername(this.user).subscribe(
-        res => {
-            if (res.body[0].profile.pending_friends.includes(username)){
-            this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+            res => {
+                if (res.body[0].profile.pending_friends.includes(username)){
+                this.router.navigate(['/profile'], {queryParams: {user: username, req: true}})
+                }
+                else this.router.navigate(['/profile'], {queryParams: {user: username}})
+            },
+            err => {
+                console.log(err)
             }
-            else this.router.navigate(['/profile'], {queryParams: {user: username}})
-        },
-        err => {
-            console.log(err)
-        }
         )
     }
 

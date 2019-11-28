@@ -2,6 +2,9 @@ import { Component, OnInit, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../user.service';
+import { timingSafeEqual } from 'crypto';
+import { PostService } from '../post.service';
+import { post } from 'selenium-webdriver/http';
 
 @Component({
 	selector: 'app-editprofile',
@@ -27,7 +30,7 @@ export class EditprofileComponent implements OnInit {
 	fandoms = []
 	subscribed = []
 	
-	constructor(private userService: UserService, private route: ActivatedRoute, private router: Router, private r: Renderer2) { }
+	constructor(private userService: UserService,private postService: PostService, private route: ActivatedRoute, private router: Router, private r: Renderer2) { }
 
 	ngOnInit() {
 		this.userService.getUserByUsername(this.route.snapshot.queryParamMap.get('user')).subscribe(
@@ -38,6 +41,7 @@ export class EditprofileComponent implements OnInit {
 				(<HTMLInputElement>document.getElementById("bio")).value = res.body[0].profile.bio;
 				(<HTMLInputElement>document.getElementById("age")).value = res.body[0].profile.age;
 				(<HTMLInputElement>document.getElementById("image")).value = res.body[0].image;
+				this.image = res.body[0].image;
 				(<HTMLInputElement>document.getElementById("level")).value = res.body[0].profile.level;
 				this.level = res.body[0].profile.level;
 				(<HTMLInputElement>document.getElementById("type")).value = res.body[0].profile.type;
@@ -74,11 +78,24 @@ export class EditprofileComponent implements OnInit {
 		var type=this.type, level=this.level;
 		if (this.newType!="") type = this.newType;
 		if (this.newLevel!="") level = this.newLevel
+		if (this.image != image){
+			var posts:any
+			this.postService.getAllPosts().subscribe(
+				res => {
+					posts = res.body;
+					for (var i=0; i<posts.length; i++){
+						if (posts[i].author == this.username){
+							this.postService.setUserImage(posts[i]._id, image).subscribe(res=>{console.log(res.body)}, err=>{console.log(err)})
+						}
+					}
+				}
+			)
+		}
 		this.userService.updateUser(this.username, email, password, bio, age, image, this.interests, type, level, this.friends, this.pendingFriends, this.fandoms, this.subscribed).subscribe(
 			res => {
 				console.log(res.body);
 				if (res.status == 200)
-					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } })//.then(()=>{window.location.reload()})
+					this.router.navigate(['/profile'], { 'queryParams': { 'user': this.username } }).then(()=>{window.location.reload()})
 			},
 			err => {
 				console.log(err);
