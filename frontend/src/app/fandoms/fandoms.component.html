@@ -1,16 +1,34 @@
 <body>
-    <!-- <div style='background: white;padding:.5em 2em 1em 2em'> -->
-    <h3 style='margin:.5em 0 .5em 2px;'><b>All Fandoms</b></h3>
-    <div class='row'>
-        <a *ngFor="let item of fandomNames; let i=index" (click)='toFandomPg(item)' class='fdBox view overlay' id="{{item}}">
-            <img class='img-fluid' id='image' src='{{fandomImages[i]}}'>
-            <a class="mask flex-center rgba-orange-strong" >
-                <p style='font-size:14px' class="white-text"><b>{{fandomDesc[i]}}</b>
-                <br><br><b><i class='fa fa-user'></i> {{fandomSubcounts[i]}}</b>
-               </p>
+    <h3 style='margin:.5em 0 .5em -10px;'><b>All Fandoms</b></h3>
+    <div class='row' style='text-align: left;'>
+    <!-- <div class='row'> -->
+        <div class='column' style='width:75%'>
+            <div class='row'>
+            <a *ngFor="let item of fandomNames; let i=index" (click)='toFandomPg(item)' class='fdBox view overlay' id="{{item}}">
+                <img class='img-fluid' id='image' src='{{fandomImages[i]}}'>
+                <a class="mask flex-center rgba-orange-strong" >
+                    <p style='font-size:14px' class="white-text"><b>{{fandomDesc[i]}}</b>
+                    <br><br><b><i class='fa fa-user'></i> {{fandomSubcounts[i]}}</b>
+                </p>
+                </a>
+                <div style='padding:8px 0 0 0;font-size:18px;'>{{item}}</div>
             </a>
-            <div style='padding:8px 0 0 0;font-size:18px;'>{{item}}</div>
-        </a>
+            </div>
+        </div>
+        <div class='column' style='width:25%; float:right'>
+                <div id='box'>
+                    <h4><b>Can't find any fandom you like. Then, create it !!</b></h4>
+            
+                    <div>
+                    <div><input id='title' #title placeholder='Enter Fandom name'></div>
+                    <div><textarea id='description' #desc placeholder='Enter Fandom description'></textarea></div>
+                    <!-- no need for admin as admin is the loggedin user -->
+                    
+                    <div style='text-align: center;'><button id='submit' (click)='createFandom(title.value,desc.value)'>submit</button></div>
+                    <div style='margin-top:10px;color:red'>{{message}}</div>
+                    </div>
+                </div>
+        </div>
+        <!-- </div> -->
     </div>
-    <!-- </div> -->
 </body>

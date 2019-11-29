@@ -6,7 +6,7 @@
 		<div class='column'>
 			<p style='height:130px;width:130px'><img src="{{imagelink}}" alt="user-img" style="width:130px;height:130px;border-radius:50%"></p>
 			<button *ngIf='isShow' id='friendB' (click)="addFriendClicked(username)">{{friendB}}</button>
-			<button *ngIf='isLinked' id='friendBLinked' [disabled]=true>{{friendB}}</button>
+			<button *ngIf='isUnfriend' id='friendBUnfriend' (click)="addFriendClicked(username)">{{friendB}}</button>
 			<div><span id='color1'>Username:</span> {{username}}</div>
 			<div><span id='color1'>Email:</span> {{email}}</div>
 			<div><span id='color1'>Age:</span> {{age}}</div>
@@ -53,7 +53,7 @@
 	</div>
 
 	<hr>
-	<div style='text-align: center;' *ngIf="!isShow && !isLinked">
+	<div style='text-align: center;' *ngIf="!isShow && !isUnfriend">
 		<button style='font-size:12px' mdbBtn color="info" #edit (click)="redirectToEditProfile()">edit profile</button>
 		<button style='font-size:12px' mdbBtn color="info" #save (click)="logout()">Logout</button>
 	</div>		

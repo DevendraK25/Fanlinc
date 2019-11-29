@@ -71,6 +71,10 @@ export class UserService {
 	addFriend(username, friend) {
 		return this.http.post(`${this.uri}/users/addfriend/${username}`, {friend: friend}, {observe: 'response'});
 	}
+
+	removeFriend(username, friend) {
+		return this.http.post(`${this.uri}/users/unfriend/${username}`, {friend: friend}, {observe: 'response'});
+	}
 	
 	// deleteUser(username) {
 	// 	return this.http.delete(`${this.uri}/users/delete/${username}`);

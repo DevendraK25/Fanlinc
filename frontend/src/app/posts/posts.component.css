@@ -201,3 +201,9 @@ body{
 #post2Fd:hover{
     color:#F8C471
 }
+#dropDownItemBack{
+    height:300px;
+    width: 220px;
+    overflow: scroll;
+    overflow-x:hidden;
+}

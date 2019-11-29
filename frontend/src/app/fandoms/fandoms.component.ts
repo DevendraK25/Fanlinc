@@ -43,6 +43,26 @@ export class FandomsComponent implements OnInit {
 		)
 	}
 
+	createFandom(name, desc) {
+        if (name != '' && desc != '') {
+            this.fandomService.addFandom(name, desc, this.session.retrieve('logged-in')).subscribe(
+                res => {
+                    if (res.status == 200) {
+                        console.log(res.body);
+                        this.router.navigate(['/fandom-page'], {queryParams: {fandom: name}});
+                    }
+                },
+                err => {
+                    console.log(err);
+                    this.router.navigate(['/page-not-found']);
+                }
+            );
+        }
+        else {
+            alert("some fields are still missing")
+        }
+    }
+
 	toFandomPg(name){
 		this.router.navigate(['/fandom-page'], {queryParams: {fandom: name, sort:"popularity"}})
 	}

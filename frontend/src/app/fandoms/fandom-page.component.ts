@@ -394,10 +394,10 @@ export class FandomPageComponent implements OnInit {
 		  var username = prompt("Confirm username");
 		  var password = prompt("Confirm password");
 		  if (username!=null && password!=null){
-			this.fandomService.deleteFandom(this.id).subscribe(
+			this.fandomService.deleteFandom(this.name).subscribe(
 			  res => {
 				console.log(res.body)
-				this.router.navigate(['/posts'])
+				this.router.navigate(['/posts'], {queryParams: {sort: 'popularity'}})
 			  },
 			  err => {
 				console.log(err)

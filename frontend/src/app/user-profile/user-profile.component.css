@@ -52,13 +52,16 @@ textarea {
 #friendB:hover{
 	background: #F39C12;
 }
-#friendBLinked{
+#friendBUnfriend{
 	margin: 0 0 15px 30px;
 	font-size:13px;
 	background: #F5B041;
 	border:none;
 	border-radius:3px;
 	color:white;
+}
+#friendBUnfriend:hover{
+	background: #F39C12;
 }
 #existingInterest{
 	background: #F5B041;

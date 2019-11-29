@@ -21,7 +21,7 @@ export class NewFandomComponent implements OnInit {
                 res => {
                     if (res.status == 200) {
                         console.log(res.body);
-                        this.router.navigate(['/fandoms'], {queryParams: {fandom: name}});
+                        this.router.navigate(['/fandom-page'], {queryParams: {fandom: name}});
                     }
                 },
                 err => {

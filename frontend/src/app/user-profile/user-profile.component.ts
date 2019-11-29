@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
 	fandoms = []
 	friends = []
 	isShow = false;
-	isLinked = false
+	isUnfriend = false
 	friendB = ""
 	constructor(private renderer: Renderer2, private userService: UserService, private route: ActivatedRoute, private router: Router, private session: LocalStorageService) { }
 
@@ -34,7 +34,6 @@ export class UserProfileComponent implements OnInit {
 	}
 
 	ngOnInit() {
-
 		var userParam = this.route.snapshot.queryParamMap.get('user')
 		this.user = this.session.retrieve("logged-in")
 		if (this.user == userParam){
@@ -92,9 +91,9 @@ export class UserProfileComponent implements OnInit {
 							this.friendB = "Add Friend"
 					}
 					else{
-						this.friendB = 'Linked'
+						this.friendB = 'Unfriend'
 						this.isShow = !this.isShow;
-						this.isLinked = !this.isLinked;
+						this.isUnfriend = !this.isUnfriend;
 					}			
 				},
 				err => {
@@ -113,16 +112,28 @@ export class UserProfileComponent implements OnInit {
 		this.router.navigate(['/editprofile'], { 'queryParams': { 'user': this.user } });
 	}
 
-	addFriendClicked(toBeAdded){
+	addFriendClicked(toBeAddedOrRemoved){
 		if (this.user != null && this.user != ""){
 			if (this.friendB == 'Add Friend'){
 				this.friendB = "Friend Request Sent";
-				this.userService.addPending(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+				this.renderer.setProperty(document.querySelector("#friendB"), "disabled", true)
+				this.userService.addPending(toBeAddedOrRemoved, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
 			}
 			else if (this.friendB == 'Accept Friend Request'){
-				this.userService.addFriend(this.user, toBeAdded).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
-				this.userService.addFriend(toBeAdded, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
-				this.userService.removePending(this.user, toBeAdded).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+				this.userService.addFriend(this.user, toBeAddedOrRemoved).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+				this.userService.addFriend(toBeAddedOrRemoved, this.user).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+				this.renderer.setProperty(document.querySelector("#friendB"), "disabled", true)
+				this.userService.removePending(this.user, toBeAddedOrRemoved).subscribe(res=>{console.log(res.body);window.location.reload()},err=>{console.log(err)})
+			}
+			else if (this.friendB == 'Unfriend'){
+				if (confirm("You are about to unfriend "+toBeAddedOrRemoved)){
+					this.userService.removeFriend(this.user, toBeAddedOrRemoved).subscribe(res=>{console.log(res.body)},err=>{console.log(err)})
+					this.userService.removeFriend(toBeAddedOrRemoved, this.user).subscribe(res=>{
+						console.log(res.body);
+						this.router.navigate(['/profile'], {queryParams: {user: toBeAddedOrRemoved}}).then(()=>window.location.reload())
+					},
+					err=>{console.log(err)})
+				}
 			}
 		}
 		else {
