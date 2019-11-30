@@ -231,72 +231,86 @@ export class FandomPageComponent implements OnInit {
 		return (mins+" mins ago")
 	}
 		
-	num=0;
-	upvote(postId, numVotes){ 
-		var numVotes1 = parseInt(numVotes)
-		if (this.id == ""){ //first post clicked
-		  this.id = postId
-		  this.num = numVotes1+1;
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
+	num=0;numUpClick=0;numDownClick=0
+    upvote(postId, numVotes){ 
+		if (this.user != "" && this.user != null){
+			var numVotes1 = parseInt(numVotes)
+				if ((this.id != postId && this.numUpClick==0) || (this.id == postId && this.numUpClick==0 && this.numDownClick==1)){
+				this.id = postId
+				this.num = numVotes1+1;
+				this.numUpClick = 1;
+				this.numDownClick = 0;
+				$("#"+postId).html(this.num)
+				this.postService.setNumVotes(postId, this.num).subscribe(
+					res=>{
+					console.log(res.body)
+					}
+				)
 			}
-		  )
 		}
-		else if (this.id == postId){//same post clicked
-		  this.num += 1;
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
+		else {
+			if (confirm("Sign in first!!")) this.router.navigate(['/login'])
+		}
+    // else if (this.id == postId){//same post clicked
+    //   this.num += 1;
+    //   $("#"+postId).html(this.num)
+    //   this.postService.setNumVotes(postId, this.num).subscribe(
+    //     res=>{
+    //       console.log(res.body)
+    //     }
+    //   )
+    // }
+    // else { //different post
+    //   this.id = postId
+    //   this.num = numVotes1+1
+    //   $("#"+postId).html(this.num)
+    //   this.postService.setNumVotes(postId, this.num).subscribe(
+    //     res=>{
+    //       console.log(res.body)
+    //     }
+    //   )
+    // }
+   }
+
+    downvote(postId, numVotes){
+		if (this.user != "" && this.user != null){
+			var numVotes1 = parseInt(numVotes)
+			if ((this.id != postId && this.numDownClick==0) || (this.id == postId && this.numUpClick==1 && this.numDownClick==0)){ //first post clicked
+				this.id = postId
+				this.num = numVotes1-1;
+				this.numDownClick = 1;
+				this.numUpClick = 0;
+				$("#"+postId).html(this.num)
+				this.postService.setNumVotes(postId, this.num).subscribe(
+					res=>{
+					console.log(res.body)
+					}
+				)
 			}
-		  )
 		}
-		else { //different post
-		  this.id = postId
-		  this.num = numVotes1+1
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
-			}
-		  )
+		else {
+			if (confirm("Sign in first!!")) this.router.navigate(['/login'])
 		}
-	}
-	
-	downvote(postId, numVotes){
-		var numVotes1 = parseInt(numVotes)
-		if (this.id == ""){ //first post clicked
-		  this.id = postId
-		  this.num = numVotes1-1;
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
-			}
-		  )
-		}
-		else if (this.id == postId){ //same post clicked
-		  this.num -= 1;
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
-			}
-		  )
-		}
-		else { //different post
-		  this.id = postId
-		  this.num = numVotes1-1
-		  $("#"+postId).html(this.num)
-		  this.postService.setNumVotes(postId, this.num).subscribe(
-			res=>{
-			  console.log(res.body)
-			}
-		  )
-		}
-	  }
+    // else if (this.id == postId){ //same post clicked
+    //   this.num -= 1;
+    //   $("#"+postId).html(this.num)
+    //   this.postService.setNumVotes(postId, this.num).subscribe(
+    //     res=>{
+    //       console.log(res.body)
+    //     }
+    //   )
+    // }
+    // else { //different post
+    //   this.id = postId
+    //   this.num = numVotes1-1
+    //   $("#"+postId).html(this.num)
+    //   this.postService.setNumVotes(postId, this.num).subscribe(
+    //     res=>{
+    //       console.log(res.body)
+    //     }
+    //   )
+    // }
+    }
 	
 	redirectToFandom(fandom){
 		this.router.navigate(['/fandom-page'], {queryParams: {"fandom": fandom}});

@@ -92,73 +92,85 @@ export class CommentPgComponent implements OnInit{
         }
     }
 
-    id="";num=0;
+    id="";num=0;numUpClick=0;numDownClick=0
     upvote(){ 
-        var postId = this.postId; var numVotes = this.postNumVote
-        console.log(postId, numVotes, "up")
-        if (this.id == ""){ //first post clicked
-            this.id = postId
-            this.num = numVotes+1;
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
+        if (this.user != "" && this.user != null){
+            var postId = this.postId; var numVotes = this.postNumVote
+            if ((this.id != postId && this.numUpClick==0) || (this.id == postId && this.numUpClick==0 && this.numDownClick==1)){ //first post clicked
+                this.id = postId
+                this.num = numVotes+1;
+                this.numUpClick = 1;
+                this.numDownClick = 0;
+                $("#numVote").html(this.num)
+                this.postService.setNumVotes(postId, this.num).subscribe(
+                    res=>{
+                    console.log(res.body)
+                    }
+                )
+            }
         }
-        else if (this.id == postId){//same post clicked
-            this.num += 1;
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
-        }
-        else { //different post
-            this.id = postId
-            this.num = numVotes+1
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
-        }
+        else {
+			if (confirm("Sign in first!!")) this.router.navigate(['/login'])
+		}
+        // else if (this.id == postId){//same post clicked
+        //     this.num += 1;
+        //     $("#numVote").html(this.num)
+        //     this.postService.setNumVotes(postId, this.num).subscribe(
+        //         res=>{
+        //         console.log(res.body)
+        //         }
+        //     )
+        // }
+        // else { //different post
+        //     this.id = postId
+        //     this.num = numVotes+1
+        //     $("#numVote").html(this.num)
+        //     this.postService.setNumVotes(postId, this.num).subscribe(
+        //         res=>{
+        //         console.log(res.body)
+        //         }
+        //     )
+        // }
     }
 
     downvote(){
-        var postId = this.postId; var numVotes = this.postNumVote
-        console.log(postId, numVotes, "down")
-        if (this.id == ""){ //first post clicked
-            this.id = postId
-            this.num = numVotes-1;
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
+        if (this.user != "" && this.user != null){
+            var postId = this.postId; var numVotes = this.postNumVote
+            if ((this.id != postId && this.numDownClick==0) || (this.id == postId && this.numUpClick==1 && this.numDownClick==0)){ //first post clicked
+                this.id = postId
+                this.num = numVotes-1;
+                this.numDownClick = 1;
+                this.numUpClick = 0;
+                $("#numVote").html(this.num)
+                this.postService.setNumVotes(postId, this.num).subscribe(
+                    res=>{
+                    console.log(res.body)
+                    }
+                )
+            }
         }
-        else if (this.id == postId){ //same post clicked
-            this.num -= 1;
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
-        }
-        else { //different post
-            this.id = postId
-            this.num = numVotes-1
-            $("#numVote").html(this.num)
-            this.postService.setNumVotes(postId, this.num).subscribe(
-                res=>{
-                console.log(res.body)
-                }
-            )
-        }
+        else {
+			if (confirm("Sign in first!!")) this.router.navigate(['/login'])
+		}
+        // else if (this.id == postId){ //same post clicked
+        //     this.num -= 1;
+        //     $("#numVote").html(this.num)
+        //     this.postService.setNumVotes(postId, this.num).subscribe(
+        //         res=>{
+        //         console.log(res.body)
+        //         }
+        //     )
+        // }
+        // else { //different post
+        //     this.id = postId
+        //     this.num = numVotes-1
+        //     $("#numVote").html(this.num)
+        //     this.postService.setNumVotes(postId, this.num).subscribe(
+        //         res=>{
+        //         console.log(res.body)
+        //         }
+        //     )
+        // }
     }
 
     sendComment(comment){
